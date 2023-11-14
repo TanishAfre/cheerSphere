@@ -1,21 +1,14 @@
 {
-  "name": "electron-quick-start",
+  "name": "focusmind",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "Focus Mind basic Layout",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": "https://github.com/electron/electron-quick-start",
-  "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
-  ],
-  "author": "GitHub",
-  "license": "CC0-1.0",
+  "author": "",
+  "license": "ISC",
   "devDependencies": {
     "electron": "^27.0.4"
   }
