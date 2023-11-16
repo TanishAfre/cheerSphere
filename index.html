@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8" />
+    <!-- 
     <meta
       http-equiv="Content-Security-Policy"
       content="default-src 'self'; script-src 'self'"
@@ -10,14 +11,30 @@
       http-equiv="X-Content-Security-Policy"
       content="default-src 'self'; script-src 'self'"
     />
+    sidebar code -->
     <title>Focus Mode</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-...">
+    <script src="https://kit.fontawesome.com/b81fdd1146.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles.css">
   </head>
   <body>
+    <!-- sidebar code -->
+    <div class="sidebar"> 
+      <header>  FocusMind  </header>
+      <ul>
+        <li><a href="#"><i class="fa-solid fa-list"></i>Overview</a></li>
+        <li><a href="#"><i class="fa-solid fa-chart-simple"></i>Analytics</a></li>
+        <li><a href="#"><i class="fa-solid fa-arrows-to-dot"></i>Focus</a></li>
+        <li><a href="#"><i class="fa-solid fa-calendar-days"></i>Calender</a></li>       
+        <li><a href="#"><i class="fa-solid fa-gear"></i>Setting</a></li>
+      </ul>
+    </div>
+
+    <!-- main app -->
     <h1>Welcome to Focus Mode</h1>
-    
-    <p>👋</p>
-    <p id="info"></p>
-    // Frount end changes Branch
+      
+      <p>👋</p>
+      <p id="info"></p>
   </body>
   <script src="./renderer.js"></script>
 </html>
