@@ -119,9 +119,8 @@ header .image-text .header-text{
 /* error in top and right */
 .sidebar header .toggle{
     position: absolute;
-    top: 50%;
-    right: -25px;
-    transform: translateY(-50%) rotate(180deg);
+    top: 4%;
+    right: -13px;
     height: 25px;
     width: 25px;
     background-color: var(--primary-color);
