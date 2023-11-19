@@ -142,8 +142,10 @@ header .image-text .header-text{
 }
 
 .sidebar .menu-bar{
-    background: red;
-    height: 100%;
+    height: calc(100% - 50px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 
