@@ -6,10 +6,10 @@
 
 
 *{
-    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
 :root{
@@ -46,7 +46,7 @@ body{
 }
 
 .sidebar.close{
-    width: 200px;
+    width: 95px;
 }
 
 /* resuable CSS */
