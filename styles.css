@@ -59,6 +59,15 @@ body{
     background: var(--sidebar-color);
 }
 
+.sidebar li{
+    height: 50px;
+    background: red;
+    margin-top: 10px;
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
 .sidedar header{
     position: relative;
 }
