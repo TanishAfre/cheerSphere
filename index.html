@@ -1,9 +1,9 @@
-
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <!-- 
+
+<head>
+  <meta charset="UTF-8" />
+  <!-- 
     <meta
       http-equiv="Content-Security-Policy"
       content="default-src 'self'; script-src 'self'"
@@ -13,96 +13,139 @@
       content="default-src 'self'; script-src 'self'"
     />
     sidebar code -->
-    <title>Focus Mode</title>
-    <!-- Using Boxivons because they have more veriety -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-..."> -->
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <script src="https://kit.fontawesome.com/b81fdd1146.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="css/styles.css">
-  </head>
-  <body>
-    <!-- sidebar code -->
-    
-    <nav class="sidebar close">
-      <header>
-        <div class="image-text">
-          <span class="image">
-            <img src="images/focus mind.png" alt="logo" />
-          </span>
+  <title>Focus Mode</title>
+  <!-- Using Boxivons because they have more veriety -->
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-..."> -->
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <script src="https://kit.fontawesome.com/b81fdd1146.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/floating-button.css">
+  <!--bootstrap-->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
 
-          <div class="text header-text">
-            <span class="name">FocusMind</span>
-          </div>
-        </div>
+<body>
+  <!-- sidebar code -->
 
-        <i class='bx bx-chevron-right toggle'></i>
-      </header>
+  <nav class="sidebar close">
+    <header>
+      <div class="image-text">
+        <span class="image">
+          <img src="images/focus mind.png" alt="logo" />
+        </span>
 
-      <div class="menu-bar">
-        <div class="menu">
-          <ul class="menu-links">
-            <li class="nav-links">
-              <a href="#">
-                <i class='bx bx-list-ul icon' ></i>
-                <span class="text nav-text">Overview</span>
-              </a>
-            </li>
-            <li class="nav-links">
-              <a href="#">
-                <i class='bx bxs-bar-chart-alt-2 icon' ></i>
-                <span class="text nav-text">Analytics</span>
-              </a>
-            </li>
-            <li class="nav-links">
-              <a href="#">
-                <i class='bx bx-crosshair icon'></i>
-                <span class="text nav-text">Focus</span>
-              </a>
-            </li>
-            <li class="nav-links">
-              <a href="#">
-                <i class='bx bx-calendar-event icon' ></i>
-                <span class="text nav-text">Calender</span>
-              </a>
-            </li>
-            <li class="nav-links">
-              <a href="#">
-                <i class='bx bx-cog icon' ></i>
-                <span class="text nav-text">Settings</span>
-              </a>
-            </li>
-          </ul>
+        <div class="text header-text">
+          <span class="name">FocusMind</span>
         </div>
       </div>
 
-      <div class="bottom-content">
-        <div class="toggle-switch">
-          <span class="switch"></span>
+      <i class='bx bx-chevron-right toggle'></i>
+    </header>
+
+    <div class="menu-bar">
+      <div class="menu">
+        <ul class="menu-links">
+          <li class="nav-links">
+            <a href="#">
+              <i class='bx bx-list-ul icon'></i>
+              <span class="text nav-text">Overview</span>
+            </a>
+          </li>
+          <li class="nav-links">
+            <a href="#">
+              <i class='bx bxs-bar-chart-alt-2 icon'></i>
+              <span class="text nav-text">Analytics</span>
+            </a>
+          </li>
+          <li class="nav-links">
+            <a href="#">
+              <i class='bx bx-crosshair icon'></i>
+              <span class="text nav-text">Focus</span>
+            </a>
+          </li>
+          <li class="nav-links">
+            <a href="#">
+              <i class='bx bx-calendar-event icon'></i>
+              <span class="text nav-text">Calender</span>
+            </a>
+          </li>
+          <li class="nav-links">
+            <a href="#">
+              <i class='bx bx-cog icon'></i>
+              <span class="text nav-text">Settings</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="bottom-content">
+      <div class="toggle-switch">
+        <span class="switch"></span>
+      </div>
+    </div>
+
+  </nav>
+
+
+  <section class="home">
+
+    <!-- main app -->
+
+    <div class="text">
+      Welcome to Focus Mode
+      <p>👋</p>
+      <p id="info"></p>
+    </div>
+
+  </section>
+
+  <!-- Floating Button -->
+  <div class="floating-btn">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+      How are you feeling today?
+    </button>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">How are you feeling today?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body text-center">
+          <span class="emoji" onclick="saveMood('😄')">😄</span>
+          <span class="emoji" onclick="saveMood('😐')">😐</span>
+          <span class="emoji" onclick="saveMood('😢')">😢</span>
+          <span class="emoji" onclick="saveMood('😡')">😡</span>
         </div>
       </div>
+    </div>
+  </div>
 
-    </nav>
+
+  <script src="renderer.js"></script>
+  <script>
+    var selectedMood = '';
+
+    function saveMood(mood) {
+      selectedMood = mood;
+      console.log('Selected Mood: ' + selectedMood);
+    }
+  </script>
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 
-    <section class="home">    
-
-      <!-- main app -->
-      
-      <div class="text">
-        Welcome to Focus Mode
-        <p>👋</p>
-        <p id="info"></p>
-      </div>
-      
-    </section>
-
-  
-    <script src="renderer.js"></script>
-  
-
-    <!--
+  <!--
     <div id="preloader">
     </div>  -->
-  </body>
-  
+</body>
+
 </html>
