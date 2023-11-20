@@ -10,11 +10,11 @@ const createWindow = () => {
     //frame: false, // Set frame to false to remove window frame
     autoHideMenuBar: true, //hide the menu bar and not the frame
     webPreferences: {
-      devTools: false
+      devTools: true
    }
    
   })
-
+  win.setThumbarButtons([])
   win.loadFile('index.html')
 }
 

@@ -1,0 +1,11 @@
+.floating-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+  }
+
+  .emoji {
+    cursor: pointer;
+    font-size: 40px;
+    margin: 10px;
+  }

@@ -11,5 +11,11 @@
   "license": "ISC",
   "devDependencies": {
     "electron": "^27.0.4"
+  },
+  "build": {
+    "appId": "com.yourcompany.focusmind",
+    "win": {
+      "icon": "./images/favicon.ico"
+    }
   }
 }
