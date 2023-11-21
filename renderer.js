@@ -1,5 +1,4 @@
 const { ipcRenderer } = require('electron');
-console.log('Renderer process: Script loaded');
 
 document.getElementById('minimize-btn').addEventListener('click', () => {
   ipcRenderer.send('minimize-window');

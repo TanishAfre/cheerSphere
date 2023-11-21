@@ -1,7 +1,7 @@
 const { app, BrowserWindow, ipcMain } = require('electron')
 console.log('Main process: App ready');
 
-const path = require('node:path')
+const path = require('path')
 
 //I disabled developer mode but to enable it press Ctrl+Shift+I
 const createWindow = () => {
@@ -12,7 +12,7 @@ const createWindow = () => {
     frame: false, // Set frame to false to remove window frame
     autoHideMenuBar: true, //hide the menu bar and not the frame
     webPreferences: {
-      devTools: true,
+      devTools: true, //disable this when packing the application
       nodeIntegration: true,
       contextIsolation: false, //needed for IPCRendered, figured after spending 2 hrs of working and half a bottle of whiskey - H
       enableRemoteModule: true,
@@ -20,7 +20,6 @@ const createWindow = () => {
    }
    
   })
-  win.setThumbarButtons([])
   win.loadFile('index.html')
 
   ipcMain.on('minimize-window', () => {

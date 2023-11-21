@@ -21,16 +21,11 @@
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/floating-button.css">
   <link rel="stylesheet" href="css/frame.css">
-  <link rel="stylesheet" href="css/loading-animation.css">
   <!--bootstrap-->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 
 <body>
-    <!-- Preloader -->
-    <div id="preloader">
-    </div>
-    
   <div id="title-bar">
     <div id="title" style="padding-left: 2px;">Focus Mode</div>
     <div id="buttons">
@@ -40,7 +35,7 @@
   </div>
   <!-- sidebar code -->
 
-  <nav class="sidebar close" style="margin-top: 45px;">
+  <nav class="sidebar close" style="margin-top: 45px; background-color: #FEF6EB;">
     <header>
       <div class="image-text">
         <span class="image">
@@ -175,12 +170,9 @@
 
 
 
-  <script src="sidebar-render.js"></script>
-  <script src="renderer.js"></script>
-  <script src="js/scripts.js"></script>
   <script>
 
-    // mood modal
+
     var selectedMood = '';
 
     function saveMood(mood) {
@@ -188,21 +180,26 @@
       console.log('Selected Mood: ' + selectedMood);
       $('#moodModal').modal('hide'); // Close the modal
     }
-
-    // PreLoader
-    var loader = document.getElementById("preloader");
-      window.addEventListener("load", function(){
-        loader.style.display = "none";
-      });
-
   </script>
 
+  <!-- Insert this line above script imports  -->
+  <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
+
+
   <!-- Bootstrap JS and dependencies -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- Code for other js files-->
+  <script src="sidebar-render.js"></script>
+  <script src="renderer.js"></script>
+  <script src="js/scripts.js"></script>
 
-
+  <!-- Insert this line after script imports -->
+  <script>if (window.module) module = window.module;</script>
+  <!--
+    <div id="preloader">
+    </div>  -->
 </body>
 
 </html>
