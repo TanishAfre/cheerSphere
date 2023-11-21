@@ -13,7 +13,7 @@ const createWindow = () => {
     autoHideMenuBar: true, //hide the menu bar and not the frame
     webPreferences: {
       devTools: true, //disable this when packing the application
-      nodeIntegration: true,
+      nodeIntegration: true, //needed for custom frame
       contextIsolation: false, //needed for IPCRendered, figured after spending 2 hrs of working and half a bottle of whiskey - H
       enableRemoteModule: true,
       preload: path.join(__dirname, 'preload.js')

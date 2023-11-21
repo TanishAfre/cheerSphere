@@ -21,6 +21,7 @@
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/floating-button.css">
   <link rel="stylesheet" href="css/frame.css">
+  <link rel="stylesheet" href="css/loading-animation.css">
   <!--bootstrap-->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
@@ -182,7 +183,7 @@
     }
   </script>
 
-  <!-- Insert this line above script imports  -->
+  <!-- Insert this line above script imports, required for electron node integration  -->
   <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
 
 
@@ -197,9 +198,19 @@
 
   <!-- Insert this line after script imports -->
   <script>if (window.module) module = window.module;</script>
-  <!--
-    <div id="preloader">
-    </div>  -->
+
+  <div id="preloader">
+  </div>
+
+
+
+<!-- Pre loader Script-->
+ <script>
+      var loader = document.getElementById("preloader");
+      window.addEventListener("load", function(){
+        loader.style.display = "none";
+      });
+    </script> 
 </body>
 
 </html>
