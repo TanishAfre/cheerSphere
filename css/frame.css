@@ -1,0 +1,46 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  
+  #custom-frame {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  
+  #title-bar {
+    background-color: #333;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  #title {
+    font-size: 14px;
+  }
+  
+  #buttons {
+    display: flex;
+  }
+  
+  #minimize-btn,
+  #close-btn {
+    cursor: pointer;
+    padding: 5px;
+    padding: 0 10px 0 10px;
+    transition: background 0.3s; /* closing button background transition */
+
+  }
+
+  #close-btn:hover{
+    background-color: red;
+  }
+
+  #minimize-btn:hover{
+    background-color: gray;
+  }
+  
+  
