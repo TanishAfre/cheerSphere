@@ -1,5 +1,7 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron')
+console.log('Main process: App ready');
 
+const path = require('node:path')
 
 //I disabled developer mode but to enable it press Ctrl+Shift+I
 const createWindow = () => {
@@ -7,15 +9,27 @@ const createWindow = () => {
     width: 1000,
     height: 600,
     resizable: false, //Disabled Resizing as a UI preference 
-    //frame: false, // Set frame to false to remove window frame
+    frame: false, // Set frame to false to remove window frame
     autoHideMenuBar: true, //hide the menu bar and not the frame
     webPreferences: {
-      devTools: true
+      devTools: true,
+      nodeIntegration: true,
+      contextIsolation: false, //needed for IPCRendered, figured after spending 2 hrs of working and half a bottle of whiskey - H
+      enableRemoteModule: true,
+      preload: path.join(__dirname, 'preload.js')
    }
    
   })
   win.setThumbarButtons([])
   win.loadFile('index.html')
+
+  ipcMain.on('minimize-window', () => {
+    win.minimize();
+  })
+  
+  ipcMain.on('close-window', () => {
+    win.close();
+  })
 }
 
 app.whenReady().then(() => {
@@ -25,12 +39,8 @@ app.whenReady().then(() => {
     if (BrowserWindow.getAllWindows().length === 0) {
       createWindow()
     }
-  })
+  }); 
+
+  
 })
 
-//need to work on this as instead of closing the app it should go in background 
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit()
-  }
-})
