@@ -168,13 +168,18 @@
     </div>
   </div>
 
+  <!-- Preloader -->
+  <div id="preloader">
+  </div>
+
+
 
   <script src="sidebar-render.js"></script>
   <script src="renderer.js"></script>
   <script src="js/scripts.js"></script>
   <script>
 
-
+    // mood modal
     var selectedMood = '';
 
     function saveMood(mood) {
@@ -182,6 +187,13 @@
       console.log('Selected Mood: ' + selectedMood);
       $('#moodModal').modal('hide'); // Close the modal
     }
+
+    // PreLoader
+    var loader = document.getElementById("preloader");
+      window.addEventListener("load", function(){
+        loader.style.display = "none";
+      });
+      
   </script>
 
   <!-- Bootstrap JS and dependencies -->
@@ -190,9 +202,6 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 
-  <!--
-    <div id="preloader">
-    </div>  -->
 </body>
 
 </html>
