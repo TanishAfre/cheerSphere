@@ -21,11 +21,16 @@
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/floating-button.css">
   <link rel="stylesheet" href="css/frame.css">
+  <link rel="stylesheet" href="css/loading-animation.css">
   <!--bootstrap-->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 
 <body>
+    <!-- Preloader -->
+    <div id="preloader">
+    </div>
+    
   <div id="title-bar">
     <div id="title" style="padding-left: 2px;">Focus Mode</div>
     <div id="buttons">
@@ -168,10 +173,6 @@
     </div>
   </div>
 
-  <!-- Preloader -->
-  <div id="preloader">
-  </div>
-
 
 
   <script src="sidebar-render.js"></script>
@@ -193,7 +194,7 @@
       window.addEventListener("load", function(){
         loader.style.display = "none";
       });
-      
+
   </script>
 
   <!-- Bootstrap JS and dependencies -->
