@@ -1,8 +1,6 @@
 const { app, BrowserWindow, ipcMain } = require('electron')
-console.log('Main process: App ready');
-
-const path = require('path')
-
+const { exec } = require('child_process'); //running python
+const path = require('path') //path
 //I disabled developer mode but to enable it press Ctrl+Shift+I
 const createWindow = () => {
   const win = new BrowserWindow({
@@ -22,6 +20,7 @@ const createWindow = () => {
   })
   win.loadFile('index.html')
 
+
   ipcMain.on('minimize-window', () => {
     win.minimize();
   })
@@ -29,6 +28,14 @@ const createWindow = () => {
   ipcMain.on('close-window', () => {
     win.close();
   })
+
+  ipcMain.on('focus', () => {
+
+    exec('python python/start-focus.py', (error, stdout, stderr) => {
+      console.log(error,stderr,stdout)
+  });
+})
+
 }
 
 app.whenReady().then(() => {
@@ -42,4 +49,3 @@ app.whenReady().then(() => {
 
   
 })
-
