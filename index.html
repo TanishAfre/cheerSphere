@@ -20,14 +20,22 @@
   <script src="https://kit.fontawesome.com/b81fdd1146.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/floating-button.css">
+  <link rel="stylesheet" href="css/frame.css">
   <!--bootstrap-->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 
 <body>
+  <div id="title-bar">
+    <div id="title" style="padding-left: 2px;">Focus Mode</div>
+    <div id="buttons">
+      <div id="minimize-btn">&#x2500;</div>
+      <div id="close-btn">&#x2715;</div>
+    </div>
+  </div>
   <!-- sidebar code -->
-
-  <nav class="sidebar close">
+ 
+  <nav class="sidebar close" style="margin-top: 45px;">
     <header>
       <div class="image-text">
         <span class="image">
@@ -160,6 +168,7 @@
   </div>
 
 
+  <script src="sidebar-render.js"></script>
   <script src="renderer.js"></script>
   <script>
     var selectedMood = '';
