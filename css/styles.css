@@ -30,6 +30,7 @@
 }
 
 body{
+    
     background-color: #FEF6EB !important;
     min-height: 100vh;
     transition: var(--tran-05);
@@ -179,6 +180,9 @@ header .image-text .header-text{
     left : 250px;
     height: 100vh;
     width: calc(100% - 250px);
+    background-image: url("../images/winter-bg.png") !important;
+    background-repeat: no-repeat;
+    background-size: cover;
     background-color: var(--body-color);
     transition: var(--tran-05);
 }

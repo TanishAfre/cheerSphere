@@ -23,6 +23,8 @@
   <link rel="stylesheet" href="css/frame.css">
   <link rel="stylesheet" href="css/loading-animation.css">
   <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/congrats-modal.css">
+  
   <!--bootstrap-->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
@@ -132,7 +134,7 @@
     </button>
   </div>
 
-  <!-- Modal -->
+  <!--Mood Modal -->
   <div class="modal fade" id="moodModal" tabindex="-1" role="dialog" aria-labelledby="moodModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -185,6 +187,26 @@
     </div>
   </div>
 
+  <!-- Modal Congrats -->
+  <div class="modal fade" id="congratulationsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Congratulations!</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>You were focused for: <span id="focusedTime">0 minutes</span>.</p>
+          <p>How would you rate your session using Niko Chart?</p>
+          <!-- Include your Niko Chart or rating options here -->
+          <!-- For simplicity, I'm using a basic input for rating -->
+          <input type="number" min="1" max="5" placeholder="Rate here" />
+        </div>
+      </div>
+    </div>
+  </div>
 
 
   <script>
@@ -222,6 +244,14 @@
   var startTime;
   var button = document.getElementById('focus-btn');
 
+  function showCongratulationsModal() {
+    var focusedTime = 25; // Replace this with your actual focused time calculation
+    document.getElementById('focusedTime').innerText = focusedTime + ' minutes';
+
+    // Trigger the modal
+    $('#congratulationsModal').modal('show');
+  }
+
   function startFocus() {
     var button = document.getElementById('focus-btn');
 
@@ -253,6 +283,8 @@
       // Reset button style
       button.innerHTML = 'Start Focusing';
       button.style.backgroundColor = 'green';
+
+      showCongratulationsModal();
     }
   }
 
