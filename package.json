@@ -9,10 +9,13 @@
   },
   "author": "",
   "license": "ISC",
-    "build": {
+  "build": {
     "appId": "com.yourcompany.focusmind",
     "win": {
       "icon": "./images/favicon.ico"
     }
+  },
+  "dependencies": {
+    "electron-tray-window": "^1.2.7"
   }
 }
