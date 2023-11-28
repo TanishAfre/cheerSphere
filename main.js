@@ -22,10 +22,11 @@ const createWindow = () => {
    }
    
   })
+  win.setIcon('images/Focus_Mind_Logo.png');
   win.loadFile('index.html')
 
     // Create the Tray icon
-    tray = new Tray(path.join(__dirname, 'images/focus-mind.ico')); // Path to the tray icon
+    tray = new Tray(path.join(__dirname, 'images/focus-mind.png')); // Path to the tray icon
     tray.setToolTip('Focus Mind'); // Tooltip for the tray icon
     tray.on('click', () => {
       // Restore the window when the tray icon is clicked
