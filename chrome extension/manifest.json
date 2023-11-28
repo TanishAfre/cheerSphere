@@ -17,9 +17,9 @@
     }
   ],
   "icons": {
-    "16": "images/icon.png",
-    "48": "images/icon.png",
-    "128": "images/icon.png"
+    "16": "extensionImages/extensionImages.png",
+    "48": "extensionImages/extensionImages.png",
+    "128": "extensionImages/extensionImages.png"
   },
   "browser_action": {
     "default_popup": "Popup.html",
