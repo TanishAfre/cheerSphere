@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, Tray } = require('electron')
+const { app, BrowserWindow, ipcMain, Menu, Tray } = require('electron')
 const { exec } = require('child_process'); //running python
 const path = require('path') //path
 const TrayWindow = require('electron-tray-window');
@@ -19,25 +19,32 @@ const createWindow = () => {
       contextIsolation: false, //needed for IPCRendered, figured after spending 2 hrs of working and half a bottle of whiskey - H
       enableRemoteModule: true,
       preload: path.join(__dirname, 'preload.js')
-   }
-   
+    }
+
   })
   win.setIcon('images/Focus_Mind_Logo.png');
   win.loadFile('index.html')
 
-    // Create the Tray icon
-    tray = new Tray(path.join(__dirname, 'images/focus-mind.png')); // Path to the tray icon
-    tray.setToolTip('Focus Mind'); // Tooltip for the tray icon
-    tray.on('click', () => {
-      // Restore the window when the tray icon is clicked
-      if (win.isVisible()) {
-        win.hide();
-      } else {
-        win.show();
-      }
-    });
-  
-    // Minimize the window to tray instead of closing
+  // Create the Tray icon
+  tray = new Tray(path.join(__dirname, 'images/focus-mind.png')); // Path to the tray icon
+  tray.setToolTip('Focus Mind'); // Tooltip for the tray icon
+  const contextMenu = Menu.buildFromTemplate([
+    { label: 'Item1', type: 'radio' },
+    { label: 'Item2', type: 'radio' },
+    { label: 'Item3', type: 'radio', checked: true },
+    { label: 'Item4', type: 'radio' }
+  ]);
+  tray.setContextMenu(contextMenu)
+  tray.on('click', () => {
+    // Restore the window when the tray icon is clicked
+    if (win.isVisible()) {
+      win.hide();
+    } else {
+      win.show();
+    }
+  });
+
+  // Minimize the window to tray instead of closing
   win.on('minimize', (event) => {
     if (!app.isQuitting) {
       event.preventDefault();
@@ -49,7 +56,7 @@ const createWindow = () => {
   ipcMain.on('minimize-window', () => {
     win.minimize();
   })
-  
+
   ipcMain.on('close-window', () => {
     win.close();
   })
@@ -57,9 +64,9 @@ const createWindow = () => {
   ipcMain.on('focus', () => {
 
     exec('python python/start-focus.py', (error, stdout, stderr) => {
-      console.log(error,stderr,stdout)
-  });
-})
+      console.log(error, stderr, stdout)
+    });
+  })
 
 }
 
@@ -69,17 +76,17 @@ app.whenReady().then(() => {
   app.on('before-quit', () => {
     app.isQuitting = true;
   });
-  
+
   app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
       app.quit();
     }
   });
-  
+
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
       createWindow();
     }
   });
-  
+
 })
