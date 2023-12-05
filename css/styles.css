@@ -30,6 +30,7 @@
 }
 
 body{
+    
     background-color: #FEF6EB !important;
     min-height: 100vh;
     transition: var(--tran-05);
@@ -64,7 +65,7 @@ body{
 }
 
 .sidebar.close .text{
-    opacity: 0;
+    display: none;
 }
 
 .sidebar .image{
@@ -179,6 +180,8 @@ header .image-text .header-text{
     left : 250px;
     height: 100vh;
     width: calc(100% - 250px);
+    background-repeat: no-repeat;
+    background-size: cover;
     background-color: var(--body-color);
     transition: var(--tran-05);
 }

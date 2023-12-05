@@ -1,0 +1,86 @@
+.below-headings{
+    width:20%;
+    height: 50px;
+    border-top: 1px solid ;
+}
+.block-card{
+    margin-bottom: 20px;
+    background-color: white !important;
+}
+.blocked-card-head{
+    margin: 12px;
+    align-content: center;
+    text-align: center;
+    background-color: white !important;
+}
+.blocked-card-body{
+    font-size:12px;
+}
+.blocked-card-footer{
+    margin: 12px;
+    margin-top: 0 !important;
+    font-size: 12px !important;
+    background-color: white !important;
+}
+.btn-focus{
+    font-size: 12px !important;
+    padding: 3px;
+    background-color: #9D1450 !important;
+    color: white !important;
+}
+.btn-secondary{
+    font-size: 12px !important;
+    background-color: whitesmoke !important;
+    color: black !important;
+}
+.text-container{
+    width: 100%;
+    height: auto;
+    max-height: 140px;
+    border: 1px solid gray;
+    overflow-y: scroll;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.text-body-blocked{
+    margin:0 !important;
+}
+.remove-button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    width: 70%;
+    cursor: pointer;
+    
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+td{
+    text-align: center !important;
+}
+th:nth-child(1),
+td:nth-child(1) {
+    width: 70%;
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+    width: 30%;
+}
+.imp-exp-btn{
+    width: 100%;
+}
+.green-button {
+    background-color: #789c74 !important;
+    color: white !important;
+}
+input::placeholder{
+    font-size: 10px;
+}
