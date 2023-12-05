@@ -16,7 +16,7 @@
     }
   },
   "dependencies": {
-    "electron": "^27.1.2",
+    "electron": "^28.0.0",
     "electron-tray-window": "^1.2.7",
     "i": "^0.3.7"
   }
