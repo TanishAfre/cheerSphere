@@ -1,66 +1,67 @@
 const generateSTYLES = () => {
-    return `<style>
-    * {
-    box-sizing: border-box;
-    color: #fff;
-    font-family: monospace;
-    font-size: 5vw;
-    font-weight: bold;
-    text-align: center;
-  }
-  
-  html {
-    background: radial-gradient(68.34% 50% at 50% 50%, #2D9AFF 0%, #41DEE8 0%, #A22DFF 100%);
+  return `<style>
+  #container {
+    position: fixed;
+    backdrop-filter: saturate(180%) blur(30px); 
     height: 100vh;
-    padding: 50px 30px;
+    width: 100vw;--
     display: flex;
     align-items: center;
     justify-content: center;
+    color: white;
+    display: flex;
+    z-index: 9999;
   }
-  
-  html::before {
-    content: '!! Website Blocked !!';
-  }
-  
-  body {
-    display: none !important;
-  }
-    
-   
-     </style>`;
+
+    ._1 {
+      font-size: 90px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    ._2 {
+      font-size: 20px;
+      text-align: center;
+      margin-top: 100px;
+      position: absolute;
+    }
+  </style>`;
 };
 
 const generateHTML = (pageName) => {
-    return `
+  return `
+    <div id='container'>
         <div class='_1'>Focus Mode Enabled</div>
-        <div class='_2'>Website Blocked ${pageName}</div>
-    </div>
-     `;
+        <div class='_2'>Website Blocked: ${pageName}</div>
+    </div>`;
 };
+// Create a new element to hold content
+const overlayContainer = document.createElement("div");
 
 switch (window.location.hostname) {
-    case "www.youtube.com":
-        document.head.innerHTML = generateSTYLES();
-        document.body.innerHTML = generateHTML("YOUTUBE");
-        break;
-    case "www.facebook.com":
-        document.head.innerHTML = generateSTYLES();
-        document.body.innerHTML = generateHTML("FACEBOOK");
-        break;
-    case "www.netflix.com":
-        document.head.innerHTML = generateSTYLES();
-        document.body.innerHTML = generateHTML("NETFLIX");
-        break;
-    case "www.roblox.com":
-        document.head.innerHTML = generateSTYLES();
-        document.body.innerHTML = generateHTML("ROBLOX");
-        break;
-    case "discord.com":
-        document.head.innerHTML = generateSTYLES();
-        document.body.innerHTML = generateHTML("DISCORD");
-        break;
-    case "www.spotify.com":
-        document.head.innerHTML = generateSTYLES();
-        document.body.innerHTML = generateHTML("SPOTIFY");
-        break;
+  case "www.youtube.com":
+    overlayContainer.innerHTML = generateSTYLES() + generateHTML(window.location.hostname);
+    document.body.appendChild(overlayContainer);
+    break;
+  case "www.facebook.com":
+    overlayContainer.innerHTML = generateSTYLES() + generateHTML(window.location.hostname);
+    document.body.appendChild(overlayContainer);
+    break;
+  case "www.netflix.com":
+    overlayContainer.innerHTML = generateSTYLES() + generateHTML(window.location.hostname);
+    document.body.appendChild(overlayContainer);
+    break;
+  case "www.roblox.com":
+    overlayContainer.innerHTML = generateSTYLES() + generateHTML(window.location.hostname);
+    document.body.appendChild(overlayContainer);
+    break;
+  case "discord.com":
+    overlayContainer.innerHTML = generateSTYLES() + generateHTML(window.location.hostname);
+    document.body.appendChild(overlayContainer);
+    break;
+  case "www.spotify.com":
+    overlayContainer.innerHTML = generateSTYLES() + generateHTML(window.location.hostname);
+    document.body.appendChild(overlayContainer);
+    break;
 }
+//document.body.innerHTML = generateHTML(window.location.hostname);
