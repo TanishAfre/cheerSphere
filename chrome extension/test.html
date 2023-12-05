@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Read File from Database</title>
+</head>
+
+<body>
+
+    <button onclick="readFile()">Read File</button>
+    <pre style="white-space: pre-wrap; color: red;" id="fileContent"></pre>
+
+    <script>
+        async function readFile() {
+            try {
+                const response = await fetch('database/focusmode.txt');
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch file: ${response.status} ${response.statusText}`);
+                }
+
+                const content = await response.text();
+                displayFileContent(content);
+            } catch (error) {
+                console.error(error.message);
+            }
+        }
+
+        function displayFileContent(content) {
+            const fileContentElement = document.getElementById('fileContent');
+            fileContentElement.textContent = content;
+        }
+    </script>
+
+</body>
+
+</html>
