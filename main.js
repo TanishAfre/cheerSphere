@@ -69,7 +69,7 @@ const createWindow = () => {
   })
 
 }
-
+app.setName('Focus Mind');
 app.whenReady().then(() => {
   createWindow()
 
@@ -90,3 +90,22 @@ app.whenReady().then(() => {
   });
 
 })
+
+app.setUserTasks([
+  {
+    program: process.execPath,
+    arguments: '--focus-mode',
+    iconPath: 'images/focus-mind.png',
+    iconIndex: 0,
+    title: 'Start Focus',
+    description: 'Enter Focus Mode'
+  },
+  {
+    program: process.execPath,
+    arguments: '--show-analytics',
+    iconPath: process.execPath,
+    iconIndex: 0,
+    title: 'Analytics',
+    description: 'View Analytics'
+  }
+]);
