@@ -29,10 +29,10 @@ const createWindow = () => {
   tray = new Tray(path.join(__dirname, 'images/focus-mind.png')); // Path to the tray icon
   tray.setToolTip('Focus Mind'); // Tooltip for the tray icon
   const contextMenu = Menu.buildFromTemplate([
-    { label: 'Item1', type: 'radio' },
-    { label: 'Item2', type: 'radio' },
-    { label: 'Item3', type: 'radio', checked: true },
-    { label: 'Item4', type: 'radio' }
+    { label: 'Focus Mode', type: 'normal', click: () => app.quit() } ,
+    { label: 'Analytics', type: 'normal', click: () => app.quit() } ,
+    { type: 'separator' }, // Adds a visual separator in the menu
+    { label: 'Exit', type: 'normal', click: () => app.quit() } // Adds an exit button
   ]);
   tray.setContextMenu(contextMenu)
   tray.on('click', () => {
