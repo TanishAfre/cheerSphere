@@ -7,6 +7,13 @@ CREATE TABLE UserMood (
     EntryTime TIME NOT NULL -- Time of entry
 );
 
+-- table to store calendar events
+CREATE TABLE calendarEvents (
+    event_id INTEGER PRIMARY KEY, -- Unique ID for each entry
+    event_title TEXT NOT NULL, -- title of the event
+    event_starting_date DATE  NOT NULL, -- starting date of the event
+    event_ending_date DATE  NOT NULL -- ending date of the event
+);
 
 
 
