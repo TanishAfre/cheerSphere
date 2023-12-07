@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <!-- 
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'"
+    />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'"
+    />
+    sidebar code -->
+    <title>Focus Mode</title>
+    <!-- Using Boxivons because they have more veriety -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-..."> -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://kit.fontawesome.com/b81fdd1146.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/floating-button.css">
+    <link rel="stylesheet" href="../css/frame.css">
+    <link rel="stylesheet" href="../css/loading-animation.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/congrats-modal.css">
+    <link rel="stylesheet" href="../css/settings.css">
+
+    <!--bootstrap-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div id="title-bar">
+        <div id="title" style="padding-left: 5px;">Focus Mode</div>
+        <div id="buttons">
+            <div id="minimize-btn">&#x2500;</div>
+            <div id="close-btn">&#x2715;</div>
+        </div>
+    </div>
+    <!-- sidebar code -->
+
+    <nav class="sidebar close" style="margin-top: 45px; background-color: #FEF6EB;">
+        <header>
+            <div class="image-text">
+                <span class="image">
+                    <img src="../images/focus mind.png" alt="logo" />
+                </span>
+
+                <div class="text header-text">
+                    <span class="name">FocusMind</span>
+                </div>
+            </div>
+
+            <i class='bx bx-chevron-right toggle'></i>
+        </header>
+
+        <div class="menu-bar">
+            <div class="menu">
+                <ul class="menu-links">
+                    <li class="nav-links">
+                        <a href="../index.html">
+                            <i class='bx bx-list-ul icon'></i>
+                            <span class="text nav-text">Overview</span>
+                        </a>
+                    </li>
+                    <li class="nav-links">
+                        <a href="#">
+                            <i class='bx bxs-bar-chart-alt-2 icon'></i>
+                            <span class="text nav-text">Analytics</span>
+                        </a>
+                    </li>
+                    <li class="nav-links">
+                        <a href="#">
+                            <i class='bx bx-crosshair icon'></i>
+                            <span class="text nav-text">Focus</span>
+                        </a>
+                    </li>
+                    <li class="nav-links">
+                        <a href="#">
+                            <i class='bx bx-calendar-event icon'></i>
+                            <span class="text nav-text">Calender</span>
+                        </a>
+                    </li>
+                    <li class="nav-links">
+                        <a href="./settings.html">
+                            <i class='bx bx-cog icon'></i>
+                            <span class="text nav-text">Settings</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="bottom-content">
+            <div class="toggle-switch">
+                <span class="switch"></span>
+            </div>
+        </div>
+
+    </nav>
+
+
+    <section class="home" style="overflow: scroll;">
+
+        <!-- main app -->
+        
+
+    </section>
+
+
+    <!-- Insert this line above script imports, required for electron node integration  -->
+    <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
+
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Code for other js files-->
+    <script src="../js/sidebar-render.js"></script>
+    <script src="../js/renderer.js"></script>
+    <script src="../js/scripts.js"></script>
+    <script src="../js/settings.js"></script>
+
+    <!-- Insert this line after script imports -->
+    <script>if (window.module) module = window.module;</script>
+
+    <div id="preloader">
+    </div>
+    <!--Timer Start Code-->
+
+
+    <!-- Pre loader Script
+    <script>
+    var loader = document.getElementById("preloader");
+      window.addEventListener("load", function(){
+       loader.style.display = "none";
+     });
+    </script> 
+  -->
+</body>
+
+</html>
