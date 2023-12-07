@@ -1,5 +1,7 @@
 
 var ctx = document.getElementById('myChart').getContext('2d');
+var focusHours = document.getElementById('focusMode').getContext('2d');
+
 var myChart = new Chart(ctx, {
     type: 'polarArea',
     data: {
@@ -28,5 +30,40 @@ var myChart = new Chart(ctx, {
     },
     options: {
         resposive: true,
+    }
+});
+
+var myChart = new Chart(focusHours, {
+    type: 'bar',
+    data: {
+        labels: ['Monday', 'Tuesday', 'Wednesday', 'Thirsday', 'Friday', 'Saterday'],
+        datasets: [{
+            label: 'Hours Focused',
+            data: [12, 10, 5, 8, 10, 2],
+            backgroundColor: [
+                'rgba(0, 0, 0, 0.2)',
+                'rgba(0, 0, 0, 0.2)',
+                'rgba(0, 0, 0, 0.2)',
+                'rgba(0, 0, 0, 0.2)',
+                'rgba(0, 0, 0, 0.2)',
+                'rgba(0, 0, 0, 0.2)'
+            ],
+            borderColor: [
+                'rgba(0, 0, 0, 1)',
+                'rgba(0, 0, 0, 1)',
+                'rgba(0, 0, 0, 1)',
+                'rgba(0, 0, 0, 1)',
+                'rgba(0, 0, 0, 1)',
+                'rgba(0, 0, 0, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
     }
 });
