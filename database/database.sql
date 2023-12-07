@@ -33,6 +33,15 @@ CREATE TABLE focusModeActivation (
     FOREIGN KEY (event_id) REFERENCES calendarEvents(id) -- foreign key to link the event id to the calendarEvents table
 );
 
+-- table to store user settings
+CREATE TABLE userSettings (
+    user_id INTEGER PRIMARY KEY, -- Unique ID for each entry
+    focus_mode_enabled BOOLEAN NOT NULL DEFAULT 0, -- boolean to check if the focus mode is enabled or not
+    focus_duration_minutes INTEGER NOT NULL DEFAULT 25, -- duration of the focus mode in minutes. MAke 0 if you want to make it a counter
+    notification_sound_enabled BOOLEAN NOT NULL DEFAULT 1 -- boolean to check if the notification sound is enabled or not
+);
+
+
 
 
 
