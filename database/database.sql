@@ -41,6 +41,16 @@ CREATE TABLE userSettings (
     notification_sound_enabled BOOLEAN NOT NULL DEFAULT 1 -- boolean to check if the notification sound is enabled or not
 );
 
+-- table to store blocked websites
+CREATE TABLE BlockedWebsite (
+    blocked_website_id INTEGER PRIMARY KEY, -- Unique ID for each entry
+    user_id INTEGER, -- id of the user
+    blocked_website_name TEXT NOT NULL, -- name of the website
+    website_blocked_status BOOLEAN NOT NULL DEFAULT 1, -- boolean to check if the website is blocked or not
+    website_url TEXT NOT NULL, -- url of the website
+    CONSTRAINT fk_user_id FOREIGN KEY (user_id) REFERENCES userSettings(user_id) -- foreign key to link the user id to the userSettings table
+);
+
 
 
 
