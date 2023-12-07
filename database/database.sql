@@ -15,6 +15,14 @@ CREATE TABLE calendarEvents (
     event_ending_date DATE  NOT NULL -- ending date of the event
 );
 
+-- table to store event notifications
+CREATE TABLE eventNotifications (
+    notification_ID INTEGER PRIMARY KEY, -- Unique ID for each entry
+    event_id INTEGER, -- id of the event
+    notification_date DATE NOT NULL, -- date of the notification
+    notification_message TEXT NOT NULL, -- message of the notification
+    FOREIGN KEY (event_id) REFERENCES calendarEvents(id) -- foreign key to link the event id to the calendarEvents table
+);
 
 
 
