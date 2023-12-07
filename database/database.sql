@@ -24,6 +24,18 @@ CREATE TABLE eventNotifications (
     FOREIGN KEY (event_id) REFERENCES calendarEvents(id) -- foreign key to link the event id to the calendarEvents table
 );
 
+-- table to store focus mode activations
+CREATE TABLE focusModeActivation (
+    activation_Id INTEGER PRIMARY KEY, -- Unique ID for each entry
+    event_id INTEGER, -- id of the event
+    activation_datetime DATETIME NOT NULL, -- date and time of the activation
+    is_active BOOLEAN NOT NULL, -- boolean to check if the focus mode is active or not
+    FOREIGN KEY (event_id) REFERENCES calendarEvents(id) -- foreign key to link the event id to the calendarEvents table
+);
+
+
+
+
 
 
 
