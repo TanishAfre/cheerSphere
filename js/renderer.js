@@ -12,5 +12,5 @@ document.getElementById('close-btn').addEventListener('click', () => {
 
 document.getElementById('focus-btn').addEventListener('click', () => {
   console.log('button pressed')
-  ipcRenderer.send('focus');
+  ipcRenderer.send('blackout');
 });
