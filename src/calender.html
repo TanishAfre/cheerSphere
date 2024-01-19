@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="../css/dashboard.css">
     <link rel="stylesheet" href="../css/congrats-modal.css">
     <link rel="stylesheet" href="../css/settings.css">
+    <link rel="stylesheet" href="../css/calender.css">
 
     <!--bootstrap-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -102,66 +103,75 @@
 
 
     <section class="home" style="overflow: scroll;">
-        <div class="calendar-container">
-            <div class="calendar-nav">
-              <button class="nav-button">&#x2039;</button>
-              <button class="today-button">today</button>
-              <button class="nav-button">&#x203A;</button>
-              <h2 class="current-month">April 2019</h2>
-              <div class="view-buttons">
-                <button class="view-button active">month</button>
-                <button class="view-button">week</button>
-                <button class="view-button">day</button>
-                <button class="view-button">list</button>
-              </div>
+        <div class="calender">
+            <div class="calender-head">
+                <span class="month-picker" id="month-picker">
+                    February
+                </span>
             </div>
+            <div class="year-picker">
+                <span class="year-change" id="prev-year">
+                    <pre><</pre>
+                </span>
+                <span id="year">2024</span>
+                <span class="year-change" id="next-year">
+                    <pre>></pre>
+                </span>
+            </div>
+            <div class="calender-body">
+                <div class="calender-week-day">
+                    <div>Sun</div>
+                    <div>Mon</div>
+                    <div>Tue</div>
+                    <div>Wed</div>
+                    <div>Thu</div>
+                    <div>Fri</div>
+                    <div>Sat</div>
+                </div>
+                <div class="calender-days">
+                    <div>1</div>
+                    <div>2</div>
+                    <div>3</div>
+                    <div>4</div>
+                    <div>5</div>
+                    <div>6</div>
+                    <div>7</div>
+                    <div>8</div>
+                    <div>9</div>
+                    <div>10</div>
+                    <div>11</div>
+                    <div>12</div>
+                    <div>13</div>
+                    <div>14</div>
+                    <div>15</div>
+                    <div>16</div>
+                    <div>17</div>
+                    <div>18</div>
+                    <div>19</div>
+                    <div>20</div>
+                </div>
+                <div class="calender-footer">
+                    <span>DarkMode</span>
+                    <div class="dark-mode-switch">
+                        <div class="dark-mode-switch-ident"></div>
+                    </div>
+                </div>
+                <div class="month-list">
+                    <div>Jan</div>
+                    <div>Feb</div>
+                    <div>Mar</div>
+                    <div>Apr</div>
+                    <div>May</div>
+                    <div>Jun</div>
+                    <div>Jul</div>
+                    <div>Aug</div>
+                    <div>Sep</div>
+                    <div>Oct</div>
+                    <div>Nov</div>
+                    <div>Dec</div>
+                </div>
 
-            <table class="calendar">
-                <thead>
-                  <tr>
-                    <th>Sun</th>
-                    <th>Mon</th>
-                    <th>Tue</th>
-                    <th>Wed</th>
-                    <th>Thu</th>
-                    <th>Fri</th>
-                    <th>Sat</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <!-- Repeat for each week -->
-                  <tr>
-                    <td class="prev-month">31</td>
-                    <td><div class="event all-day-event">All Day Event</div></td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td>5</td>
-                    <td>6</td>
-                  </tr>
-                  <!-- ... other weeks ... -->
-                  <tr>
-                    <td>7</td>
-                    <td>8</td>
-                    <td><div class="event long-event">Long Event</div></td>
-                    <td>10</td>
-                    <td>11</td>
-                    <td>12</td>
-                    <td>13</td>
-                  </tr>
-                  <!-- ... -->
-                  <tr>
-                    <td>14</td>
-                    <td>15</td>
-                    <td><div class="event repeating-event">4p Repeating Event</div></td>
-                    <td>17</td>
-                    <td>18</td>
-                    <td>19</td>
-                    <td>20</td>
-                  </tr>
-                  <!-- ... -->
-                </tbody>
-            </table>
+            </div>
         </div>
     </section>
 
