@@ -18,7 +18,6 @@
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-..."> -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://kit.fontawesome.com/b81fdd1146.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../css/graphs.css">
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/floating-button.css">
     <link rel="stylesheet" href="../css/frame.css">
@@ -66,7 +65,7 @@
                         </a>
                     </li>
                     <li class="nav-links">
-                        <a href="#">
+                        <a href="./Analytics.html">
                             <i class='bx bxs-bar-chart-alt-2 icon'></i>
                             <span class="text nav-text">Analytics</span>
                         </a>
@@ -84,7 +83,7 @@
                         </a>
                     </li>
                     <li class="nav-links">
-                        <a href="./settings.html">
+                        <a href="#">
                             <i class='bx bx-cog icon'></i>
                             <span class="text nav-text">Settings</span>
                         </a>
@@ -103,23 +102,67 @@
 
 
     <section class="home" style="overflow: scroll;">
-
-        <!-- Adding Charts -->
-        <div class="text">
-            Time Spent
-            <hr>
-            <div class="graphBox">
-                <div class="box">
-                    <canvas id="myChart"></canvas>
-                </div>
-                <div class="box">
-                    <canvas id="focusMode"></canvas>
-                </div>
+        <div class="calendar-container">
+            <div class="calendar-nav">
+              <button class="nav-button">&#x2039;</button>
+              <button class="today-button">today</button>
+              <button class="nav-button">&#x203A;</button>
+              <h2 class="current-month">April 2019</h2>
+              <div class="view-buttons">
+                <button class="view-button active">month</button>
+                <button class="view-button">week</button>
+                <button class="view-button">day</button>
+                <button class="view-button">list</button>
+              </div>
             </div>
+
+            <table class="calendar">
+                <thead>
+                  <tr>
+                    <th>Sun</th>
+                    <th>Mon</th>
+                    <th>Tue</th>
+                    <th>Wed</th>
+                    <th>Thu</th>
+                    <th>Fri</th>
+                    <th>Sat</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Repeat for each week -->
+                  <tr>
+                    <td class="prev-month">31</td>
+                    <td><div class="event all-day-event">All Day Event</div></td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                  </tr>
+                  <!-- ... other weeks ... -->
+                  <tr>
+                    <td>7</td>
+                    <td>8</td>
+                    <td><div class="event long-event">Long Event</div></td>
+                    <td>10</td>
+                    <td>11</td>
+                    <td>12</td>
+                    <td>13</td>
+                  </tr>
+                  <!-- ... -->
+                  <tr>
+                    <td>14</td>
+                    <td>15</td>
+                    <td><div class="event repeating-event">4p Repeating Event</div></td>
+                    <td>17</td>
+                    <td>18</td>
+                    <td>19</td>
+                    <td>20</td>
+                  </tr>
+                  <!-- ... -->
+                </tbody>
+            </table>
         </div>
-
-        
-
     </section>
 
 
@@ -129,11 +172,9 @@
 
     <!-- Bootstrap JS and dependencies -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- Code for other js files-->
-    <script src="../js/myChart.js"></script>
     <script src="../js/sidebar-render.js"></script>
     <script src="../js/renderer.js"></script>
     <script src="../js/scripts.js"></script>
