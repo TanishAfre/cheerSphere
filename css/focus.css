@@ -126,15 +126,15 @@
     margin: 5px;
     font-size: 16px;
     cursor: pointer;
-    background-color: #333; /* Dark gray background */
+    background-color: #484848; /* Dark gray background */
     color: white; /* White text */
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     transition: background-color 0.3s ease;
   }
   
   button:hover {
-    background-color: #555; /* Slightly lighter gray on hover */
+    background-color: #737373; /* Slightly lighter gray on hover */
   }
   
   .session-container {

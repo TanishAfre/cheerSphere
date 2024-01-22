@@ -5,17 +5,17 @@ const sessionLength = document.getElementById('sessionLength');
 const decreaseSession = document.getElementById('decreaseSession');
 const increaseSession = document.getElementById('increaseSession');
 
-// decreaseSession.addEventListener('click', function() {
-//     let length = parseInt(sessionLength.textContent, 10);
-//     if (length > 1) {
-//         sessionLength.textContent = length - 1;
-//     }
-// });
+decreaseSession.addEventListener('click', function() {
+    let length = parseInt(sessionLength.textContent, 10);
+    if (length > 1) {
+        sessionLength.textContent = length - 1;
+    }
+});
 
-// increaseSession.addEventListener('click', function() {
-//     let length = parseInt(sessionLength.textContent, 10);
-//     sessionLength.textContent = length + 1;
-// });
+increaseSession.addEventListener('click', function() {
+    let length = parseInt(sessionLength.textContent, 10);
+    sessionLength.textContent = length + 1;
+});
 
 
 const targetDate = new Date();
