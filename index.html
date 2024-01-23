@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="css/loading-animation.css">
   <link rel="stylesheet" href="css/dashboard.css">
   <link rel="stylesheet" href="css/congrats-modal.css">
-  
+
   <!--bootstrap-->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
@@ -118,8 +118,8 @@
             <h3 style="margin-top: 40px;">Hours spent on blocked<br> app/websites</h3>
           </div>
         </div>
-        <button id="focus-btn" onclick="startFocus()" type="button"
-          class="btn btn-success start-focus">Start Focusing</button>
+        <button id="focus-btn" onclick="startFocus()" type="button" class="btn btn-success start-focus">Start
+          Focusing</button>
       </div>
 
 
@@ -188,7 +188,8 @@
   </div>
 
   <!-- Modal Congrats -->
-  <div class="modal fade" id="congratulationsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="congratulationsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -239,69 +240,82 @@
   </div>
   <!--Timer Start Code-->
   <script>
-    
-  var isFocusing = false;
-  var startTime;
-  var button = document.getElementById('focus-btn');
 
-  function showCongratulationsModal() {
-    var focusedTime = 25; // Replace this with your actual focused time calculation
-    document.getElementById('focusedTime').innerText = focusedTime + ' minutes';
-
-    // Trigger the modal
-    $('#congratulationsModal').modal('show');
-  }
-
-  function startFocus() {
+    var isFocusing = false;
+    var startTime;
     var button = document.getElementById('focus-btn');
 
-    if (!isFocusing) {
-      // Start focusing
-      startTime = new Date().getTime();
-      isFocusing = true;
+    function showCongratulationsModal() {
+      var focusedTime = 25; // Replace this with your actual focused time calculation
+      document.getElementById('focusedTime').innerText = focusedTime + ' minutes';
 
-      // Change text to a timer
-      button.innerHTML = 'Focusing for: 00:00';
-
-
-      // Example: Update timer display every second
-      setInterval(function () {
-        if (isFocusing) {
-          var elapsedMillis = new Date().getTime() - startTime;
-          updateTimerDisplay(elapsedMillis);
-        }
-      }, 1000);
-    } else {
-      // Stop focusing
-      isFocusing = false;
-
-      // Print time in console
-      var elapsedMillis = new Date().getTime() - startTime;
-      var elapsedSeconds = Math.floor(elapsedMillis / 1000);
-      console.log('Focusing time: ' + formatTime(elapsedSeconds));
-
-      // Reset button style
-      button.innerHTML = 'Start Focusing';
-      button.style.backgroundColor = 'green';
-
-      showCongratulationsModal();
+      // Trigger the modal
+      $('#congratulationsModal').modal('show');
     }
-  }
 
-  function updateTimerDisplay(elapsedMillis) {
-    var elapsedSeconds = Math.floor(elapsedMillis / 1000);
-    button.innerHTML = 'Focusing for: ' + formatTime(elapsedSeconds);
-  }
+    function startFocus() {
+      var button = document.getElementById('focus-btn');
 
-  function formatTime(seconds) {
-    var minutes = Math.floor(seconds / 60);
-    seconds = seconds % 60;
-    return padLeft(minutes) + ':' + padLeft(seconds);
-  }
+      if (!isFocusing) {
 
-  function padLeft(value) {
-    return value < 10 ? '0' + value : value;
-  }
+        // Start focusing
+        startTime = new Date().getTime();
+        isFocusing = true;
+
+        // Change text to a timer
+        button.innerHTML = 'Focusing for: 00:00';
+
+
+        // Example: Update timer display every second
+        setInterval(function () {
+          if (isFocusing) {
+            var elapsedMillis = new Date().getTime() - startTime;
+            updateTimerDisplay(elapsedMillis);
+          }
+        }, 1000);
+
+        // Send something to IPCRenderer every 2 seconds
+        ipcRendererInterval = setInterval(function () {
+          if (!isFocusing) {
+            clearInterval(ipcRendererInterval); // Stop the interval if isFocusing is false
+            return;
+          }
+          // Send data to IPCRenderer here
+          console.log("Sent something")
+          ipcRenderer.send('focus');
+        }, 2000);
+
+      } else {
+        // Stop focusing
+        isFocusing = false;
+
+        // Print time in console
+        var elapsedMillis = new Date().getTime() - startTime;
+        var elapsedSeconds = Math.floor(elapsedMillis / 1000);
+        console.log('Focusing time: ' + formatTime(elapsedSeconds));
+
+        // Reset button style
+        button.innerHTML = 'Start Focusing';
+        button.style.backgroundColor = 'green';
+
+        showCongratulationsModal();
+      }
+    }
+
+    function updateTimerDisplay(elapsedMillis) {
+      var elapsedSeconds = Math.floor(elapsedMillis / 1000);
+      button.innerHTML = 'Focusing for: ' + formatTime(elapsedSeconds);
+    }
+
+    function formatTime(seconds) {
+      var minutes = Math.floor(seconds / 60);
+      seconds = seconds % 60;
+      return padLeft(minutes) + ':' + padLeft(seconds);
+    }
+
+    function padLeft(value) {
+      return value < 10 ? '0' + value : value;
+    }
 
   </script>
 

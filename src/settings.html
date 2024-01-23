@@ -254,7 +254,7 @@
                                     </div>
                                     <div class="col-auto">
                                         <div class="form-outline">
-                                            <input type="number" id="typeNumber" class="form-control" placeholder="Current Time in Minutes is 45"/>
+                                            <span id="timerValue"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -266,9 +266,8 @@
                                         <p class="text-muted mb-0">How long should Blackout mode be activated for</p>
                                     </div>
                                     <div class="col-auto">
-                                        <div class="custom-control custom-switch">
-                                            <input type="checkbox" class="custom-control-input" id="alert2" />
-                                            <span class="custom-control-label"></span>
+                                        <div class="form-outline">
+                                            <span id="timerValue1"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -305,7 +304,8 @@
                                 <div class="row align-items-center">
                                     <div class="col">
                                         <strong class="mb-0">Multi Screen Blackout</strong>
-                                        <p class="text-muted mb-0">MultiScreen Blackout which will deactivate every screen</p>
+                                        <p class="text-muted mb-0">MultiScreen Blackout which will deactivate every
+                                            screen</p>
                                     </div>
                                     <div class="col-auto">
                                         <div class="custom-control custom-switch">
@@ -377,12 +377,14 @@
                             <div class="list-group-item">
                                 <div class="row align-items-center">
                                     <div class="col">
-                                        <strong class="mb-0">Do consequat minim duis incididunt eiusmod nisi voluptate quis exercitation magna enim et.</strong>
-                                        <p class="text-muted mb-0">Enim est ea commodo ex laborum laborum adipisicing deserunt
-                                             labore laboris laboris sit id. Eu amet officia non non. 
-                                             Est ad laboris veniam voluptate pariatur culpa adipisicing esse nulla 
-                                             excepteur cupidatat elit fugiat Lorem. In deserunt dolor consectetur 
-                                             reprehenderit nostrud aute nostrud non voluptate officia adipisicing id.
+                                        <strong class="mb-0">Do consequat minim duis incididunt eiusmod nisi voluptate
+                                            quis exercitation magna enim et.</strong>
+                                        <p class="text-muted mb-0">Enim est ea commodo ex laborum laborum adipisicing
+                                            deserunt
+                                            labore laboris laboris sit id. Eu amet officia non non.
+                                            Est ad laboris veniam voluptate pariatur culpa adipisicing esse nulla
+                                            excepteur cupidatat elit fugiat Lorem. In deserunt dolor consectetur
+                                            reprehenderit nostrud aute nostrud non voluptate officia adipisicing id.
                                         </p>
                                     </div>
                                     <div class="col-auto">
@@ -424,8 +426,18 @@
 
     <div id="preloader">
     </div>
-    <!--Timer Start Code-->
-
+    <!--Loading database-->
+    <script>
+        fetch('../database/settings.json')
+            .then(response => response.json())
+            .then(data => {
+                // Update the content of the span element with the timerSetting value
+                document.getElementById('timerValue').textContent = data.BlackoutModeSettings.Timer;
+            })
+            .catch(error => {
+                console.error('Error fetching or parsing JSON:', error);
+            });
+    </script>
 
     <!-- Pre loader Script
     <script>
