@@ -1,0 +1,132 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+    margin: 0; /* Resets any default margin */
+}
+
+/* Calendar Container */
+.calender {
+    width: 90%;
+    max-width: 350px; /* Adjusted for a more compact design */
+    margin: 50px auto; /* More margin to center on the page */
+    background: #FFFFFF;
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    overflow: hidden; /* Hides anything outside the border-radius */
+}
+
+/* Calendar Header */
+.calender-head {
+    background: #FFFFFF;
+    color: #333;
+    padding: 15px;
+    text-align: center;
+    font-size: 24px; /* Larger font size for the header */
+    font-weight: bold; /* Bold font weight for the header */
+    border-bottom: 1px solid #E0E0E0; /* Light border for subtle separation */
+}
+
+.year-picker {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.year-change {
+    cursor: pointer;
+    padding: 0 10px;
+}
+
+/* Week Day Headers */
+.calender-week-day {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* Creates 7 equal columns for the days of the week */
+    background: #FFFFFF;
+    color: #333;
+    text-align: center;
+    border-bottom: 1px solid #E0E0E0; /* Adds a subtle border to the bottom */
+}
+
+.calender-week-day div {
+    padding: 10px 0; /* Adds padding on the top and bottom */
+}
+
+/* Calendar Days */
+.calender-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+}
+
+.calender-days div {
+    padding: 10px 0; /* Reduced vertical padding for a more compact look */
+    border-bottom: none; /* Removed borders */
+    border-right: none; /* Removed borders */
+    cursor: pointer;
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.calender-days div:hover {
+    background: #F0F0F0; /* Light grey background on hover */
+}
+
+/* Footer */
+.calender-footer {
+    padding: 10px;
+    text-align: center;
+    background: #FFFFFF;
+    color: #333;
+    font-size: 16px; /* Larger font size for footer text */
+    display: flex; /* Uses flexbox for layout */
+    justify-content: space-between; /* Distributes space between and around elements */
+    align-items: center; /* Centers items vertically */
+    border-top: 1px solid #E0E0E0; /* Light border for subtle separation */
+}
+
+/* Dark Mode Switch */
+.dark-mode-switch {
+    position: relative;
+    width: 40px; /* Reduced width for switch */
+    height: 20px; /* Reduced height for switch */
+    background: #E0E0E0;
+    border-radius: 20px; /* Full rounded edges */
+    cursor: pointer;
+    transition: background-color 0.3s; /* Smooth transition for background-color */
+}
+
+.dark-mode-switch-ident {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px; /* Reduced size for switch identifier */
+    height: 16px; /* Reduced size for switch identifier */
+    background: #FFFFFF;
+    border-radius: 50%; /* Circular shape */
+    transition: all 0.3s ease; /* Smooth transition for movement */
+}
+
+/* Toggle Dark Mode */
+.body.dark .dark-mode-switch-ident {
+    left: 22px; /* Adjusted to match the reduced size of the switch */
+    background: #333; /* Dark background for the identifier in dark mode */
+}
+
+/* Month List - assuming you want this hidden */
+.month-list {
+    display: none; /* Hide month list as it's not shown in the provided design */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .calender {
+        width: 95%;
+        margin-top: 20px; /* Adjusted margin for smaller screens */
+    }
+}
+
+/* Aesthetic Enhancements */
+/* This is where you can add further enhancements like custom fonts, additional hover effects, etc. */

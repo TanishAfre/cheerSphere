@@ -1,0 +1,17 @@
+{
+    "BlackoutModeSettings": {
+      "Timer": 90,
+      "Duration": 20,
+      "QuitEarly": false,
+      "DisableKeyboard": false,
+      "MultiScreen": false
+    },
+    "NotificationBlocking": {
+        "NotificationEnable": false,
+        "DisplayNotificationsPost" : false
+      },
+      "Analytics": {
+        "NotificationEnable": false,
+        "DisplayNotificationsPost" : false
+      }
+  }
