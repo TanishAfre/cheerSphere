@@ -3,6 +3,15 @@
       "Timer": true,
       "Duration": 20,
       "QuitEarly": true,
-      "DisableKeyboard": true
-    }
+      "DisableKeyboard": false,
+      "MultiScreen": false
+    },
+    "NotificationBlocking": {
+        "NotificationEnable": false,
+        "DisplayNotificationsPost" : false
+      },
+      "Analytics": {
+        "NotificationEnable": false,
+        "DisplayNotificationsPost" : false
+      }
   }

@@ -96,6 +96,7 @@ const createWindow = () => {
       console.log(error, stderr, stdout)
     });
   })
+  
   ipcMain.on('blackout', (event, arg) => {
     createBlackoutWindow();
   });
