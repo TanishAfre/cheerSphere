@@ -116,7 +116,8 @@
                             <h5 class="card-header blocked-card-head">Blocked Applications</h5>
                             <div class="card-body blocked-card-body">
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" placeholder="Block more applications by entering there name"
+                                    <input type="text" class="form-control"
+                                        placeholder="Block more applications by entering there name"
                                         style="width: 80%;">
                                     <div class="input-group-append" style="width: 20%;">
                                         <button class="btn green-button" type="button">Add</button>
@@ -176,8 +177,8 @@
                             <h5 class="card-header blocked-card-head">Blocked Websites</h5>
                             <div class="card-body blocked-card-body">
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" placeholder="Block more websites by entering there url"
-                                        style="width: 80%;">
+                                    <input type="text" class="form-control"
+                                        placeholder="Block more websites by entering there url" style="width: 80%;">
                                     <div class="input-group-append" style="width: 20%;">
                                         <button class="btn green-button" type="button">Add</button>
                                     </div>
@@ -233,11 +234,162 @@
                     <div class="col-md-1">
                     </div>
                 </div>
-                <h4 style="margin-top:50px;">
-                    Focus Mode
-                    <hr class="below-headings">
-                </h4>
             </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10 col-xl-8 mx-auto">
+
+                    <div class="my-4">
+                        <strong class="mb-0">Blackout Mode</strong>
+                        <p>Blackout mode is an essential feature to maintain work/life balance.</p>
+
+                        <div class="list-group mb-5 shadow">
+                            <div class="list-group-item">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <strong class="mb-0">Blackout Mode Timer</strong>
+                                        <p class="text-muted mb-0">How often should Blackout mode be activated during
+                                            focusing</p>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" id="alert1"
+                                                checked="" />
+                                            <span class="custom-control-label"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-group-item">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <strong class="mb-0">Blackout Mode Duration</strong>
+                                        <p class="text-muted mb-0">How long should Blackout mode be activated for</p>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" id="alert2" />
+                                            <span class="custom-control-label"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-group-item">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <strong class="mb-0">Allow Early Blackout Mode Deactivation</strong>
+                                        <p class="text-muted mb-0">Should there be an option to disable leave Blackout
+                                            mode early</p>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" id="alert2" />
+                                            <span class="custom-control-label"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-group-item">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <strong class="mb-0">Disable Keyboard</strong>
+                                        <p class="text-muted mb-0">Disable keyboard while blackout mode is active</p>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" id="alert2" />
+                                            <span class="custom-control-label"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="my-4" />
+                        <strong class="mb-0">Notification Blocking</strong>
+                        <p>Please enable system alert you will get.</p>
+                        <div class="list-group mb-5 shadow">
+                            <div class="list-group-item">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <strong class="mb-0">Allow Notification Blocking</strong>
+                                        <p class="text-muted mb-0"></p>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" id="alert3"
+                                                checked="" />
+                                            <span class="custom-control-label"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-group-item">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <strong class="mb-0">Provide all the notifications after focus mode is
+                                            deactivated</strong>
+                                        <p class="text-muted mb-0">Saves all the Notifications in a database and
+                                            displays it to user
+                                            after finishing a focus mode cycle, Notifications are never stored and
+                                            deleted after user sees them
+                                        </p>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" id="alert4"
+                                                checked="" />
+                                            <span class="custom-control-label"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="my-4" />
+                        <strong class="mb-0">Analytics</strong>
+                        <p>Sunt occaecat ullamco ipsum tempor.</p>
+                        <div class="list-group mb-5 shadow">
+                            <div class="list-group-item">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <strong class="mb-0">Lorem Ipsum Dolor Sit Amet</strong>
+                                        <p class="text-muted mb-0">Do laboris nostrud qui consectetur laborum non.</p>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" id="alert3"
+                                                checked="" />
+                                            <span class="custom-control-label"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-group-item">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <strong class="mb-0">Do consequat minim duis incididunt eiusmod nisi voluptate quis exercitation magna enim et.</strong>
+                                        <p class="text-muted mb-0">Enim est ea commodo ex laborum laborum adipisicing deserunt
+                                             labore laboris laboris sit id. Eu amet officia non non. 
+                                             Est ad laboris veniam voluptate pariatur culpa adipisicing esse nulla 
+                                             excepteur cupidatat elit fugiat Lorem. In deserunt dolor consectetur 
+                                             reprehenderit nostrud aute nostrud non voluptate officia adipisicing id.
+                                        </p>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" id="alert4"
+                                                checked="" />
+                                            <span class="custom-control-label"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         </div>
 
     </section>
