@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Break Timer</title>
     <!-- Include Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.7.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/blackout.css">
     <style>
         .btn-stop-break {
@@ -22,13 +22,31 @@
         <h1>Great Job! Time for a Well-Deserved Break:</h1>
         <div id="timer">10:00</div>
     </div>
-    
-    <button class="btn btn-stop-break">End Break Early</button>
 
-    <!-- Include Bootstrap JS and jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.7.0/dist/js/bootstrap.min.js"></script>
+    <button class="btn btn-stop-break " id="blackoutStop" >End Break Early</button>
+    <!-- Insert this line above script imports, required for electron node integration  -->
+    <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
+
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Code for other js files-->
+    <script src="../js/renderer.js"></script>
+    <script src="../js/scripts.js"></script>
+
+    <!-- Insert this line after script imports -->
+    <script>if (window.module) module = window.module;</script>
+
+    <div id="preloader">
+    </div>
     <script>
+
+        document.getElementById('blackoutStop').addEventListener('click', () => {
+
+        });
+
         // Timer countdown logic
         let timer;
         let minutes = 10;
@@ -65,8 +83,19 @@
         stopBreakButton.addEventListener('click', () => {
             clearInterval(timer);
             alert('Break stopped!');
+            console.log('button pressed for stopping blackout')
+            ipcRenderer.send('close-blackout');
         });
     </script>
+
+    <!-- Pre loader Script
+    <script>
+    var loader = document.getElementById("preloader");
+      window.addEventListener("load", function(){
+       loader.style.display = "none";
+     });
+    </script> 
+  -->
 </body>
 
 </html>

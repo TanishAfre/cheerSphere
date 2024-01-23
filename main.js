@@ -14,7 +14,7 @@ let blackoutWin = null;
 function createBlackoutWindow() {
   blackoutWin = new BrowserWindow({
     fullscreen: true, // Set the window to full-screen
-    frame: false, // Set frame to false to remove window frame
+    //frame: false, // Set frame to false to remove window frame
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false
@@ -77,8 +77,9 @@ const createWindow = () => {
     }
   });
   // Event listener for the 'blackout' event
-  ipcMain.on('blackout', (event, arg) => {
-    createBlackoutWindow();
+ 
+  ipcMain.on('close-blackout', (event, arg) => {
+    blackoutWin.close();
   });
 
   ipcMain.on('minimize-window', () => {
@@ -95,8 +96,12 @@ const createWindow = () => {
       console.log(error, stderr, stdout)
     });
   })
+  ipcMain.on('blackout', (event, arg) => {
+    createBlackoutWindow();
+  });
 
 }
+
 app.setName('Focus Mind');
 app.whenReady().then(() => {
   createWindow()
