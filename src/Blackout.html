@@ -23,7 +23,7 @@
         <div id="timer">10:00</div>
     </div>
 
-    <button class="btn btn-stop-break " id="blackoutStop" >End Break Early</button>
+    <button class="btn btn-stop-break " id="blackoutStop">End Break Early</button>
     <!-- Insert this line above script imports, required for electron node integration  -->
     <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
 
@@ -42,41 +42,64 @@
     <div id="preloader">
     </div>
     <script>
+        let quitEarly;
 
-        document.getElementById('blackoutStop').addEventListener('click', () => {
+        fetch('../database/settings.json')
+            .then(response => response.json())
+            .then(data => {
+                const duration = data.BlackoutModeSettings.Duration;
+                const quitEarly = data.BlackoutModeSettings.QuitEarly;
+                const disableKeyboard = data.BlackoutModeSettings.DisableKeyboard;
 
-        });
+                console.log('Duration:', duration);
+                console.log('Quit Early:', quitEarly);
+                console.log('Disable Keyboard:', disableKeyboard);
 
-        // Timer countdown logic
-        let timer;
-        let minutes = 10;
-        let seconds = 0;
-
-        function updateTimerDisplay() {
-            const timerDisplay = document.getElementById('timer');
-            timerDisplay.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-        }
-
-        function startTimer() {
-            timer = setInterval(() => {
-                if (minutes === 0 && seconds === 0) {
-                    clearInterval(timer);
-                    // Handle timer completion here
-                    alert('Time is up! Take a break.');
-                    return;
+                if (quitEarly === false) {
+                    const btnStopBreak = document.getElementById('blackoutStop');
+                    btnStopBreak.style.display = 'none';
+                    console.log('Quiting Early is disabled based on settings');
                 }
-                if (seconds === 0) {
-                    minutes--;
-                    seconds = 59;
-                } else {
-                    seconds--;
+
+
+                function updateTimerDisplay() {
+                    const timerDisplay = document.getElementById('timer');
+                    timerDisplay.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
                 }
+
+                function startTimer() {
+                    timer = setInterval(() => {
+                        if (minutes === 0 && seconds === 0) {
+                            clearInterval(timer);
+                            // Handle timer completion here
+                            alert('Time is up! Take a break.');
+                            return;
+                        }
+                        if (seconds === 0) {
+                            minutes--;
+                            seconds = 59;
+                        } else {
+                            seconds--;
+                        }
+                        updateTimerDisplay();
+                    }, 1000);
+                }
+                let timer;
+                let minutes = duration;
+                let seconds = 0;
+
                 updateTimerDisplay();
-            }, 1000);
-        }
+                startTimer();
 
-        updateTimerDisplay();
-        startTimer();
+                if (disableKeyboard == true) {
+                    console.log('button pressed for stopping blackout')
+                    //ipcRenderer.send('disable-keyboard');
+                }
+            })
+            .catch(error => {
+                console.error('Error reading JSON:', error);
+            });
+        //need to move everything inside the fetch as the variables might not be available outside fetch caus of delay
 
         // Stop Break button functionality
         const stopBreakButton = document.querySelector('.btn-stop-break');
