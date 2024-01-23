@@ -46,13 +46,17 @@ def read_process_names_from_file(file_path):
         return []
 
 def stop_processes_from_file(file_path):
-    process_names = read_process_names_from_file(file_path)
+    while True:  # Infinite loop
+        process_names = read_process_names_from_file(file_path)
 
-    if not process_names:
-        print("No process names found in the file.")
-        return
+        if not process_names:
+            print("No process names found in the file.")
+            break  # Exit the loop if no process names are found
 
-    for process_name in process_names:
-        stop_process_by_name(process_name)
+        for process_name in process_names:
+            stop_process_by_name(process_name)
 
-stop_processes_from_file("./database/apps.txt") #when debugging change directory to ../database/apps.txt
+        time.sleep(3)  # Wait for 3 seconds before the next iteration
+
+if __name__ == "__main__":
+    stop_processes_from_file("./database/apps.txt")  # When debugging, change the directory to ../database/apps.txt
