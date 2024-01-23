@@ -15,6 +15,7 @@ function createBlackoutWindow() {
   blackoutWin = new BrowserWindow({
     fullscreen: true, // Set the window to full-screen
     frame: false, // Set frame to false to remove window frame
+    resizable: false, //Disabled Resizing as a UI preference 
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false
