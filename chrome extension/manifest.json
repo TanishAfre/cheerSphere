@@ -3,8 +3,15 @@
   "name": "Focus Mind",
   "description": "Focus mind description",
   "version": "0.0.1",
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
   "permissions": [
     "activeTab",
+    "tabs",
     "storage"
   ],
   "content_scripts": [
