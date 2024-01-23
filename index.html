@@ -113,13 +113,16 @@
             <div class="circle">12</div>
             <h3 style="margin-top: 40px;">Hours Focused This Week</h3>
           </div>
-          <div class="col-md circle-glow" align="center">
+          <div class="col-md circle-glow">
             <div class="circle">200</div>
             <h3 style="margin-top: 40px;">Hours spent on blocked<br> app/websites</h3>
           </div>
         </div>
-        <button id="focus-btn" onclick="startFocus()" type="button" class="btn btn-success start-focus">Start
-          Focusing</button>
+        <div class="button-wrapper">
+         <button id="focus-btn" onclick="startFocus()" type="button" class="btn btn-success start-focus">Start
+            Focusing</button>
+        </div>
+
       </div>
 
 
@@ -199,128 +202,141 @@
           </button>
         </div>
         <div class="modal-body">
-          <p>You were focused for: <span id="focusedTime">0 minutes</span>.</p>
-          <p>How would you rate your session using Niko Chart?</p>
-          <!-- Include your Niko Chart or rating options here -->
-          <!-- For simplicity, I'm using a basic input for rating -->
-          <input type="number" min="1" max="5" placeholder="Rate here" />
+          <div class="card-body text-center"> <img src="https://img.icons8.com/bubbles/200/000000/trophy.png">
+            <p>You were focused for: <span id="focusedTime">0 minutes</span>.</p>
+            <p>How would you rate your session using Niko Chart?</p>
+            <!-- Include your Niko Chart or rating options here -->
+            <!-- For simplicity, I'm using a basic input for rating -->
+            <input type="number" min="1" max="5" placeholder="Rate here" />
+          </div>
         </div>
       </div>
     </div>
-  </div>
+    <script>
+      var selectedMood = '';
 
-
-  <script>
-    var selectedMood = '';
-
-    function saveMood(mood) {
-      selectedMood = mood;
-      console.log('Selected Mood: ' + selectedMood);
-      $('#moodModal').modal('hide'); // Close the modal
-    }
-  </script>
-
-  <!-- Insert this line above script imports, required for electron node integration  -->
-  <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
-
-
-  <!-- Bootstrap JS and dependencies -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <!-- Code for other js files-->
-  <script src="js/sidebar-render.js"></script>
-  <script src="js/renderer.js"></script>
-  <script src="js/scripts.js"></script>
-
-  <!-- Insert this line after script imports -->
-  <script>if (window.module) module = window.module;</script>
-
-  <div id="preloader">
-  </div>
-  <!--Timer Start Code-->
-  <script>
-
-    var isFocusing = false;
-    var startTime;
-    var button = document.getElementById('focus-btn');
-
-    function showCongratulationsModal() {
-      var focusedTime = 25; // Replace this with your actual focused time calculation
-      document.getElementById('focusedTime').innerText = focusedTime + ' minutes';
-
-      // Trigger the modal
-      $('#congratulationsModal').modal('show');
-    }
-
-    function startFocus() {
-      var button = document.getElementById('focus-btn');
-
-      if (!isFocusing) {
-
-        // Start focusing
-        startTime = new Date().getTime();
-        isFocusing = true;
-
-        // Change text to a timer
-        button.innerHTML = 'Focusing for: 00:00';
-
-
-        // Example: Update timer display every second
-        setInterval(function () {
-          if (isFocusing) {
-            var elapsedMillis = new Date().getTime() - startTime;
-            updateTimerDisplay(elapsedMillis);
-          }
-        }, 1000);
-
-        // Send something to IPCRenderer every 2 seconds
-        ipcRendererInterval = setInterval(function () {
-          if (!isFocusing) {
-            clearInterval(ipcRendererInterval); // Stop the interval if isFocusing is false
-            return;
-          }
-          // Send data to IPCRenderer here
-          console.log("Sent something")
-          ipcRenderer.send('focus');
-        }, 2000);
-
-      } else {
-        // Stop focusing
-        isFocusing = false;
-
-        // Print time in console
-        var elapsedMillis = new Date().getTime() - startTime;
-        var elapsedSeconds = Math.floor(elapsedMillis / 1000);
-        console.log('Focusing time: ' + formatTime(elapsedSeconds));
-
-        // Reset button style
-        button.innerHTML = 'Start Focusing';
-        button.style.backgroundColor = 'green';
-
-        showCongratulationsModal();
+      function saveMood(mood) {
+        selectedMood = mood;
+        console.log('Selected Mood: ' + selectedMood);
+        $('#moodModal').modal('hide'); // Close the modal
       }
-    }
+    </script>
 
-    function updateTimerDisplay(elapsedMillis) {
-      var elapsedSeconds = Math.floor(elapsedMillis / 1000);
-      button.innerHTML = 'Focusing for: ' + formatTime(elapsedSeconds);
-    }
-
-    function formatTime(seconds) {
-      var minutes = Math.floor(seconds / 60);
-      seconds = seconds % 60;
-      return padLeft(minutes) + ':' + padLeft(seconds);
-    }
-
-    function padLeft(value) {
-      return value < 10 ? '0' + value : value;
-    }
-
-  </script>
+    <!-- Insert this line above script imports, required for electron node integration  -->
+    <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
 
 
-  <!-- Pre loader Script
+    <!-- Bootstrap JS and dependencies -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+    <!-- Code for other js files-->
+    <script src="js/sidebar-render.js"></script>
+    <script src="js/renderer.js"></script>
+    <script src="js/scripts.js"></script>
+
+    <!-- Insert this line after script imports -->
+    <script>if (window.module) module = window.module;</script>
+
+   <!--Timer Start Code-->
+
+
+    <script>
+      var isFocusing = false;
+      var startTime;
+      var button = document.getElementById('focus-btn');
+      var totalDuration = 60 * 60; // 60 minutes in seconds
+      var remainingDuration = totalDuration; // Initialize remaining duration to 60 minutes
+      var focusedTime;
+
+      function showCongratulationsModal() {
+        focusedTime = totalDuration - remainingDuration; // Calculate focused time
+        document.getElementById('focusedTime').innerText = formatTime(focusedTime);
+        console.log(formatTime(focusedTime));
+        // Trigger the modal
+        $('#congratulationsModal').modal('show');
+      }
+
+      function startFocus() {
+        if (!isFocusing) {
+          // Start focusing
+          startTime = new Date().getTime();
+          isFocusing = true;
+
+          // Change text to a timer
+          button.innerHTML = "Time Left:" + formatTime(remainingDuration);
+
+          // Example: Update timer display every second
+          var intervalId = setInterval(function () {
+            if (isFocusing) {
+              var elapsedMillis = new Date().getTime() - startTime;
+              updateTimerDisplay(elapsedMillis);
+            }
+          }, 1000);
+
+          // Send something to IPCRenderer every 2 seconds
+          ipcRendererInterval = setInterval(function () {
+            if (!isFocusing) {
+              clearInterval(ipcRendererInterval); // Stop the interval if isFocusing is false
+              return;
+            }
+            // Send data to IPCRenderer here
+            console.log("Sent something");
+            ipcRenderer.send('focus');
+          }, 2000);
+          // Send something to IPCRenderer every 2 min
+          ipcRendererInterval = setInterval(function () {
+            if (!isFocusing) {
+              clearInterval(ipcRendererInterval); // Stop the interval if isFocusing is false
+              return;
+            }
+            // Send data to IPCRenderer here
+            console.log("Blackout Started");
+            ipcRenderer.send('blackout');
+          }, 120000);
+
+        } else {
+          // Stop focusing
+          isFocusing = false;
+
+          // Calculate focused time
+          var elapsedMillis = new Date().getTime() - startTime;
+          var elapsedSeconds = Math.floor(elapsedMillis / 1000);
+          remainingDuration -= elapsedSeconds; // Subtract elapsed time from remaining duration
+
+          // Reset button style
+          button.innerHTML = 'Start Focusing';
+          button.style.backgroundColor = 'green';
+          confettiCaller();
+          showCongratulationsModal();
+          //reset timers
+          focusedTime = 0;
+          totalDuration = 60 * 60;
+          remainingDuration = totalDuration;
+        }
+      }
+
+      function updateTimerDisplay(elapsedMillis) {
+        var elapsedSeconds = Math.floor(elapsedMillis / 1000);
+        var remainingTime = Math.max(0, remainingDuration - elapsedSeconds); // Ensure remaining time is non-negative
+        button.innerHTML = 'Time Left ' + formatTime(remainingTime);
+      }
+
+      function formatTime(seconds) {
+        var minutes = Math.floor(seconds / 60);
+        seconds = seconds % 60;
+        return padLeft(minutes) + ':' + padLeft(seconds);
+      }
+
+      function padLeft(value) {
+        return value < 10 ? '0' + value : value;
+      }
+    </script>
+
+
+    <!-- Pre loader Script
     <script>
     var loader = document.getElementById("preloader");
       window.addEventListener("load", function(){
