@@ -37,6 +37,8 @@ const generateSTYLES = () => {
   </style>`;
 };
 
+let focusmodeResponse;
+
 const generateHTML = (pageName) => {
   return `
     <div id='container'>
@@ -45,27 +47,53 @@ const generateHTML = (pageName) => {
         <button id='toggle'>Close Focus Mode</button>
     </div>`;
 };
+// implement using fetch api
+
 
 // Create a new element to hold content
 const overlayContainer = document.createElement("div");
 
-switch (window.location.hostname) {
-  case "www.youtube.com":
-  case "www.facebook.com":
-  case "www.netflix.com":
-  case "www.roblox.com":
-  case "discord.com":
-  case "www.spotify.com":
-    overlayContainer.innerHTML = generateSTYLES() + generateHTML(window.location.hostname);
-    document.body.appendChild(overlayContainer);
+// Function to check if a website is blocked
+const isWebsiteBlocked = async (hostname) => {
+  const response = await new Promise((resolve) => {
+    chrome.runtime.sendMessage({ action: 'readWebsites' }, resolve);
+  });
+  // Extract the array of blocked websites from the response
+  const blockedWebsites = response.data || [];
+  console.log('blockedWebsites: ' + blockedWebsites);
+  return blockedWebsites.includes(hostname);
+};
 
-    // Add event listener to the Close Focus Mode button
-    const closeButton = document.getElementById('toggle');
-    if (closeButton) {
-      closeButton.addEventListener('click', () => {
-        // Remove the overlay container when the button is clicked
-        document.body.removeChild(overlayContainer);
-      });
+// Read the current hostname
+const currentHostname = window.location.hostname;
+
+// Fetch focus mode response and check if the website is blocked
+chrome.runtime.sendMessage({ action: 'readFocusMode' }, function (response) {
+  console.log('FocusMode Status: ' + response.data);
+  focusmodeResponse = response.data;
+
+  // Check if the current website is blocked
+  isWebsiteBlocked(currentHostname).then((blocked) => {
+    if (blocked && focusmodeResponse == 'on') {
+      // Website is blocked, and focus mode is enabled
+
+      // Display the overlay container
+      overlayContainer.innerHTML = generateSTYLES() + generateHTML(currentHostname);
+      document.body.appendChild(overlayContainer);
+
+      // Add event listener to the Close Focus Mode button
+      const closeButton = document.getElementById('toggle');
+      if (closeButton) {
+        closeButton.addEventListener('click', () => {
+          // Remove the overlay container when the button is clicked
+          document.body.removeChild(overlayContainer);
+        });
+      }
     }
-    break;
-}
+  });
+});
+
+
+chrome.runtime.sendMessage({ action: 'readSQLDatabase' }, function (response) {
+  console.log('readSQLDatabase response.data:', response.data);
+});
