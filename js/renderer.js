@@ -8,9 +8,11 @@ document.getElementById('close-btn').addEventListener('click', () => {
     console.log('rendered got the close')
   ipcRenderer.send('close-window');
 });
-
-
 document.getElementById('focus-btn').addEventListener('click', () => {
   console.log('button pressed')
-  ipcRenderer.send('focus');
+ // ipcRenderer.send('focus');
+});
+document.getElementById('blackoutStop').addEventListener('click', () => {
+  console.log('button pressed for stopping blackout')
+  ipcRenderer.send('close-blackout');
 });

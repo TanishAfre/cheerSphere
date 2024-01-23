@@ -5,6 +5,31 @@ const TrayWindow = require('electron-tray-window');
 
 let tray = null; // Tray instance
 let win = null; // BrowserWindow instance
+
+let blackoutWin = null;
+
+// Existing code for your app...
+
+// Function to create the blackout window
+function createBlackoutWindow() {
+  blackoutWin = new BrowserWindow({
+    fullscreen: true, // Set the window to full-screen
+    frame: false, // Set frame to false to remove window frame
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false
+    }
+  });
+
+  // Load index2.html into the new window
+  blackoutWin.loadFile('src/Blackout.html');
+
+  // Optional: Clear the reference when the window is closed
+  blackoutWin.on('closed', () => {
+    blackoutWin = null;
+  });
+}
+
 //I disabled developer mode but to enable it press Ctrl+Shift+I
 const createWindow = () => {
   const win = new BrowserWindow({
@@ -29,8 +54,8 @@ const createWindow = () => {
   tray = new Tray(path.join(__dirname, 'images/focus-mind.png')); // Path to the tray icon
   tray.setToolTip('Focus Mind'); // Tooltip for the tray icon
   const contextMenu = Menu.buildFromTemplate([
-    { label: 'Focus Mode', type: 'normal', click: () => app.quit() } ,
-    { label: 'Analytics', type: 'normal', click: () => app.quit() } ,
+    { label: 'Focus Mode', type: 'normal', click: () => app.quit() },
+    { label: 'Analytics', type: 'normal', click: () => app.quit() },
     { type: 'separator' }, // Adds a visual separator in the menu
     { label: 'Exit', type: 'normal', click: () => app.quit() } // Adds an exit button
   ]);
@@ -51,7 +76,11 @@ const createWindow = () => {
       win.hide();
     }
   });
-
+  // Event listener for the 'blackout' event
+ 
+  ipcMain.on('close-blackout', (event, arg) => {
+    blackoutWin.close();
+  });
 
   ipcMain.on('minimize-window', () => {
     win.minimize();
@@ -67,8 +96,13 @@ const createWindow = () => {
       console.log(error, stderr, stdout)
     });
   })
+  
+  ipcMain.on('blackout', (event, arg) => {
+    createBlackoutWindow();
+  });
 
 }
+
 app.setName('Focus Mind');
 app.whenReady().then(() => {
   createWindow()

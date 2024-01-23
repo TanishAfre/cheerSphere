@@ -1,0 +1,36 @@
+{
+  "manifest_version": 2,
+  "name": "Focus Mind",
+  "description": "Focus mind description",
+  "version": "0.0.1",
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "extensionImages/extensionIcon.png",
+    "48": "extensionImages/extensionIcon.png",
+    "128": "extensionImages/extensionIcon.png"
+  },
+  "browser_action": {
+    "default_popup": "Popup.html",
+    "default_title": "Focus Mind"
+  }
+}
