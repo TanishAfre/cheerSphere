@@ -209,3 +209,6 @@ header .image-text .header-text{
 .text:hover{
     cursor: context-menu;
 }
+.untext:hover{
+    cursor: context-menu;
+}

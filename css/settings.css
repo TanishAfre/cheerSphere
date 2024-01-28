@@ -1,3 +1,7 @@
+.mb-0:hover{
+    cursor: context-menu;
+}
+
 .below-headings{
     width:20%;
     height: 50px;
