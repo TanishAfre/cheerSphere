@@ -312,7 +312,7 @@
             // Send data to IPCRenderer here
             console.log("Blackout Started");
             ipcRenderer.send('blackout');
-          }, 120000);
+          }, 10000); // currently 10 seconds
 
         } else {
           // Stop focusing
@@ -351,9 +351,7 @@
         return value < 10 ? '0' + value : value;
       }
     </script>
-
-
-    <!-- Pre loader Script
+    <!-- Pre loader Script 
     <script>
     var loader = document.getElementById("preloader");
       window.addEventListener("load", function(){
