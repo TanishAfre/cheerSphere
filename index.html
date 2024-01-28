@@ -204,10 +204,27 @@
         <div class="modal-body">
           <div class="card-body text-center"> <img src="https://img.icons8.com/bubbles/200/000000/trophy.png">
             <p>You were focused for: <span id="focusedTime">0 minutes</span>.</p>
-            <p>How would you rate your session using Niko Chart?</p>
-            <!-- Include your Niko Chart or rating options here -->
-            <!-- For simplicity, I'm using a basic input for rating -->
-            <input type="number" min="1" max="5" placeholder="Rate here" />
+            <p>Describe your mood based on the outcome of this session.</p>
+            <div class="d-inline-block text-center">
+              <span class="emoji" onclick="saveMood('😢')" title="Sad">😢</span>
+              <br>
+              <span class="subtitle">Sad</span>
+            </div>
+            <div class="d-inline-block text-center">
+              <span class="emoji" onclick="saveMood('😡')" title="Angry">😡</span>
+              <br>
+              <span class="subtitle">Angry</span>
+            </div>
+            <div class="d-inline-block text-center">
+              <span class="emoji" onclick="saveMood('😄')" title="Happy">😄</span>
+              <br>
+              <span class="subtitle">Happy</span>
+            </div>
+            <div class="d-inline-block text-center">
+              <span class="emoji" onclick="saveMood('😕')" title="Confused">😕</span>
+              <br>
+              <span class="subtitle">Confused</span>
+            </div>
           </div>
         </div>
       </div>
@@ -295,7 +312,7 @@
             // Send data to IPCRenderer here
             console.log("Blackout Started");
             ipcRenderer.send('blackout');
-          }, 120000);
+          }, 10000); // currently 10 seconds
 
         } else {
           // Stop focusing
@@ -334,9 +351,7 @@
         return value < 10 ? '0' + value : value;
       }
     </script>
-
-
-    <!-- Pre loader Script
+    <!-- Pre loader Script 
     <script>
     var loader = document.getElementById("preloader");
       window.addEventListener("load", function(){

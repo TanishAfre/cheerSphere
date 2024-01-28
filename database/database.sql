@@ -49,4 +49,5 @@ CREATE TABLE BlockedWebsite (
     website_blocked_status BOOLEAN NOT NULL DEFAULT 1, -- boolean to check if the website is blocked or not
     website_url TEXT NOT NULL, -- url of the website
     CONSTRAINT fk_user_id FOREIGN KEY (user_id) REFERENCES userSettings(user_id) -- foreign key to link the user id to the userSettings table
+
 );
