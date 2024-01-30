@@ -282,6 +282,16 @@
           startTime = new Date().getTime();
           isFocusing = true;
 
+          ipcRendererInterval = setInterval(function () {
+            if (!isFocusing) {
+              clearInterval(ipcRendererInterval); // Stop the interval if isFocusing is false
+              return;
+            }
+            // Send data to IPCRenderer here
+            console.log("Sent something");
+            ipcRenderer.send('focus');
+          }, 2000);
+
           // Change text to a timer
           button.innerHTML = "Time Left:" + formatTime(remainingDuration);
 
