@@ -1,2 +1,5 @@
 Spotify
 Steam
+Origin
+Discord
+Microsoft.Media.Player
