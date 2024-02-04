@@ -152,43 +152,20 @@
                     </div>
                     <div class="col-md-6">
                         <div class="card block-card">
+
                             <h5 class="card-header blocked-card-head">Blocked Websites</h5>
                             <div class="card-body blocked-card-body">
                                 <div class="input-group mb-3">
                                     <input type="text" class="form-control"
-                                        placeholder="Block more websites by entering there url" style="width: 80%;">
+                                        placeholder="Block more applications by entering there name"
+                                        style="width: 80%;">
                                     <div class="input-group-append" style="width: 20%;">
                                         <button class="btn green-button" type="button">Add</button>
                                     </div>
                                 </div>
-                                <div class="text-container">
-                                    <table>
-                                        <tbody>
-                                            <tr>
-                                                <td>Google.com</td>
-                                                <td><button class="remove-button">-</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Spotify.com</td>
-                                                <td><button class="remove-button">-</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Netflix.com</td>
-                                                <td><button class="remove-button">-</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Youtube.com</td>
-                                                <td><button class="remove-button">-</button></td>
-                                            </tr>
-                                            <!-- Add more rows for additional blocked applications as needed -->
-                                            <tr>
-                                                <td>Steam</td>
-                                                <td><button class="remove-button">-</button></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                <div class="text-container" style="overflow: hidden;">
+                                    <p class="mb-0 text-center h3    mt-5">Coming Soon!</p>
                                 </div>
-
                             </div>
                             <div class="card-footer blocked-card-footer float-right">
                                 <div class="contaier-fluid">
@@ -398,6 +375,7 @@
     <script src="../js/renderer.js"></script>
     <script src="../js/scripts.js"></script>
     <script src="../js/settings.js"></script>
+    <script src="../js/crud.js"></script>
 
     <!-- Insert this line after script imports -->
     <script>if (window.module) module = window.module;</script>
@@ -406,62 +384,59 @@
     </div>
     <!-- CRUD for tables -->
     <script>
-    // Function to fetch blocked applications from the text file
-    async function fetchBlockedApplications() {
-        try {
-            const response = await fetch('../database/apps.txt');
-            const data = await response.text();
-            return data.split('\n').filter(app => app.trim() !== '');
-        } catch (error) {
-            console.error('Error fetching blocked applications:', error);
-            return [];
+        // Function to fetch blocked applications from the text file
+        async function fetchBlockedApplications() {
+            try {
+                const response = await fetch('../database/apps.txt');
+                const data = await response.text();
+                return data.split('\n').filter(app => app.trim() !== '');
+            } catch (error) {
+                console.error('Error fetching blocked applications:', error);
+                return [];
+            }
         }
-    }
 
-    // Function to render blocked applications in the table
-    async function renderBlockedApplications() {
-        const blockedApps = await fetchBlockedApplications();
-        const tableBody = document.querySelector('#blockedAppsTable tbody');
+        // Function to render blocked applications in the table
+        async function renderBlockedApplications() {
+            const blockedApps = await fetchBlockedApplications();
+            const tableBody = document.querySelector('#blockedAppsTable tbody');
 
-        // Clear existing rows
-        tableBody.innerHTML = '';
+            // Clear existing rows
+            tableBody.innerHTML = '';
 
-        // Add rows for each application
-        blockedApps.forEach(app => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
+            // Add rows for each application
+            blockedApps.forEach(app => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
                 <td>${app}</td>
                 <td><button class="remove-button" onclick="removeApplication('${app}')">-</button></td>
             `;
-            tableBody.appendChild(row);
-        });
-    }
-
-    // Function to add a new application
-    function addApplication() {
-        const appNameInput = document.getElementById('appNameInput');
-        const appName = appNameInput.value.trim();
-
-        if (appName !== '') {
-            // Append the new application to the text file
-            // (You may want to use a server-side language for this in a real application)
-            // Here, we'll just update the UI for demonstration purposes.
-            renderBlockedApplications();
-            appNameInput.value = ''; // Clear the input field
+                tableBody.appendChild(row);
+            });
         }
-    }
 
-    // Function to remove an application
-    function removeApplication(appName) {
-        // Implement logic to remove the application from the text file
-        // (You may want to use a server-side language for this in a real application)
-        // Here, we'll just update the UI for demonstration purposes.
+        // Function to add a new application
+        function addApplication() {
+            const appNameInput = document.getElementById('appNameInput');
+            const appName = appNameInput.value.trim();
+
+            if (appName !== '') {
+                // Append the new application to the text file
+                // (You may want to use a server-side language for this in a real application)
+                // Here, we'll just update the UI for demonstration purposes.
+                renderBlockedApplications();
+                appNameInput.value = ''; // Clear the input field
+            }
+        }
+
+        // Function to remove an application
+        function removeApplication(appName) {
+            //hard coded for now only
+        }
+
+        // Initial rendering of blocked applications
         renderBlockedApplications();
-    }
-
-    // Initial rendering of blocked applications
-    renderBlockedApplications();
-</script>
+    </script>
 
     <!--Loading database-->
     <script>
