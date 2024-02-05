@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="../css/dashboard.css">
     <link rel="stylesheet" href="../css/congrats-modal.css">
     <link rel="stylesheet" href="../css/settings.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
 
     <!--bootstrap-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -124,32 +125,9 @@
                                     </div>
                                 </div>
                                 <div class="text-container">
-                                    <table>
-                                        <tbody>
-                                            <tr>
-                                                <td>Spotify</td>
-                                                <td><button class="remove-button">-</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Netflix</td>
-                                                <td><button class="remove-button">-</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Netflix</td>
-                                                <td><button class="remove-button">-</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Netflix</td>
-                                                <td><button class="remove-button">-</button></td>
-                                            </tr>
-                                            <!-- Add more rows for additional blocked applications as needed -->
-                                            <tr>
-                                                <td>Steam</td>
-                                                <td><button class="remove-button">-</button></td>
-                                            </tr>
-                                        </tbody>
+                                    <table id="blockedAppsTable">
+                                        <tbody></tbody>
                                     </table>
-
                                 </div>
 
                             </div>
@@ -174,43 +152,20 @@
                     </div>
                     <div class="col-md-6">
                         <div class="card block-card">
+
                             <h5 class="card-header blocked-card-head">Blocked Websites</h5>
                             <div class="card-body blocked-card-body">
                                 <div class="input-group mb-3">
                                     <input type="text" class="form-control"
-                                        placeholder="Block more websites by entering there url" style="width: 80%;">
+                                        placeholder="Block more applications by entering there name"
+                                        style="width: 80%;">
                                     <div class="input-group-append" style="width: 20%;">
                                         <button class="btn green-button" type="button">Add</button>
                                     </div>
                                 </div>
-                                <div class="text-container">
-                                    <table>
-                                        <tbody>
-                                            <tr>
-                                                <td>Google.com</td>
-                                                <td><button class="remove-button">-</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Spotify.com</td>
-                                                <td><button class="remove-button">-</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Netflix.com</td>
-                                                <td><button class="remove-button">-</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Youtube.com</td>
-                                                <td><button class="remove-button">-</button></td>
-                                            </tr>
-                                            <!-- Add more rows for additional blocked applications as needed -->
-                                            <tr>
-                                                <td>Steam</td>
-                                                <td><button class="remove-button">-</button></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                <div class="text-container" style="overflow: hidden;">
+                                    <p class="mb-0 text-center h3    mt-5">Coming Soon!</p>
                                 </div>
-
                             </div>
                             <div class="card-footer blocked-card-footer float-right">
                                 <div class="contaier-fluid">
@@ -240,7 +195,7 @@
             <div class="row justify-content-center">
                 <div class="col-12 col-lg-10 col-xl-8 mx-auto">
 
-                    <div class="my-4">
+                    <div class="my-4 untext">
                         <strong class="mb-0">Blackout Mode</strong>
                         <p>Blackout mode is an essential feature to maintain work/life balance.</p>
 
@@ -267,7 +222,7 @@
                                     </div>
                                     <div class="col-auto">
                                         <div class="form-outline">
-                                            <span id="timerValue1"></span>
+                                            <span id="Duration"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -280,9 +235,8 @@
                                             mode early</p>
                                     </div>
                                     <div class="col-auto">
-                                        <div class="custom-control custom-switch">
-                                            <input type="checkbox" class="custom-control-input" id="alert2" />
-                                            <span class="custom-control-label"></span>
+                                        <div class="form-outline">
+                                            <span id="QuitEarly"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -347,9 +301,7 @@
                                     </div>
                                     <div class="col-auto">
                                         <div class="custom-control custom-switch">
-                                            <input type="checkbox" class="custom-control-input" id="alert4"
-                                                checked="" />
-                                            <span class="custom-control-label"></span>
+                                            <span class="text-muted mb-0">Coming Soon!</span>
                                         </div>
                                     </div>
                                 </div>
@@ -420,12 +372,69 @@
     <script src="../js/renderer.js"></script>
     <script src="../js/scripts.js"></script>
     <script src="../js/settings.js"></script>
+    <script src="../js/crud.js"></script>
 
     <!-- Insert this line after script imports -->
     <script>if (window.module) module = window.module;</script>
 
     <div id="preloader">
     </div>
+    <!-- CRUD for tables -->
+    <script>
+        // Function to fetch blocked applications from the text file
+        async function fetchBlockedApplications() {
+            try {
+                const response = await fetch('../database/apps.txt');
+                const data = await response.text();
+                return data.split('\n').filter(app => app.trim() !== '');
+            } catch (error) {
+                console.error('Error fetching blocked applications:', error);
+                return [];
+            }
+        }
+
+        // Function to render blocked applications in the table
+        async function renderBlockedApplications() {
+            const blockedApps = await fetchBlockedApplications();
+            const tableBody = document.querySelector('#blockedAppsTable tbody');
+
+            // Clear existing rows
+            tableBody.innerHTML = '';
+
+            // Add rows for each application
+            blockedApps.forEach(app => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                <td>${app}</td>
+                <td><button class="remove-button" onclick="removeApplication('${app}')">-</button></td>
+            `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Function to add a new application
+        function addApplication() {
+            const appNameInput = document.getElementById('appNameInput');
+            const appName = appNameInput.value.trim();
+
+            if (appName !== '') {
+                // Append the new application to the text file
+                // (You may want to use a server-side language for this in a real application)
+                // Here, we'll just update the UI for demonstration purposes.
+                renderBlockedApplications();
+                appNameInput.value = ''; // Clear the input field
+            }
+        }
+
+        // Function to remove an application
+        function removeApplication(appName) {
+            //hard coded for now only
+        }
+
+        // Initial rendering of blocked applications
+        renderBlockedApplications();
+    </script>
+
     <!--Loading database-->
     <script>
         fetch('../database/settings.json')
@@ -433,6 +442,8 @@
             .then(data => {
                 // Update the content of the span element with the timerSetting value
                 document.getElementById('timerValue').textContent = data.BlackoutModeSettings.Timer;
+                document.getElementById('Duration').textContent = data.BlackoutModeSettings.Duration;
+                document.getElementById('QuitEarly').textContent = data.BlackoutModeSettings.QuitEarly;
             })
             .catch(error => {
                 console.error('Error fetching or parsing JSON:', error);

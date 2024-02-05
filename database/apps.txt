@@ -1,2 +1,6 @@
 Spotify
-Steam
+steam
+Origin
+Discord
+Microsoft.Media.Player
+steamwebhelper

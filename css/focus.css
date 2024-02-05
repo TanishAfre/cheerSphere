@@ -127,9 +127,9 @@
     font-size: 16px;
     cursor: pointer;
     background-color: #484848; /* Dark gray background */
-    color: white; /* White text */
+    color: white !important; /* White text */
     border: none;
-    border-radius: 10px;
+    border-radius: 5px !important; 
     transition: background-color 0.3s ease;
   }
   

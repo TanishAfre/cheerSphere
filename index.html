@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="css/loading-animation.css">
   <link rel="stylesheet" href="css/dashboard.css">
   <link rel="stylesheet" href="css/congrats-modal.css">
-
+  <link rel="stylesheet" href="css/sidebar.css">
   <!--bootstrap-->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
@@ -277,10 +277,21 @@
       }
 
       function startFocus() {
+        ipcRenderer.send('notif');
         if (!isFocusing) {
           // Start focusing
           startTime = new Date().getTime();
           isFocusing = true;
+
+          ipcRendererInterval = setInterval(function () {
+            if (!isFocusing) {
+              clearInterval(ipcRendererInterval); // Stop the interval if isFocusing is false
+              return;
+            }
+            // Send data to IPCRenderer here
+            console.log("Sent something");
+            ipcRenderer.send('focus');
+          }, 2000);
 
           // Change text to a timer
           button.innerHTML = "Time Left:" + formatTime(remainingDuration);

@@ -16,3 +16,58 @@
     box-shadow: 0 7px 25px rgba(0,0,0,0.8);
     border-radius: 20px;
 }
+
+.card{
+    flex-direction: row !important;
+}
+
+.cardBox{
+    position: relative !important;
+    width: 100%;
+    height : 10%;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-gap: 30px;
+    min-height: 200px;
+}
+
+.cardBox .card{
+    position: relative;
+    background: #fff;
+    padding: 20px;
+    display: flex;
+    height: 120px;
+    width: 100%;
+    justify-content: space-between;
+    /* cursor: pointer; */
+    box-shadow: 0 7px 25px rgba(0,0,0,0.8);
+    border-radius: 20px;
+}
+
+.cardBox .card .numbers{
+    position: relative;
+    display: flex;
+    font-size: x-large;
+    justify-content: space-between;
+    align-items: center;
+    color: blue;
+}
+
+.cardBox .card .cardName{
+    position: relative;
+    display: flex;
+    font-size: x-large;
+    justify-content: space-between;
+    align-items: center;
+    color: rgba(41, 41, 41, 0.8);
+}
+
+.cardBox .card .iconBox{
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 40px;
+    border-radius: 50%;
+    color: rgba(41, 41, 41, 0.8);
+}

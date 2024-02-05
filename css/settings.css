@@ -1,3 +1,7 @@
+.mb-0:hover{
+    cursor: context-menu;
+}
+
 .below-headings{
     width:20%;
     height: 50px;
@@ -36,6 +40,7 @@
 .text-container{
     width: 100%;
     height: auto;
+    min-height: 140px;
     max-height: 140px;
     border: 1px solid gray;
     overflow-y: scroll;
