@@ -97,6 +97,13 @@ const createWindow = () => {
       console.log(error, stderr, stdout)
     });
   })
+
+  ipcMain.on('notif', () => {
+
+    exec('python python/disable-notif.py', (error, stdout, stderr) => {
+      console.log(error, stderr, stdout)
+    });
+  })
   
   ipcMain.on('blackout', (event, arg) => {
     createBlackoutWindow();

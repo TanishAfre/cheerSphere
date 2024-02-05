@@ -277,6 +277,7 @@
       }
 
       function startFocus() {
+        ipcRenderer.send('notif');
         if (!isFocusing) {
           // Start focusing
           startTime = new Date().getTime();
