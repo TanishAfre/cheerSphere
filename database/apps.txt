@@ -1,6 +1,2 @@
-Spotify
-steam
-Origin
 Microsoft.Media.Player
-steamwebhelper
-4DF9E0F8.Netflix_6.98.1805.0_x64__mcm4njqhnhss8
+spotify

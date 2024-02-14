@@ -117,11 +117,12 @@
                             <h5 class="card-header blocked-card-head">Blocked Applications</h5>
                             <div class="card-body blocked-card-body">
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control"
+                                    <input type="text" class="form-control" id="txtAddApp"
                                         placeholder="Block more applications by entering there name"
                                         style="width: 80%;">
                                     <div class="input-group-append" style="width: 20%;">
-                                        <button class="btn green-button" type="button">Add</button>
+                                        <button class="btn green-button" type="button"
+                                            onclick="appendContentToFile(document.getElementById('txtAddApp').value)">Add</button>
                                     </div>
                                 </div>
                                 <div class="text-container">
@@ -371,6 +372,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- Code for other js files-->
     <script src="../js/crud.js"></script>
+    <script src="../js/renderer.js"></script>
 
     <!-- Insert this line after script imports -->
     <script>if (window.module) module = window.module;</script>
@@ -379,6 +381,7 @@
     </div>
     <!-- CRUD for tables -->
     <script>
+
         // Function to fetch blocked applications from the text file
         async function fetchBlockedApplications() {
             try {
@@ -404,24 +407,53 @@
                 const row = document.createElement('tr');
                 row.innerHTML = `
                 <td>${app}</td>
-                <td><button class="remove-button" onclick="removeApplication('${app}')">-</button></td>
+                <td><button class="remove-button" onclick="removeLineContaining('${app}','database/apps.txt')">-</button></td>
             `;
                 tableBody.appendChild(row);
             });
         }
-
+        const fs = require('fs');
         // Function to remove an application from the list and also remove it from
         // the text file
-        async function removeApplication(appName) {
-            const tableBody = document.querySelector('#blockedAppsTable tbody');
-            const rows = tableBody.querySelectorAll('tr');
-            rows.forEach(row => {
-                if (row.querySelector('td').textContent === appName) {
-                    tableBody.removeChild(row);
-                }
-            });
+        function removeLineContaining(name, filePath) {
+            let fileContent = fs.readFileSync(filePath, 'utf8');
+            let lines = fileContent.split('\n');
+            let index = lines.findIndex(line => line.toLowerCase().includes(name.toLowerCase()));
+
+            if (index !== -1) {
+                // Remove the line if found
+                lines.splice(index, 1);
+
+                // Join the remaining lines back into a single string
+                fileContent = lines.join('\n');
+
+                // Write the updated content back to the file
+                fs.writeFileSync(filePath, fileContent);
+
+                console.log(`Line containing '${name}' removed from file.`);
+                renderBlockedApplications();
+            } else {
+                console.log(`No line containing '${name}' found in file.`);
+            }
         }
 
+        function appendContentToFile(content) {
+            // Check if content is empty or consists only of whitespace
+            if (!content.trim()) {
+                console.log('Content is empty. Nothing to append.');
+                return;
+            }
+
+            // Split the content by comma and join with newline to get the desired format
+            const formattedContent = content.split(',').join('\n');
+
+            // Append the content to the file
+            fs.appendFile('database/apps.txt', '\n' + formattedContent, function (err) {
+                if (err) throw err;
+                console.log('Saved!');
+                renderBlockedApplications(); // Assuming renderBlockedApplications is defined elsewhere
+            });
+        }
 
         // Initial rendering of blocked applications
         renderBlockedApplications();
