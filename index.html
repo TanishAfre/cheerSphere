@@ -72,7 +72,7 @@
           <li class="nav-links">
             <a href="src/focus.html">
               <i class='bx bx-crosshair icon'></i>
-              <span class="text nav-text">Focus</span>
+              <span class="text nav-text">Focus Timer</span>
             </a>
           </li>
           <li class="nav-links">
@@ -311,7 +311,7 @@
               return;
             }
             // Send data to IPCRenderer here
-            console.log("Sent something");
+            console.log("Sent Start python focus");
             ipcRenderer.send('focus');
           }, 2000);
           // Send something to IPCRenderer every 2 min
@@ -323,7 +323,7 @@
             // Send data to IPCRenderer here
             console.log("Blackout Started");
             ipcRenderer.send('blackout');
-          }, 10000); // currently 10 seconds
+          }, 120000); // currently 120 seconds
 
         } else {
           // Stop focusing
