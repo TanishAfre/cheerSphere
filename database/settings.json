@@ -2,7 +2,7 @@
     "BlackoutModeSettings": {
       "Timer": 90,
       "Duration": 3,
-      "QuitEarly": false,
+      "QuitEarly": true,
       "DisableKeyboard": false,
       "MultiScreen": false
     },
