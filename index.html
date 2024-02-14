@@ -119,7 +119,7 @@
           </div>
         </div>
         <div class="button-wrapper">
-         <button id="focus-btn" onclick="startFocus()" type="button" class="btn btn-success start-focus">Start
+          <button id="focus-btn" onclick="startFocus()" type="button" class="btn btn-success start-focus">Start
             Focusing</button>
         </div>
 
@@ -257,16 +257,25 @@
     <!-- Insert this line after script imports -->
     <script>if (window.module) module = window.module;</script>
 
-   <!--Timer Start Code-->
+    <!--Timer Start Code-->
 
-
+    <!--Functions-->
     <script>
-      var isFocusing = false;
-      var startTime;
-      var button = document.getElementById('focus-btn');
-      var totalDuration = 60 * 60; // 60 minutes in seconds
-      var remainingDuration = totalDuration; // Initialize remaining duration to 60 minutes
-      var focusedTime;
+      // Function to disable links
+      function disableLinks() {
+        var links = document.querySelectorAll('.menu-links a');
+        links.forEach(function (link) {
+          link.classList.add('disabled'); // Add 'disabled' class
+        });
+      }
+
+      // Function to enable links
+      function enableLinks() {
+        var links = document.querySelectorAll('.menu-links a');
+        links.forEach(function (link) {
+          link.classList.remove('disabled'); // Remove 'disabled' class
+        });
+      }
 
       function showCongratulationsModal() {
         focusedTime = totalDuration - remainingDuration; // Calculate focused time
@@ -276,10 +285,38 @@
         $('#congratulationsModal').modal('show');
       }
 
+      function updateTimerDisplay(elapsedMillis) {
+        var elapsedSeconds = Math.floor(elapsedMillis / 1000);
+        var remainingTime = Math.max(0, remainingDuration - elapsedSeconds); // Ensure remaining time is non-negative
+        button.innerHTML = 'Time Left ' + formatTime(remainingTime);
+      }
+
+      function formatTime(seconds) {
+        var minutes = Math.floor(seconds / 60);
+        seconds = seconds % 60;
+        return padLeft(minutes) + ':' + padLeft(seconds);
+      }
+
+      function padLeft(value) {
+        return value < 10 ? '0' + value : value;
+      }
+
+    </script>
+    <!--Focus code starts here-->
+    <script>
+      var isFocusing = false;
+      var startTime;
+      var button = document.getElementById('focus-btn');
+      var totalDuration = 60 * 60; // 60 minutes in seconds
+      var remainingDuration = totalDuration; // Initialize remaining duration to 60 minutes
+      var focusedTime;
+
       function startFocus() {
-        ipcRenderer.send('notif');
+        ipcRenderer.send('notif'); // sends notification IPC to main.js for python file
+
         if (!isFocusing) {
           // Start focusing
+          disableLinks();
           startTime = new Date().getTime();
           isFocusing = true;
 
@@ -328,7 +365,7 @@
         } else {
           // Stop focusing
           isFocusing = false;
-
+          enableLinks();
           // Calculate focused time
           var elapsedMillis = new Date().getTime() - startTime;
           var elapsedSeconds = Math.floor(elapsedMillis / 1000);
@@ -346,21 +383,7 @@
         }
       }
 
-      function updateTimerDisplay(elapsedMillis) {
-        var elapsedSeconds = Math.floor(elapsedMillis / 1000);
-        var remainingTime = Math.max(0, remainingDuration - elapsedSeconds); // Ensure remaining time is non-negative
-        button.innerHTML = 'Time Left ' + formatTime(remainingTime);
-      }
 
-      function formatTime(seconds) {
-        var minutes = Math.floor(seconds / 60);
-        seconds = seconds % 60;
-        return padLeft(minutes) + ':' + padLeft(seconds);
-      }
-
-      function padLeft(value) {
-        return value < 10 ? '0' + value : value;
-      }
     </script>
     <!-- Pre loader Script 
     <script>
