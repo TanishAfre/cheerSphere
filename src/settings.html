@@ -370,10 +370,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- Code for other js files-->
-    <script src="../js/sidebar-render.js"></script>
-    <script src="../js/renderer.js"></script>
-    <script src="../js/scripts.js"></script>
-    <script src="../js/settings.js"></script>
     <script src="../js/crud.js"></script>
 
     <!-- Insert this line after script imports -->
@@ -414,24 +410,18 @@
             });
         }
 
-        // Function to add a new application
-        function addApplication() {
-            const appNameInput = document.getElementById('appNameInput');
-            const appName = appNameInput.value.trim();
-
-            if (appName !== '') {
-                // Append the new application to the text file
-                // (You may want to use a server-side language for this in a real application)
-                // Here, we'll just update the UI for demonstration purposes.
-                renderBlockedApplications();
-                appNameInput.value = ''; // Clear the input field
-            }
+        // Function to remove an application from the list and also remove it from
+        // the text file
+        async function removeApplication(appName) {
+            const tableBody = document.querySelector('#blockedAppsTable tbody');
+            const rows = tableBody.querySelectorAll('tr');
+            rows.forEach(row => {
+                if (row.querySelector('td').textContent === appName) {
+                    tableBody.removeChild(row);
+                }
+            });
         }
 
-        // Function to remove an application
-        function removeApplication(appName) {
-            //hard coded for now only
-        }
 
         // Initial rendering of blocked applications
         renderBlockedApplications();
