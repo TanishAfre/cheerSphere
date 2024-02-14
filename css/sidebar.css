@@ -24,6 +24,7 @@ body{
 
  /* sidebar */
 .sidebar{
+    background-color: #FEF6EB !important;
     opacity: 1 !important;
     position: fixed;
     top: 0;
