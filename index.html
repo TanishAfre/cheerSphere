@@ -309,79 +309,70 @@
       var button = document.getElementById('focus-btn');
       var totalDuration = 60 * 60; // 60 minutes in seconds
       var remainingDuration = totalDuration; // Initialize remaining duration to 60 minutes
-      var focusedTime;
 
       function startFocus() {
-        ipcRenderer.send('notif'); // sends notification IPC to main.js for python file
-
         if (!isFocusing) {
-          // Start focusing
-          disableLinks();
-          startTime = new Date().getTime();
-          isFocusing = true;
-
-          ipcRendererInterval = setInterval(function () {
-            if (!isFocusing) {
-              clearInterval(ipcRendererInterval); // Stop the interval if isFocusing is false
-              return;
-            }
-            // Send data to IPCRenderer here
-            console.log("Sent something");
-            ipcRenderer.send('focus');
-          }, 2000);
-
-          // Change text to a timer
-          button.innerHTML = "Time Left:" + formatTime(remainingDuration);
-
-          // Example: Update timer display every second
-          var intervalId = setInterval(function () {
-            if (isFocusing) {
-              var elapsedMillis = new Date().getTime() - startTime;
-              updateTimerDisplay(elapsedMillis);
-            }
-          }, 1000);
-
-          // Send something to IPCRenderer every 2 seconds
-          ipcRendererInterval = setInterval(function () {
-            if (!isFocusing) {
-              clearInterval(ipcRendererInterval); // Stop the interval if isFocusing is false
-              return;
-            }
-            // Send data to IPCRenderer here
-            console.log("Sent Start python focus");
-            ipcRenderer.send('focus');
-          }, 2000);
-          // Send something to IPCRenderer every 2 min
-          ipcRendererInterval = setInterval(function () {
-            if (!isFocusing) {
-              clearInterval(ipcRendererInterval); // Stop the interval if isFocusing is false
-              return;
-            }
-            // Send data to IPCRenderer here
-            console.log("Blackout Started");
-            ipcRenderer.send('blackout');
-          }, 120000); // currently 120 seconds
-
+          beginFocus();
         } else {
-          // Stop focusing
-          isFocusing = false;
-          enableLinks();
-          // Calculate focused time
-          var elapsedMillis = new Date().getTime() - startTime;
-          var elapsedSeconds = Math.floor(elapsedMillis / 1000);
-          remainingDuration -= elapsedSeconds; // Subtract elapsed time from remaining duration
-
-          // Reset button style
-          button.innerHTML = 'Start Focusing';
-          button.style.backgroundColor = 'green';
-          confettiCaller();
-          showCongratulationsModal();
-          //reset timers
-          focusedTime = 0;
-          totalDuration = 60 * 60;
-          remainingDuration = totalDuration;
+          endFocus();
         }
       }
+
+      function beginFocus() {
+        ipcRenderer.send('notif'); // sends notification IPC to main.js for python file
+        disableLinks();
+        startTime = new Date().getTime();
+        isFocusing = true;
+        startInterval(ipcRenderer, 'focus', 2000);
+        startInterval(ipcRenderer, 'blackout', 120000);
+        updateTimerDisplayInterval();
+        updateButtonContent("Time Left:" + formatTime(remainingDuration));
+      }
+
+      function endFocus() {
+        isFocusing = false;
+        enableLinks();
+        remainingDuration -= Math.floor((new Date().getTime() - startTime) / 1000);
+        resetButton();
+        confettiCaller();
+        showCongratulationsModal();
+        resetTimers();
+      }
+
+      function startInterval(target, message, interval) {
+        var intervalId = setInterval(function () {
+          if (!isFocusing) {
+            clearInterval(intervalId); // Stop the interval if isFocusing is false
+            return;
+          }
+          console.log("Sent " + message);
+          target.send(message);
+        }, interval);
+      }
+
+      function updateTimerDisplayInterval() {
+        setInterval(function () {
+          if (isFocusing) {
+            updateTimerDisplay(new Date().getTime() - startTime);
+          }
+        }, 1000);
+      }
+
+      function updateButtonContent(content) {
+        button.innerHTML = content;
+      }
+
+      function resetButton() {
+        updateButtonContent('Start Focusing');
+        button.style.backgroundColor = 'green';
+      }
+
+      function resetTimers() {
+        focusedTime = 0;
+        totalDuration = 60 * 60;
+        remainingDuration = totalDuration;
+      }
+
 
 
     </script>
