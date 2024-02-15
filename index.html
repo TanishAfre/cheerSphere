@@ -376,6 +376,19 @@
 
 
     </script>
+
+    <script>
+        fetch('database/settings.json')
+            .then(response => response.json())
+            .then(data => {
+                // Update the content of the span element with the timerSetting value
+                const Timer = data.BlackoutModeSettings.Timer;
+                const Duration = data.BlackoutModeSettings.Duration;
+            })
+            .catch(error => {
+                console.error('Error fetching or parsing JSON:', error);
+            });
+    </script>
     <!-- Pre loader Script 
     <script>
     var loader = document.getElementById("preloader");
