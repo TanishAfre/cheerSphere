@@ -302,8 +302,24 @@
       }
 
     </script>
+    <script>
+      const fs = require('fs');
+
+      try {
+        const data = JSON.parse(fs.readFileSync('database/settings.json', 'utf8'));
+        var BlackoutTimer = data.BlackoutModeSettings.Timer;
+        var Duration = data.BlackoutModeSettings.Duration;
+        console.log('Blackout Timer:', BlackoutTimer);
+        console.log('Duration:', Duration);
+        console.log("Bruh " + BlackoutTimer); // Accessing the variable outside fetch
+      } catch (error) {
+        console.error('Error reading or parsing JSON:', error);
+      }
+    </script>
     <!--Focus code starts here-->
     <script>
+
+      console.log("Bruh " + BlackoutTimer);
       var isFocusing = false;
       var startTime;
       var button = document.getElementById('focus-btn');
@@ -377,18 +393,7 @@
 
     </script>
 
-    <script>
-        fetch('database/settings.json')
-            .then(response => response.json())
-            .then(data => {
-                // Update the content of the span element with the timerSetting value
-                const Timer = data.BlackoutModeSettings.Timer;
-                const Duration = data.BlackoutModeSettings.Duration;
-            })
-            .catch(error => {
-                console.error('Error fetching or parsing JSON:', error);
-            });
-    </script>
+
     <!-- Pre loader Script 
     <script>
     var loader = document.getElementById("preloader");
