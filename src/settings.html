@@ -249,8 +249,12 @@
                                         <p class="text-muted mb-0">Disable keyboard while blackout mode is active</p>
                                     </div>
                                     <div class="col-auto">
+                                        <!-- Default checked -->
                                         <div class="custom-control custom-switch">
-                                            <span class="text-muted mb-0">Coming Soon!</span>
+                                            <input type="checkbox" class="custom-control-input" id="customSwitch1"
+                                                checked>
+                                            <label class="custom-control-label" for="customSwitch1"></label>
+                                            <div id="switchValueOutput"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -461,6 +465,30 @@
 
     <!--Loading database-->
     <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Get the switch element
+            var switchElement = document.getElementById("customSwitch1");
+
+            // Get the output element
+            var outputElement = document.getElementById("switchValueOutput");
+
+            // Function to update the output with the switch value
+            function updateSwitchValue() {
+                outputElement.textContent = "Switch Value: " + (switchElement.checked ? "On" : "Off");
+            }
+
+            // Initial update
+            updateSwitchValue();
+
+            // Listen for changes in the switch state
+            switchElement.addEventListener("change", function () {
+                // Update the output when the switch state changes
+                updateSwitchValue();
+            });
+        });
+    </script>
+    <script>
+
         fetch('../database/settings.json')
             .then(response => response.json())
             .then(data => {
