@@ -20,10 +20,11 @@ function toggleCountdown() {
         countdownTimer = setInterval(() => {
             const isComplete = updateAllSegments(targetDate); // Pass targetDate to update function
             if (isComplete) {
-                clearInterval(countdownTimer);
-                countdownTimer = null;
-                document.getElementById('toggleButton').textContent = 'Start Countdown';
-            }
+              clearInterval(countdownTimer);
+              countdownTimer = null;
+              button.textContent = 'Start Countdown';
+              resetTimeDisplay(); // Ensure the display is reset when countdown completes
+          }
         }, 1000);
         updateAllSegments(targetDate); // Pass targetDate to update function
     }
