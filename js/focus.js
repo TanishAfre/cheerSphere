@@ -5,6 +5,39 @@ const sessionLength = document.getElementById('sessionLength');
 const decreaseSession = document.getElementById('decreaseSession');
 const increaseSession = document.getElementById('increaseSession');
 
+function toggleCountdown() {
+  var button = document.getElementById('toggleButton');
+  
+  if (button.textContent === 'Start Countdown') {
+    button.textContent = 'Stop Countdown';
+    // Calculate target date based on sessionLength
+    const sessionMinutes = parseInt(sessionLength.textContent, 10);
+    const targetDate = new Date();
+    targetDate.setMinutes(targetDate.getMinutes() + sessionMinutes);
+
+    // Start countdown code with the new targetDate
+    if (!countdownTimer) {
+        countdownTimer = setInterval(() => {
+            const isComplete = updateAllSegments(targetDate); // Pass targetDate to update function
+            if (isComplete) {
+                clearInterval(countdownTimer);
+                countdownTimer = null;
+                document.getElementById('toggleButton').textContent = 'Start Countdown';
+            }
+        }, 1000);
+        updateAllSegments(targetDate); // Pass targetDate to update function
+    }
+  } else {
+    button.textContent = 'Start Countdown';
+    // Stop countdown code
+    if (countdownTimer) {
+      clearInterval(countdownTimer);
+      countdownTimer = null;
+      resetTimeDisplay();
+    }
+  }
+}
+
 decreaseSession.addEventListener('click', function() {
     let length = parseInt(sessionLength.textContent, 10);
     if (length > 1) {
@@ -18,8 +51,8 @@ increaseSession.addEventListener('click', function() {
 });
 
 
-const targetDate = new Date();
-targetDate.setHours(targetDate.getHours() + 5);
+//const targetDate = new Date();
+//targetDate.setHours(targetDate.getHours() + 5);
 
 function getTimeSegmentElements(segmentElement) {
   const segmentDisplay = segmentElement.querySelector(
@@ -141,34 +174,22 @@ function getTimeRemaining(targetDateTime) {
   };
 }
 
-function updateAllSegments() {
-  const timeRemainingBits = getTimeRemaining(
-    new Date(targetDate).getTime()
-  );
+function resetTimeDisplay() {
+  // Assuming you have a function similar to updateTimeSection that you can call
+  // to update the display of hours, minutes, and seconds.
+  // If not, you'll need to implement this based on your existing code structure.
 
+  updateTimeSection('hours', 0);
+  updateTimeSection('minutes', 0);
+  updateTimeSection('seconds', 0);
+}
+
+function updateAllSegments(targetDate) {
+  const timeRemainingBits = getTimeRemaining(targetDate.getTime());
   updateTimeSection('seconds', timeRemainingBits.seconds);
   updateTimeSection('minutes', timeRemainingBits.minutes);
   updateTimeSection('hours', timeRemainingBits.hours);
-
   return timeRemainingBits.complete;
 }
-
-startButton.addEventListener('click', function() {
-    if (!countdownTimer) {
-        countdownTimer = setInterval(() => {
-            const isComplete = updateAllSegments();
-            if (isComplete) {
-                clearInterval(countdownTimer);
-                countdownTimer = null;
-            }
-        }, 1000);
-        updateAllSegments();
-    }
-});
-
-stopButton.addEventListener('click', function() {
-    clearInterval(countdownTimer);
-    countdownTimer = null;
-});
 
 updateAllSegments();
