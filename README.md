@@ -20,7 +20,7 @@ This repository is the code base for our application Foucs Mind
 •	Node 12.13.0 or higher <br>
 •  Electron 28.2.1 or higher <br>
 
-## Usage <br>
+## Usage(JavaScript) <br>
 Setting up your development environment on your local machine: <br>
 ```sh
 # Clone the repo
@@ -33,7 +33,14 @@ npm i
 npm start
 
 ```
+## Pip requirements <br>
+Setting up the needed python libraries: <br>
+```sh
+# pyautogui
+pip install pyautogui
 
+
+```
 ## Resources for Learning Electron
 
 - [electronjs.org/docs](https://electronjs.org/docs) - all of Electron's documentation
