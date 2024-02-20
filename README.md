@@ -26,11 +26,8 @@ Setting up your development environment on your local machine: <br>
 # Clone the repo
 git clone https://github.com/TanishAfre/FocusMind
 
-# Install Electron
-npm install electron
-
-# Install the required packages
-npm install && npm build
+# Install Electron and all other dependancies
+npm i
 
 # Run the application
 npm start
