@@ -42,13 +42,13 @@ function toggleCountdown() {
 decreaseSession.addEventListener('click', function() {
     let length = parseInt(sessionLength.textContent, 10);
     if (length > 1) {
-        sessionLength.textContent = length - 1;
+        sessionLength.textContent = length - 5;
     }
 });
 
 increaseSession.addEventListener('click', function() {
     let length = parseInt(sessionLength.textContent, 10);
-    sessionLength.textContent = length + 1;
+    sessionLength.textContent = length + 5;
 });
 
 
