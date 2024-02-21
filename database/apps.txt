@@ -1,2 +1,2 @@
 Microsoft.Media.Player
-spotify
+Spotify
