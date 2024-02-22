@@ -167,19 +167,19 @@
             <br>
             <span class="subtitle">Hopeful</span>
           </div>
-          
+
           <div class="d-inline-block text-center">
             <span class="emoji" onclick="saveMood('😄')" title="Happy">😄</span>
             <br>
             <span class="subtitle">Happy</span>
           </div>
-          
+
           <div class="d-inline-block text-center">
             <span class="emoji" onclick="saveMood('😃')" title="Excited">😃</span>
             <br>
             <span class="subtitle">Excited</span>
           </div>
-          
+
         </div>
 
       </div>
@@ -314,7 +314,8 @@
     </script>
     <!--Focus code starts here-->
     <script>
-
+      var blackoutAmount = 0;
+      var blackoutLength = 0; // Stores cumulative duration in seconds
       console.log("Bruh " + BlackoutTimer);
       var isFocusing = false;
       var startTime;
@@ -325,8 +326,10 @@
       function startFocus() {
         if (!isFocusing) {
           beginFocus();
+          console.log("Blackout Amount: " + blackoutAmount);
         } else {
           endFocus();
+          console.log("Blackout Amount: " + blackoutAmount);
         }
       }
 
@@ -335,10 +338,39 @@
         disableLinks();
         startTime = new Date().getTime();
         isFocusing = true;
-        startInterval(ipcRenderer, 'sent focus', 2000);
-        startInterval(ipcRenderer, 'sent blackout', 120000);
+        startInterval(ipcRenderer, 'focus', 2000);
+        startInterval(ipcRenderer, 'blackout', 2000);
+        triggerBlackoutMode();
         updateTimerDisplayInterval();
         updateButtonContent("Time Left:" + formatTime(remainingDuration));
+      }
+
+      function triggerBlackoutMode() {
+        // Read the current contents of the file
+        fs.readFile(path, 'utf8', (err, data) => {
+          if (err) {
+            console.error("Error reading the file:", err);
+            return;
+          }
+
+          // Parse the JSON data
+          let jsonData = JSON.parse(data);
+
+          // Increment the blackoutAmount
+          jsonData.Blackout.blackoutAmount += 1;
+
+          // Convert the updated object back to a JSON string
+          const updatedData = JSON.stringify(jsonData, null, 2); // The second argument null and 2 for pretty-printing
+
+          // Write the updated data back to the file
+          fs.writeFile(path, updatedData, 'utf8', (err) => {
+            if (err) {
+              console.error("Error writing to the file:", err);
+              return;
+            }
+            console.log("Successfully updated blackoutAmount.");
+          });
+        });
       }
 
       function endFocus() {

@@ -1,6 +1,6 @@
 {
   "BlackoutModeSettings": {
-    "Timer": 230,
+    "Timer": 260,
     "Duration": 3,
     "QuitEarly": true,
     "DisableKeyboard": false,
