@@ -326,10 +326,8 @@
       function startFocus() {
         if (!isFocusing) {
           beginFocus();
-          console.log("Blackout Amount: " + blackoutAmount);
         } else {
           endFocus();
-          console.log("Blackout Amount: " + blackoutAmount);
         }
       }
 
@@ -339,20 +337,19 @@
         startTime = new Date().getTime();
         isFocusing = true;
         startInterval(ipcRenderer, 'focus', 2000);
-        startInterval(ipcRenderer, 'blackout', 2000);
-        triggerBlackoutMode();
+        startInterval(ipcRenderer, 'blackout', 10000);
         updateTimerDisplayInterval();
         updateButtonContent("Time Left:" + formatTime(remainingDuration));
       }
 
       function triggerBlackoutMode() {
+        console.log("Blackout Mode Triggered");
         // Read the current contents of the file
-        fs.readFile(path, 'utf8', (err, data) => {
+        fs.readFile('database/analytics.json', 'utf8', (err, data) => {
           if (err) {
             console.error("Error reading the file:", err);
             return;
           }
-
           // Parse the JSON data
           let jsonData = JSON.parse(data);
 
@@ -361,9 +358,8 @@
 
           // Convert the updated object back to a JSON string
           const updatedData = JSON.stringify(jsonData, null, 2); // The second argument null and 2 for pretty-printing
-
           // Write the updated data back to the file
-          fs.writeFile(path, updatedData, 'utf8', (err) => {
+          fs.writeFile('database/analytics.json', updatedData, 'utf8', (err) => {
             if (err) {
               console.error("Error writing to the file:", err);
               return;
@@ -391,6 +387,11 @@
           }
           console.log("Sent " + message);
           target.send(message);
+          if (message === 'blackout') {
+          // Add your code here
+          console.log("Blackout Mode Triggered in loop");
+          triggerBlackoutMode();
+        }
         }, interval);
       }
 
