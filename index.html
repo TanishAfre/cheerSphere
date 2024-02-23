@@ -342,8 +342,7 @@
         updateButtonContent("Time Left:" + formatTime(remainingDuration));
       }
 
-      function triggerBlackoutMode() {
-        console.log("Blackout Mode Triggered");
+      function triggerBlackoutAnalytics() {
         // Read the current contents of the file
         fs.readFile('database/analytics.json', 'utf8', (err, data) => {
           if (err) {
@@ -369,6 +368,40 @@
         });
       }
 
+      function triggerBlackoutDurationAnalytic() {
+        const data = JSON.parse(fs.readFileSync('database/settings.json', 'utf8'));
+        var Duration = data.BlackoutModeSettings.Duration;
+
+        fs.readFile('database/analytics.json', 'utf8', (err, data) => {
+          if (err) {
+            console.error('Error reading JSON file:', err);
+            return;
+          }
+
+          try {
+            // Parse the JSON data
+            const analytics = JSON.parse(data);
+
+            // Modify the value (for example, incrementing BlackoutTimer)
+            analytics.Blackout.blackoutTime += Duration;
+
+            // Convert the modified object back to JSON format
+            const updatedData = JSON.stringify(analytics, null, 2);
+
+            // Write the updated JSON back to the file
+            fs.writeFile('database/analytics.json', updatedData, 'utf8', (err) => {
+              if (err) {
+                console.error('Error writing JSON file:', err);
+                return;
+              }
+              console.log('JSON file updated successfully for Duration.');
+            });
+          } catch (error) {
+            console.error('Error parsing JSON:', error);
+          }
+        });
+      }
+      
       function endFocus() {
         isFocusing = false;
         enableLinks();
@@ -388,10 +421,9 @@
           console.log("Sent " + message);
           target.send(message);
           if (message === 'blackout') {
-          // Add your code here
-          console.log("Blackout Mode Triggered in loop");
-          triggerBlackoutMode();
-        }
+            triggerBlackoutAnalytics();
+            triggerBlackoutDurationAnalytic();
+          }
         }, interval);
       }
 
