@@ -2,6 +2,7 @@ const { app, BrowserWindow, ipcMain, Menu, Tray } = require('electron')
 const { exec } = require('child_process'); //running python
 const path = require('path') //path
 const TrayWindow = require('electron-tray-window');
+const fs = require('fs');
 
 let tray = null; // Tray instance
 let win = null; // BrowserWindow instance
@@ -78,7 +79,7 @@ const createWindow = () => {
     }
   });
   // Event listener for the 'blackout' event
- 
+
   ipcMain.on('close-blackout', (event, arg) => {
     blackoutWin.close();
   });
@@ -104,14 +105,27 @@ const createWindow = () => {
       console.log(error, stderr, stdout)
     });
   })
-  
+
   ipcMain.on('blackout', (event, arg) => {
     createBlackoutWindow();
   });
 
+  ipcMain.on('get-settings-file', (event, arg) => {
+    const filePath = path.join(app.getPath('userData'), 'database/settings.json');
+    fs.readFile(filePath, 'utf8', (err, data) => {
+      if (err) {
+        console.error('Error reading the file', err);
+        event.reply('get-settings-file-response', 'error');
+        return;
+      }
+      event.reply('get-settings-file-response', data);
+      console.log('Settings file sent');
+    });
+  });
+
 }
 
-app.setName('Focus Mind');
+app.setName('FocusMind');
 app.whenReady().then(() => {
   createWindow()
 
