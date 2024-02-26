@@ -3,6 +3,17 @@ const { exec } = require('child_process'); //running python
 const path = require('path') //path
 const TrayWindow = require('electron-tray-window');
 const fs = require('fs');
+const logFilePath = path.join(__dirname, 'logs.txt');
+
+// Function to append logs to the log file
+function appendToLog(data) {
+  fs.appendFile(logFilePath, data + '\n', (err) => {
+    if (err) {
+      console.error('Error appending to log file:', err);
+    }
+  });
+}
+
 
 let tray = null; // Tray instance
 let win = null; // BrowserWindow instance
@@ -95,14 +106,22 @@ const createWindow = () => {
   ipcMain.on('focus', () => {
 
     exec('python python/start-focus.py', (error, stdout, stderr) => {
-      console.log(error, stderr, stdout)
+      const logMessage = `Error: ${error}, Stderr: ${stderr}, Stdout: ${stdout}`;
+      console.log(logMessage); // Log to console and file
+  
+      // Appending to log file
+      appendToLog(logMessage);
     });
   })
 
   ipcMain.on('notif', () => {
 
     exec('python python/disable-notif.py', (error, stdout, stderr) => {
-      console.log(error, stderr, stdout)
+      const logMessage = `Error: ${error}, Stderr: ${stderr}, Stdout: ${stdout}`;
+      console.log(logMessage); // Log to console
+  
+      // Appending to log file
+      appendToLog(logMessage);
     });
   })
 

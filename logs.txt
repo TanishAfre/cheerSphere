@@ -1,0 +1,24 @@
+Error: null, Stderr: , Stdout: 
+Error: null, Stderr: , Stdout: SUCCESS: Sent termination signal to the process with PID 11536.
+SUCCESS: Sent termination signal to the process with PID 11536.
+SUCCESS: The process with PID 11536 has been terminated.
+Process 'Microsoft.Media.Player' is not running.
+Process 'Spotify' is running. Closing...
+Forcing close...
+Process closed.
+
+Error: null, Stderr: , Stdout: Process 'Microsoft.Media.Player' is not running.
+Process 'Spotify' is not running.
+
+Error: null, Stderr: ERROR: The process "11536" not found.
+, Stdout: SUCCESS: Sent termination signal to the process with PID 11536.
+Process 'Microsoft.Media.Player' is not running.
+Process 'Spotify' is running. Closing...
+Process closed.
+
+Error: null, Stderr: ERROR: The process "11536" not found.
+, Stdout: SUCCESS: Sent termination signal to the process with PID 11536.
+Process 'Microsoft.Media.Player' is not running.
+Process 'Spotify' is running. Closing...
+Process closed.
+
