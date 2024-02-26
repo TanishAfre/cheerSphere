@@ -92,14 +92,20 @@ const createWindow = () => {
   // Event listener for the 'blackout' event
 
   ipcMain.on('close-blackout', (event, arg) => {
+    console.log('Blackout window closed');
+    appendToLog("Blackout window closed");
     blackoutWin.close();
   });
 
   ipcMain.on('minimize-window', () => {
+    console.log('Minimizing window');
+    appendToLog("Minimizing window");
     win.minimize();
   })
 
   ipcMain.on('close-window', () => {
+    console.log('Closing window');
+    appendToLog("Closing window");
     win.close();
   })
 
@@ -107,10 +113,12 @@ const createWindow = () => {
 
     exec('python python/start-focus.py', (error, stdout, stderr) => {
       const logMessage = `Error: ${error}, Stderr: ${stderr}, Stdout: ${stdout}`;
-      console.log(logMessage); // Log to console and file
-  
-      // Appending to log file
-      appendToLog(logMessage);
+    
+      // Log to console
+      console.log(logMessage);
+      
+      // Log to file
+      appendToLog("Focus Said: " + logMessage);
     });
   })
 
@@ -118,14 +126,18 @@ const createWindow = () => {
 
     exec('python python/disable-notif.py', (error, stdout, stderr) => {
       const logMessage = `Error: ${error}, Stderr: ${stderr}, Stdout: ${stdout}`;
-      console.log(logMessage); // Log to console
-  
-      // Appending to log file
-      appendToLog(logMessage);
+    
+      // Log to console
+      console.log(logMessage);
+      
+      // Log to file
+      appendToLog("Notification Blocker Said: " + logMessage);
     });
   })
 
   ipcMain.on('blackout', (event, arg) => {
+    console.log('Creating blackout window');
+    appendToLog("Creating blackout window");
     createBlackoutWindow();
   });
 
@@ -133,12 +145,15 @@ const createWindow = () => {
     const filePath = path.join(app.getPath('userData'), 'database/settings.json');
     fs.readFile(filePath, 'utf8', (err, data) => {
       if (err) {
+
         console.error('Error reading the file', err);
+        appendToLog("Error reading the file: " + err);
         event.reply('get-settings-file-response', 'error');
         return;
       }
       event.reply('get-settings-file-response', data);
       console.log('Settings file sent');
+      appendToLog("Settings file sent");
     });
   });
 
