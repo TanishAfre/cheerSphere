@@ -16,8 +16,11 @@
     }
   },
   "dependencies": {
-    "electron": "^27.1.2",
     "electron-tray-window": "^1.2.7",
     "i": "^0.3.7"
+  },
+  "devDependencies": {
+    "electron-builder": "^24.12.0",
+    "electron-packager": "^17.1.2"
   }
 }

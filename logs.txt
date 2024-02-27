@@ -47,3 +47,5 @@ Focus Said: 26/2/2024, 1:12:18 pm - Error: null, Stderr: , Stdout: Process 'Micr
 Process 'Spotify' is not running.
 
 26/2/2024, 1:12:20 pm - Closing window
+27/2/2024, 3:20:51 pm - Closing window
+27/2/2024, 3:29:03 pm - Closing window
