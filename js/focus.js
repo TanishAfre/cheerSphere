@@ -193,4 +193,5 @@ function updateAllSegments(targetDate) {
   return timeRemainingBits.complete;
 }
 
+resetTimeDisplay();
 updateAllSegments();
