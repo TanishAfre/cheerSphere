@@ -1,5 +1,6 @@
 import subprocess
 import time
+import json
 
 def stop_process_by_name(process_name):
     try:
@@ -25,12 +26,14 @@ def stop_process_by_name(process_name):
                 subprocess.run(["taskkill", "/pid", str(pid)], check=True)
             except subprocess.CalledProcessError:
                 print("Process closed.")
+                update_analytics()
                 return
 
             # Force close the process if it hasn't closed yet
             print("Forcing close...")
             subprocess.run(["taskkill", "/f", "/pid", str(pid)])
             print("Process closed.")
+            update_analytics()
         else:
             print(f"Process '{process_name}' is not running.")
     except Exception as e:
@@ -54,5 +57,16 @@ def stop_processes_from_file(file_path):
 
     for process_name in process_names:
         stop_process_by_name(process_name)
+
+def update_analytics():
+    try:
+        with open("./database/analytics.json", "r+") as file:
+            data = json.load(file)
+            data["appAnalytics"]["appsClosed"] += 1
+            file.seek(0)
+            json.dump(data, file, indent=2)
+            file.truncate()
+    except Exception as e:
+        print(f"Error updating analytics: {e}")
 
 stop_processes_from_file("./database/apps.txt") #when debugging change directory to ../database/apps.txt

@@ -2,6 +2,18 @@ const { app, BrowserWindow, ipcMain, Menu, Tray } = require('electron')
 const { exec } = require('child_process'); //running python
 const path = require('path') //path
 const TrayWindow = require('electron-tray-window');
+const fs = require('fs');
+const logFilePath = path.join(__dirname, 'logs.txt');
+
+// Function to append logs to the log file
+function appendToLog(data) {
+  fs.appendFile(logFilePath, data + '\n', (err) => {
+    if (err) {
+      console.error('Error appending to log file:', err);
+    }
+  });
+}
+
 
 let tray = null; // Tray instance
 let win = null; // BrowserWindow instance
@@ -78,40 +90,82 @@ const createWindow = () => {
     }
   });
   // Event listener for the 'blackout' event
- 
+
   ipcMain.on('close-blackout', (event, arg) => {
+    const timestamp = new Date().toLocaleString(); // Get current timestamp
+    console.log(timestamp +' - Blackout window closed');
+    appendToLog(timestamp +' - Blackout window closed');
     blackoutWin.close();
   });
 
   ipcMain.on('minimize-window', () => {
+    const timestamp = new Date().toLocaleString(); // Get current timestamp
+    console.log(timestamp +' - Minimizing window');
+    appendToLog(timestamp +' - Minimizing window');
     win.minimize();
   })
 
   ipcMain.on('close-window', () => {
+    const timestamp = new Date().toLocaleString(); // Get current timestamp
+    console.log( timestamp +' - Closing window');
+    appendToLog(timestamp +' - Closing window');
     win.close();
   })
 
   ipcMain.on('focus', () => {
 
     exec('python python/start-focus.py', (error, stdout, stderr) => {
-      console.log(error, stderr, stdout)
+      const timestamp = new Date().toLocaleString(); // Get current timestamp
+      const logMessage = `${timestamp} - Error: ${error}, Stderr: ${stderr}, Stdout: ${stdout}`;
+    
+      // Log to console
+      console.log(logMessage);
+      
+      // Log to file
+      appendToLog("Focus Said: " + logMessage);
     });
   })
 
   ipcMain.on('notif', () => {
-
+    const timestamp = new Date().toLocaleString(); // Get current timestamp
     exec('python python/disable-notif.py', (error, stdout, stderr) => {
-      console.log(error, stderr, stdout)
+      const logMessage = `${timestamp} -Error: ${error}, Stderr: ${stderr}, Stdout: ${stdout}`;
+    
+      // Log to console
+      console.log(logMessage);
+      
+      // Log to file
+      appendToLog("Notification Blocker Said: " + logMessage);
     });
   })
-  
+
   ipcMain.on('blackout', (event, arg) => {
+    const timestamp = new Date().toLocaleString(); // Get current timestamp
+    console.log(timestamp +' - Creating blackout window');
+    appendToLog(timestamp +' - Creating blackout window');
     createBlackoutWindow();
+  });
+
+  ipcMain.on('get-settings-file', (event, arg) => {
+    const filePath = path.join(app.getPath('userData'), 'database/settings.json');
+    fs.readFile(filePath, 'utf8', (err, data) => {
+      if (err) {
+        const timestamp = new Date().toLocaleString(); // Get current timestamp
+        console.error(timestamp +' - Error reading the file', err);
+        appendToLog(timestamp +' - Error reading the file: ' + err);
+        event.reply('get-settings-file-response', 'error');
+        return;
+      }
+      const timestamp = new Date().toLocaleString(); // Get current timestamp
+      event.reply('get-settings-file-response', data);
+      console.log(timestamp +' - Settings file sent');
+      appendToLog(timestamp +' -Settings file sent');
+    });
   });
 
 }
 
-app.setName('Focus Mind');
+app.setName('FocusMind');
 app.whenReady().then(() => {
   createWindow()
 

@@ -1,0 +1,51 @@
+Error: null, Stderr: , Stdout: 
+Error: null, Stderr: , Stdout: SUCCESS: Sent termination signal to the process with PID 11536.
+SUCCESS: Sent termination signal to the process with PID 11536.
+SUCCESS: The process with PID 11536 has been terminated.
+Process 'Microsoft.Media.Player' is not running.
+Process 'Spotify' is running. Closing...
+Forcing close...
+Process closed.
+
+Error: null, Stderr: , Stdout: Process 'Microsoft.Media.Player' is not running.
+Process 'Spotify' is not running.
+
+Error: null, Stderr: ERROR: The process "11536" not found.
+, Stdout: SUCCESS: Sent termination signal to the process with PID 11536.
+Process 'Microsoft.Media.Player' is not running.
+Process 'Spotify' is running. Closing...
+Process closed.
+
+Error: null, Stderr: ERROR: The process "11536" not found.
+, Stdout: SUCCESS: Sent termination signal to the process with PID 11536.
+Process 'Microsoft.Media.Player' is not running.
+Process 'Spotify' is running. Closing...
+Process closed.
+
+Notification Blocker Said: 26/2/2024, 1:12:03 pm -Error: null, Stderr: , Stdout: 
+Focus Said: 26/2/2024, 1:12:06 pm - Error: null, Stderr: , Stdout: Process 'Microsoft.Media.Player' is not running.
+Process 'Spotify' is not running.
+
+Focus Said: 26/2/2024, 1:12:08 pm - Error: null, Stderr: , Stdout: Process 'Microsoft.Media.Player' is not running.
+Process 'Spotify' is not running.
+
+Focus Said: 26/2/2024, 1:12:10 pm - Error: null, Stderr: , Stdout: Process 'Microsoft.Media.Player' is not running.
+Process 'Spotify' is not running.
+
+Focus Said: 26/2/2024, 1:12:12 pm - Error: null, Stderr: , Stdout: Process 'Microsoft.Media.Player' is not running.
+Process 'Spotify' is not running.
+
+26/2/2024, 1:12:13 pm - Creating blackout window
+Focus Said: 26/2/2024, 1:12:14 pm - Error: null, Stderr: , Stdout: Process 'Microsoft.Media.Player' is not running.
+Process 'Spotify' is not running.
+
+Focus Said: 26/2/2024, 1:12:16 pm - Error: null, Stderr: , Stdout: Process 'Microsoft.Media.Player' is not running.
+Process 'Spotify' is not running.
+
+26/2/2024, 1:12:17 pm - Blackout window closed
+Focus Said: 26/2/2024, 1:12:18 pm - Error: null, Stderr: , Stdout: Process 'Microsoft.Media.Player' is not running.
+Process 'Spotify' is not running.
+
+26/2/2024, 1:12:20 pm - Closing window
+27/2/2024, 3:20:51 pm - Closing window
+27/2/2024, 3:29:03 pm - Closing window
