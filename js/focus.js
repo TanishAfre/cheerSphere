@@ -5,23 +5,39 @@ const sessionLength = document.getElementById('sessionLength');
 const decreaseSession = document.getElementById('decreaseSession');
 const increaseSession = document.getElementById('increaseSession');
 
+
+document.addEventListener('DOMContentLoaded', function() {
+  restoreCountdown(); // Call this function on page load to restore any ongoing countdown
+});
+
 function toggleCountdown() {
   var button = document.getElementById('toggleButton');
   
   if (button.textContent === 'Start Countdown') {
     button.textContent = 'Stop Countdown';
-    // Calculate target date based on sessionLength
     const sessionMinutes = parseInt(sessionLength.textContent, 10);
     const targetDate = new Date();
     targetDate.setMinutes(targetDate.getMinutes() + sessionMinutes);
-    
-    // Store the targetDate in localStorage
+    localStorage.setItem('countdownRunning', 'true');
     localStorage.setItem('targetDate', targetDate.getTime().toString());
-
     startCountdown(targetDate);
   } else {
     button.textContent = 'Start Countdown';
     stopCountdown();
+  }
+}
+
+function restoreCountdown() {
+  const countdownRunning = localStorage.getItem('countdownRunning') === 'true';
+  const storedTargetDate = localStorage.getItem('targetDate');
+  
+  if (countdownRunning && storedTargetDate) {
+    const targetDate = new Date(parseInt(storedTargetDate, 10));
+    const sessionMinutes = Math.ceil((targetDate - new Date()) / 60000);
+    sessionLength.textContent = sessionMinutes >= 0 ? sessionMinutes : 0; // Ensure session length doesn't go negative
+    startCountdown(targetDate);
+  } else {
+    resetTimeDisplay();
   }
 }
 
@@ -37,29 +53,21 @@ function startCountdown(targetDate) {
   }
 }
 
+// Ensure the stopCountdown function marks the countdown as not running and clears relevant localStorage items
 function stopCountdown() {
   if (countdownTimer) {
     clearInterval(countdownTimer);
     countdownTimer = null;
     resetTimeDisplay();
-    // Clear the targetDate from localStorage
-    localStorage.removeItem('targetDate');
+    localStorage.setItem('countdownRunning', 'false');
+    localStorage.removeItem('targetDate'); // Clear the targetDate from localStorage
   }
 }
 
-function restoreCountdown() {
-  const storedTargetDate = localStorage.getItem('targetDate');
-  if (storedTargetDate) {
-    const targetDate = new Date(parseInt(storedTargetDate, 10));
-    // Update the sessionLength display if necessary
-    const sessionMinutes = Math.ceil((targetDate - new Date()) / 60000);
-    sessionLength.textContent = sessionMinutes;
-    startCountdown(targetDate);
+document.addEventListener('visibilitychange', function() {
+  if (document.visibilityState === 'visible') {
+    restoreCountdown();
   }
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-  restoreCountdown();
 });
 
 decreaseSession.addEventListener('click', function() {
