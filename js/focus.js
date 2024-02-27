@@ -14,30 +14,53 @@ function toggleCountdown() {
     const sessionMinutes = parseInt(sessionLength.textContent, 10);
     const targetDate = new Date();
     targetDate.setMinutes(targetDate.getMinutes() + sessionMinutes);
+    
+    // Store the targetDate in localStorage
+    localStorage.setItem('targetDate', targetDate.getTime().toString());
 
-    // Start countdown code with the new targetDate
-    if (!countdownTimer) {
-        countdownTimer = setInterval(() => {
-            const isComplete = updateAllSegments(targetDate); // Pass targetDate to update function
-            if (isComplete) {
-              clearInterval(countdownTimer);
-              countdownTimer = null;
-              button.textContent = 'Start Countdown';
-              resetTimeDisplay(); // Ensure the display is reset when countdown completes
-          }
-        }, 1000);
-        updateAllSegments(targetDate); // Pass targetDate to update function
-    }
+    startCountdown(targetDate);
   } else {
     button.textContent = 'Start Countdown';
-    // Stop countdown code
-    if (countdownTimer) {
-      clearInterval(countdownTimer);
-      countdownTimer = null;
-      resetTimeDisplay();
-    }
+    stopCountdown();
   }
 }
+
+function startCountdown(targetDate) {
+  if (!countdownTimer) {
+    countdownTimer = setInterval(() => {
+      const isComplete = updateAllSegments(targetDate); // Pass targetDate to update function
+      if (isComplete) {
+        stopCountdown();
+      }
+    }, 1000);
+    updateAllSegments(targetDate); // Pass targetDate to update function
+  }
+}
+
+function stopCountdown() {
+  if (countdownTimer) {
+    clearInterval(countdownTimer);
+    countdownTimer = null;
+    resetTimeDisplay();
+    // Clear the targetDate from localStorage
+    localStorage.removeItem('targetDate');
+  }
+}
+
+function restoreCountdown() {
+  const storedTargetDate = localStorage.getItem('targetDate');
+  if (storedTargetDate) {
+    const targetDate = new Date(parseInt(storedTargetDate, 10));
+    // Update the sessionLength display if necessary
+    const sessionMinutes = Math.ceil((targetDate - new Date()) / 60000);
+    sessionLength.textContent = sessionMinutes;
+    startCountdown(targetDate);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  restoreCountdown();
+});
 
 decreaseSession.addEventListener('click', function() {
     let length = parseInt(sessionLength.textContent, 10);
