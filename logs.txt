@@ -49,3 +49,36 @@ Process 'Spotify' is not running.
 26/2/2024, 1:12:20 pm - Closing window
 27/2/2024, 3:20:51 pm - Closing window
 27/2/2024, 3:29:03 pm - Closing window
+Notification Blocker Said: 27/2/2024, 3:51:44 pm -Error: null, Stderr: , Stdout: 
+Focus Said: 27/2/2024, 3:51:51 pm - Error: null, Stderr: , Stdout: SUCCESS: Sent termination signal to the process with PID 9844.
+SUCCESS: Sent termination signal to the process with PID 9844.
+SUCCESS: The process with PID 9844 has been terminated.
+Process 'Spotify' is running. Closing...
+Forcing close...
+Process closed.
+
+Focus Said: 27/2/2024, 3:51:53 pm - Error: null, Stderr: ERROR: The process "9844" not found.
+, Stdout: SUCCESS: Sent termination signal to the process with PID 9844.
+Process 'Spotify' is running. Closing...
+Process closed.
+
+27/2/2024, 3:51:54 pm - Creating blackout window
+Focus Said: 27/2/2024, 3:51:55 pm - Error: null, Stderr: ERROR: The process "9844" not found.
+, Stdout: SUCCESS: Sent termination signal to the process with PID 9844.
+Process 'Spotify' is running. Closing...
+Process closed.
+
+Focus Said: 27/2/2024, 3:51:56 pm - Error: null, Stderr: , Stdout: Process 'Spotify' is not running.
+
+Focus Said: 27/2/2024, 3:51:57 pm - Error: null, Stderr: ERROR: The process "9844" not found.
+ERROR: The process "9844" not found.
+, Stdout: Process 'Spotify' is running. Closing...
+Process closed.
+
+Focus Said: 27/2/2024, 3:51:59 pm - Error: null, Stderr: ERROR: The process "24656" not found.
+, Stdout: SUCCESS: Sent termination signal to the process with PID 24656.
+Process 'Spotify' is running. Closing...
+Process closed.
+
+27/2/2024, 3:57:25 pm - Closing window
+27/2/2024, 5:25:54 pm - Closing window

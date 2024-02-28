@@ -11,3 +11,4 @@ pyautogui.press('enter')
 time.sleep(0.6)
 # Simulate pressing the Escape key
 pyautogui.press('esc')
+print("Notifications Triggered")

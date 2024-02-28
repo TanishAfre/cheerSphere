@@ -26,7 +26,7 @@ def stop_process_by_name(process_name):
                 subprocess.run(["taskkill", "/pid", str(pid)], check=True)
             except subprocess.CalledProcessError:
                 print("Process closed.")
-                update_analytics()
+                update_analytics_overall()
                 return
 
             # Force close the process if it hasn't closed yet
@@ -58,7 +58,7 @@ def stop_processes_from_file(file_path):
     for process_name in process_names:
         stop_process_by_name(process_name)
 
-def update_analytics():
+def update_analytics_overall():
     try:
         with open("./database/analytics.json", "r+") as file:
             data = json.load(file)

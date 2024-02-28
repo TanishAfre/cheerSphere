@@ -50,18 +50,18 @@ const createWindow = () => {
     height: 600,
     resizable: false, //Disabled Resizing as a UI preference 
     frame: false, // Set frame to false to remove window frame
-    autoHideMenuBar: true, //hide the menu bar and not the frame
+    hardwareAcceleration: false, //disable hardware acceleration
     webPreferences: {
       devTools: true, //disable this when packing the application
       nodeIntegration: true, //needed for custom frame
-      contextIsolation: false, //needed for IPCRendered, figured after spending 2 hrs of working and half a bottle of whiskey - H
-      enableRemoteModule: true,
-      preload: path.join(__dirname, 'preload.js')
+      contextIsolation: false, //needed for IPCRenderer
+      enableRemoteModule: true
     }
 
   })
   win.setIcon('images/Focus_Mind_Logo.png');
   win.loadFile('index.html')
+  win.webContents.openDevTools();
 
   // Create the Tray icon
   tray = new Tray(path.join(__dirname, 'images/focus-mind.png')); // Path to the tray icon
@@ -146,29 +146,11 @@ const createWindow = () => {
     createBlackoutWindow();
   });
 
-  ipcMain.on('get-settings-file', (event, arg) => {
-    const filePath = path.join(app.getPath('userData'), 'database/settings.json');
-    fs.readFile(filePath, 'utf8', (err, data) => {
-      if (err) {
-        const timestamp = new Date().toLocaleString(); // Get current timestamp
-        console.error(timestamp +' - Error reading the file', err);
-        appendToLog(timestamp +' - Error reading the file: ' + err);
-        event.reply('get-settings-file-response', 'error');
-        return;
-      }
-      const timestamp = new Date().toLocaleString(); // Get current timestamp
-      event.reply('get-settings-file-response', data);
-      console.log(timestamp +' - Settings file sent');
-      appendToLog(timestamp +' -Settings file sent');
-    });
-  });
-
 }
 
 app.setName('FocusMind');
 app.whenReady().then(() => {
-  createWindow()
-
+  createWindow();
   app.on('before-quit', () => {
     app.isQuitting = true;
   });
