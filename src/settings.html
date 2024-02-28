@@ -214,7 +214,16 @@
                                     </div>
                                     <div class="col-auto">
                                         <div class="form-outline">
-                                            <span id="timerValue"></span>
+                                            <!-- <span id="timerValue"></span> -->
+                                            <!-- <button id="decreaseTimer" class="btn btn-secondary">-</button>
+                                            <input type="number" id="timerValue" value="" min="1" class="form-control" style="width: 100px; display: inline-block;">
+                                            <button id="increaseTimer" class="btn btn-secondary">+</button> -->
+                                            <button id="decreaseTimer" class="btn btn-secondary">-</button>
+                                            <div style="display: inline-flex; align-items: center;">
+                                                <input type="number" id="timerValue" value="" min="1" class="form-control" style="width: 80px; text-align: right;">
+                                                <span id="timerUnit" style="margin-left: 5px;">ms</span>
+                                            </div>
+                                            <button id="increaseTimer" class="btn btn-secondary">+</button>
                                         </div>
                                     </div>
                                 </div>
@@ -227,7 +236,8 @@
                                     </div>
                                     <div class="col-auto">
                                         <div class="form-outline">
-                                            <span id="Duration"></span>
+                                            <!-- <span id="Duration"></span> -->
+                                            <input type="number" id="Duration" value="" min="1" class="form-control" style="width: 100px;">
                                         </div>
                                     </div>
                                 </div>
@@ -468,26 +478,21 @@
     </script>
 
     <!--Loading database-->
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Get the switch element
-            var switchElement = document.getElementById("customSwitch1");
+    <script> <!-- Code for switch-->
+        document.addEventListener("DOMContentLoaded", function() {
+            const increaseButton = document.getElementById("increaseTimer");
+            const decreaseButton = document.getElementById("decreaseTimer");
+            const timerValueInput = document.getElementById("timerValue");
 
-            // Get the output element
-            var outputElement = document.getElementById("switchValueOutput");
+            increaseButton.addEventListener("click", function() {
+                timerValueInput.value = parseInt(timerValueInput.value, 10) + 50;
+            });
 
-            // Function to update the output with the switch value
-            function updateSwitchValue() {
-                outputElement.textContent = "Switch Value: " + (switchElement.checked ? "On" : "Off");
-            }
-
-            // Initial update
-            updateSwitchValue();
-
-            // Listen for changes in the switch state
-            switchElement.addEventListener("change", function () {
-                // Update the output when the switch state changes
-                updateSwitchValue();
+            decreaseButton.addEventListener("click", function() {
+                const currentValue = parseInt(timerValueInput.value, 10);
+                if(currentValue > 1) { // Prevents the value from going below the minimum
+                    timerValueInput.value = currentValue - 50;
+                }
             });
         });
     </script>
@@ -497,14 +502,33 @@
             .then(response => response.json())
             .then(data => {
                 // Update the content of the span element with the timerSetting value
-                document.getElementById('timerValue').textContent = data.BlackoutModeSettings.Timer;
-                document.getElementById('Duration').textContent = data.BlackoutModeSettings.Duration;
+                document.getElementById('timerValue').value = data.BlackoutModeSettings.Timer;
+                document.getElementById('Duration').value = data.BlackoutModeSettings.Duration;
                 document.getElementById('QuitEarly').textContent = data.BlackoutModeSettings.QuitEarly;
             })
             .catch(error => {
                 console.error('Error fetching or parsing JSON:', error);
             });
     </script>
+
+    <script>
+        function applyBlackoutSettings() {
+            // Get the numeric value from the input
+            var blackoutDuration = document.getElementById('blackoutTimerInput').value;
+
+            // Convert the value to a number, in case it's needed
+            blackoutDuration = Number(blackoutDuration);
+
+            // Here, use blackoutDuration wherever you need to apply the blackout timer setting
+            // For example, saving to a settings object or directly applying to a timer function
+            console.log('Blackout Duration Set To:', blackoutDuration);
+
+            // If you're saving this to a JSON file or elsewhere, include that logic here
+        }    
+
+        document.getElementById('saveSettingsButton').addEventListener('click', applyBlackoutSettings);
+    </script>
+
 
     <!-- Pre loader Script
     <script>
