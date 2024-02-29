@@ -1,0 +1,22 @@
+{
+    "sessions": [
+      {
+        "session_id": "unique_session_identifier",
+        "start_time": "2024-02-29T08:00:00",
+        "end_time": "2024-02-29T09:00:00",
+        "focus_duration_minutes": 60,
+        "distractions": 5,
+        "notes": "User notes about the session",
+        "system_notes": "System notes about the session"
+      },
+      {
+        "session_id": "unique_session_identifier",
+        "start_time": "2024-02-29T14:00:00",
+        "end_time": "2024-02-29T15:30:00",
+        "focus_duration_minutes": 90,
+        "distractions": 3,
+        "notes": "User notes about the session",
+        "system_notes": "System notes about the session"
+      }
+    ]
+  }
