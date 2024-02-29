@@ -233,8 +233,6 @@
                                     </div>
                                     <div class="col-auto">
                                         <div class="form-outline">
-                                            <!-- <span id="Duration"></span> -->
-                                            <!-- <input type="number" id="Duration" value="" min="1" class="form-control" style="width: 100px;"> -->
                                             <select id="Duration" class="form-control" style="width: 100px;">
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
@@ -254,9 +252,6 @@
                                             mode early</p>
                                     </div>
                                     <div class="col-auto">
-                                        <!-- <div class="form-outline">
-                                            <span id="QuitEarly"></span>
-                                        </div> -->
                                         <div class="custom-control custom-switch">
                                             <input type="checkbox" class="custom-control-input"
                                                 id="earlyBlackoutDeactivation" checked>
@@ -273,12 +268,8 @@
                                         <p class="text-muted mb-0">Disable keyboard while blackout mode is active</p>
                                     </div>
                                     <div class="col-auto">
-                                        <!-- Default checked -->
                                         <div class="custom-control custom-switch">
-                                            <input type="checkbox" class="custom-control-input" id="customSwitch1"
-                                                checked>
-                                            <label class="custom-control-label" for="customSwitch1"></label>
-                                            <div id="switchValueOutput"></div>
+                                            <span class="text-muted mb-0">Coming Soon!</span>
                                         </div>
                                     </div>
                                 </div>
@@ -527,6 +518,9 @@
                 // Update the checked state of the earlyBlackoutDeactivation checkbox
                 const earlyBlackoutDeactivationCheckbox = document.getElementById('earlyBlackoutDeactivation');
                 earlyBlackoutDeactivationCheckbox.checked = data.BlackoutModeSettings.QuitEarly;
+
+                const allowNotificationBlockingCheckbox = document.getElementById('allowNotificationBlocking');
+                allowNotificationBlockingCheckbox.checked = data.NotificationBlocking.NotificationEnable;
             })
             .catch(error => {
                 console.error('Error fetching or parsing JSON:', error);
@@ -664,6 +658,48 @@
                 }
             });
         }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const allowNotificationBlockingCheckbox = document.getElementById("allowNotificationBlocking");
+
+            // Add event listener for checkbox change
+            allowNotificationBlockingCheckbox.addEventListener("change", function () {
+                const isChecked = this.checked;
+                changeNotificationEnableSetting(isChecked);
+            });
+        });
+
+        function changeNotificationEnableSetting(value) {
+            const fs = require('fs'); // Import the file system module
+            fs.readFile('database/settings.json', 'utf8', (err, data) => {
+                if (err) {
+                    console.error('Error reading JSON file:', err);
+                    return;
+                }
+                try {
+                    // Parse the JSON data
+                    const settings = JSON.parse(data);
+
+                    // Modify the value (for example, changing NotificationEnable setting)
+                    settings.NotificationBlocking.NotificationEnable = value;
+
+                    // Convert the modified object back to JSON format
+                    const updatedData = JSON.stringify(settings, null, 2);
+
+                    // Write the updated JSON back to the file
+                    fs.writeFile('database/settings.json', updatedData, 'utf8', (err) => {
+                        if (err) {
+                            console.error('Error writing JSON file:', err);
+                            return;
+                        }
+                        console.log('JSON file updated successfully.');
+                    });
+                } catch (error) {
+                    console.error('Error parsing JSON:', error);
+                }
+            });
+        }
+
 
     </script>
 

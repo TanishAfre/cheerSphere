@@ -7,7 +7,7 @@
     "MultiScreen": false
   },
   "NotificationBlocking": {
-    "NotificationEnable": false,
+    "NotificationEnable": true,
     "DisplayNotificationsPost": false
   },
   "Analytics": {
