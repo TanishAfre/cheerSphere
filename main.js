@@ -61,7 +61,7 @@ const createWindow = () => {
   })
   win.setIcon('images/Focus_Mind_Logo.png');
   win.loadFile('index.html')
-  win.webContents.openDevTools();
+  //win.webContents.openDevTools();
 
   // Create the Tray icon
   tray = new Tray(path.join(__dirname, 'images/focus-mind.png')); // Path to the tray icon
