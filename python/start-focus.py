@@ -33,7 +33,7 @@ def stop_process_by_name(process_name):
             print("Forcing close...")
             subprocess.run(["taskkill", "/f", "/pid", str(pid)])
             print("Process closed.")
-            update_analytics()
+            update_analytics_overall()
         else:
             print(f"Process '{process_name}' is not running.")
     except Exception as e:
