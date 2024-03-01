@@ -328,9 +328,16 @@
     function showCongratulationsModal() {
       focusedTime = totalDuration - remainingDuration; // Calculate focused time
       document.getElementById('focusedTime').innerText = formatTime(focusedTime);
-      console.log(formatTime(focusedTime));
-      // Trigger the modal
       $('#congratulationsModal').modal('show');
+      console.log("Congratulations! You were focused for " + formatTime(focusedTime) + ".");
+      //print distractions from the variable and the value that it is at now
+      console.log("distractions: " + (getDistraction()  - distractions));
+      //print start time and end time
+      console.log("Start Time: " + startTimer);
+      console.log("End Time: " + endTimer);
+      // Add session analytics
+      addSessionAnalytics(startTimer, endTimer, formatTime(focusedTime), getDistraction()  - distractions, selectedMood);
+
     }
 
     function updateTimerDisplay(elapsedMillis) {
@@ -357,30 +364,86 @@
       const data = JSON.parse(fs.readFileSync('database/settings.json', 'utf8'));
       var BlackoutTimer = data.BlackoutModeSettings.Timer;
       var Duration = data.BlackoutModeSettings.Duration;
-      console.log('Blackout Timer:', BlackoutTimer);
-      console.log('Duration:', Duration);
-      console.log("Bruh " + BlackoutTimer); // Accessing the variable outside fetch
+
     } catch (error) {
       console.error('Error reading or parsing JSON:', error);
     }
+
+    function getDistraction() {
+      try {
+        const data = JSON.parse(fs.readFileSync('database/analytics.json', 'utf8'));
+        return data.appAnalytics.appsClosed;
+
+      } catch (error) {
+        console.error('Error reading or parsing JSON:', error);
+      }
+    }
+
   </script>
   <!--Focus code starts here-->
   <script>
     var blackoutAmount = 0;
     var blackoutLength = 0; // Stores cumulative duration in seconds
-    console.log("Bruh " + BlackoutTimer);
     var isFocusing = false;
     var startTime;
     var button = document.getElementById('focus-btn');
     var totalDuration = 60 * 60; // 60 minutes in seconds
     var remainingDuration = totalDuration; // Initialize remaining duration to 60 minutes
+    var startTimer;
+    var endTimer;
+    var distractions = getDistraction();
 
     function startFocus() {
       if (!isFocusing) {
         beginFocus();
+        console.log("distractions: " + distractions);
+        startTimer = new Date().getTime();
       } else {
+        endTimer = new Date().getTime();
         endFocus();
       }
+    }
+
+
+
+    function addSessionAnalytics(startTime, endTime, focusDurationMinutes, distractions, notes) {
+      // Calculate session duration in seconds
+      const sessionDurationSeconds = (endTime - startTime) / 1000;
+
+      // Read the current contents of the analytics file
+      fs.readFile('database/focus_sessions.json', 'utf8', (err, data) => {
+        if (err) {
+          console.error("Error reading the analytics file:", err);
+          return;
+        }
+
+        // Parse the JSON data
+        let analyticsData = JSON.parse(data);
+
+        // Create a new session object
+        const newSession = {
+          "start_time": new Date(startTime).toISOString(),
+          "end_time": new Date(endTime).toISOString(),
+          "focus_duration_minutes": focusDurationMinutes,
+          "distractions": distractions,
+          "notes": notes
+        };
+
+        // Add the new session to the analytics
+        if (!analyticsData.sessions) {
+          analyticsData.sessions = [];
+        }
+        analyticsData.sessions.push(newSession);
+
+        // Write the updated data back to the file
+        fs.writeFile('database/focus_sessions.json', JSON.stringify(analyticsData, null, 2), 'utf8', (err) => {
+          if (err) {
+            console.error("Error writing to the analytics file:", err);
+            return;
+          }
+          console.log("Session analytics added successfully.");
+        });
+      });
     }
 
     function beginFocus() {
