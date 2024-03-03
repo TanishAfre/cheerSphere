@@ -1,2 +1,4 @@
-
+Discord.exe
 Spotify
+Chrome
+chrome.exe

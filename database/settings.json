@@ -13,5 +13,6 @@
   "Analytics": {
     "NotificationEnable": false,
     "DisplayNotificationsPost": false
-  }
+  },
+  "Focus_On": false
 }
