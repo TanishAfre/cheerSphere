@@ -5,21 +5,86 @@ const sessionLength = document.getElementById('sessionLength');
 const decreaseSession = document.getElementById('decreaseSession');
 const increaseSession = document.getElementById('increaseSession');
 
+
+document.addEventListener('DOMContentLoaded', function() {
+  restoreCountdown(); // Call this function on page load to restore any ongoing countdown
+});
+
+function toggleCountdown() {
+  var button = document.getElementById('toggleButton');
+  
+  if (button.textContent === 'Start Countdown') {
+    button.textContent = 'Stop Countdown';
+    const sessionMinutes = parseInt(sessionLength.textContent, 10);
+    const targetDate = new Date();
+    targetDate.setMinutes(targetDate.getMinutes() + sessionMinutes);
+    localStorage.setItem('countdownRunning', 'true');
+    localStorage.setItem('targetDate', targetDate.getTime().toString());
+    startCountdown(targetDate);
+  } else {
+    button.textContent = 'Start Countdown';
+    stopCountdown();
+  }
+}
+
+function restoreCountdown() {
+  const countdownRunning = localStorage.getItem('countdownRunning') === 'true';
+  const storedTargetDate = localStorage.getItem('targetDate');
+  
+  if (countdownRunning && storedTargetDate) {
+    const targetDate = new Date(parseInt(storedTargetDate, 10));
+    const sessionMinutes = Math.ceil((targetDate - new Date()) / 60000);
+    sessionLength.textContent = sessionMinutes >= 0 ? sessionMinutes : 0; // Ensure session length doesn't go negative
+    startCountdown(targetDate);
+  } else {
+    resetTimeDisplay();
+  }
+}
+
+function startCountdown(targetDate) {
+  if (!countdownTimer) {
+    countdownTimer = setInterval(() => {
+      const isComplete = updateAllSegments(targetDate); // Pass targetDate to update function
+      if (isComplete) {
+        stopCountdown();
+      }
+    }, 1000);
+    updateAllSegments(targetDate); // Pass targetDate to update function
+  }
+}
+
+// Ensure the stopCountdown function marks the countdown as not running and clears relevant localStorage items
+function stopCountdown() {
+  if (countdownTimer) {
+    clearInterval(countdownTimer);
+    countdownTimer = null;
+    resetTimeDisplay();
+    localStorage.setItem('countdownRunning', 'false');
+    localStorage.removeItem('targetDate'); // Clear the targetDate from localStorage
+  }
+}
+
+document.addEventListener('visibilitychange', function() {
+  if (document.visibilityState === 'visible') {
+    restoreCountdown();
+  }
+});
+
 decreaseSession.addEventListener('click', function() {
     let length = parseInt(sessionLength.textContent, 10);
     if (length > 1) {
-        sessionLength.textContent = length - 1;
+        sessionLength.textContent = length - 5;
     }
 });
 
 increaseSession.addEventListener('click', function() {
     let length = parseInt(sessionLength.textContent, 10);
-    sessionLength.textContent = length + 1;
+    sessionLength.textContent = length + 5;
 });
 
 
-const targetDate = new Date();
-targetDate.setHours(targetDate.getHours() + 5);
+//const targetDate = new Date();
+//targetDate.setHours(targetDate.getHours() + 5);
 
 function getTimeSegmentElements(segmentElement) {
   const segmentDisplay = segmentElement.querySelector(
@@ -141,34 +206,23 @@ function getTimeRemaining(targetDateTime) {
   };
 }
 
-function updateAllSegments() {
-  const timeRemainingBits = getTimeRemaining(
-    new Date(targetDate).getTime()
-  );
+function resetTimeDisplay() {
+  // Assuming you have a function similar to updateTimeSection that you can call
+  // to update the display of hours, minutes, and seconds.
+  // If not, you'll need to implement this based on your existing code structure.
 
+  updateTimeSection('hours', 0);
+  updateTimeSection('minutes', 0);
+  updateTimeSection('seconds', 0);
+}
+
+function updateAllSegments(targetDate) {
+  const timeRemainingBits = getTimeRemaining(targetDate.getTime());
   updateTimeSection('seconds', timeRemainingBits.seconds);
   updateTimeSection('minutes', timeRemainingBits.minutes);
   updateTimeSection('hours', timeRemainingBits.hours);
-
   return timeRemainingBits.complete;
 }
 
-startButton.addEventListener('click', function() {
-    if (!countdownTimer) {
-        countdownTimer = setInterval(() => {
-            const isComplete = updateAllSegments();
-            if (isComplete) {
-                clearInterval(countdownTimer);
-                countdownTimer = null;
-            }
-        }, 1000);
-        updateAllSegments();
-    }
-});
-
-stopButton.addEventListener('click', function() {
-    clearInterval(countdownTimer);
-    countdownTimer = null;
-});
-
+resetTimeDisplay();
 updateAllSegments();

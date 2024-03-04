@@ -117,11 +117,12 @@
                             <h5 class="card-header blocked-card-head">Blocked Applications</h5>
                             <div class="card-body blocked-card-body">
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control"
+                                    <input type="text" class="form-control" id="txtAddApp"
                                         placeholder="Block more applications by entering there name"
                                         style="width: 80%;">
                                     <div class="input-group-append" style="width: 20%;">
-                                        <button class="btn green-button" type="button">Add</button>
+                                        <button class="btn green-button" type="button"
+                                            onclick="appendContentToFile(document.getElementById('txtAddApp').value)">Add</button>
                                     </div>
                                 </div>
                                 <div class="text-container">
@@ -131,12 +132,13 @@
                                 </div>
 
                             </div>
+                            <!-- Hiding import export
                             <div class="card-footer blocked-card-footer float-right">
                                 <div class="contaier-fluid">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <a href="#" class="btn imp-exp-btn green-button">
-                                                <i class="fas fa-file-import"></i> Import
+                                                <i class="fas fa-file-import" id="exprtApps"></i> Import
                                             </a>
                                         </div>
                                         <div class="col-md-6">
@@ -148,6 +150,7 @@
                                     </div>
                                 </div>
                             </div>
+                            -->
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -167,6 +170,7 @@
                                     <p class="mb-0 text-center h3    mt-5">Coming Soon!</p>
                                 </div>
                             </div>
+                            <!-- Hiding import export
                             <div class="card-footer blocked-card-footer float-right">
                                 <div class="contaier-fluid">
                                     <div class="row">
@@ -184,6 +188,7 @@
                                     </div>
                                 </div>
                             </div>
+                        -->
                         </div>
                     </div>
                     <div class="col-md-1">
@@ -209,7 +214,13 @@
                                     </div>
                                     <div class="col-auto">
                                         <div class="form-outline">
-                                            <span id="timerValue"></span>
+                                            <button id="decreaseTimer" class="btn btn-secondary">-</button>
+                                            <div style="display: inline-flex; align-items: center;">
+                                                <input type="number" id="timerValue" value="" min="1"
+                                                    class="form-control" style="width: 80px; text-align: right;">
+                                                <span id="timerUnit" style="margin-left: 5px;">ms</span>
+                                            </div>
+                                            <button id="increaseTimer" class="btn btn-secondary">+</button>
                                         </div>
                                     </div>
                                 </div>
@@ -222,7 +233,13 @@
                                     </div>
                                     <div class="col-auto">
                                         <div class="form-outline">
-                                            <span id="Duration"></span>
+                                            <select id="Duration" class="form-control" style="width: 100px;">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -235,9 +252,12 @@
                                             mode early</p>
                                     </div>
                                     <div class="col-auto">
-                                        <div class="form-outline">
-                                            <span id="QuitEarly"></span>
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input"
+                                                id="earlyBlackoutDeactivation" checked>
+                                            <label class="custom-control-label" for="earlyBlackoutDeactivation"></label>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -280,10 +300,15 @@
                                         <p class="text-muted mb-0"></p>
                                     </div>
                                     <div class="col-auto">
-                                        <div class="custom-control custom-switch">
+                                        <!-- <div class="custom-control custom-switch">
                                             <input type="checkbox" class="custom-control-input" id="alert3"
                                                 checked="" />
                                             <span class="custom-control-label"></span>
+                                        </div> -->
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input"
+                                                id="allowNotificationBlocking" checked>
+                                            <label class="custom-control-label" for="allowNotificationBlocking"></label>
                                         </div>
                                     </div>
                                 </div>
@@ -370,11 +395,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- Code for other js files-->
-    <script src="../js/sidebar-render.js"></script>
-    <script src="../js/renderer.js"></script>
-    <script src="../js/scripts.js"></script>
-    <script src="../js/settings.js"></script>
     <script src="../js/crud.js"></script>
+    <script src="../js/renderer.js"></script>
 
     <!-- Insert this line after script imports -->
     <script>if (window.module) module = window.module;</script>
@@ -383,6 +405,7 @@
     </div>
     <!-- CRUD for tables -->
     <script>
+
         // Function to fetch blocked applications from the text file
         async function fetchBlockedApplications() {
             try {
@@ -408,29 +431,52 @@
                 const row = document.createElement('tr');
                 row.innerHTML = `
                 <td>${app}</td>
-                <td><button class="remove-button" onclick="removeApplication('${app}')">-</button></td>
+                <td><button class="remove-button" onclick="removeLineContaining('${app}','database/apps.txt')">-</button></td>
             `;
                 tableBody.appendChild(row);
             });
         }
+        const fs = require('fs');
+        // Function to remove an application from the list and also remove it from
+        // the text file
+        function removeLineContaining(name, filePath) {
+            let fileContent = fs.readFileSync(filePath, 'utf8');
+            let lines = fileContent.split('\n');
+            let index = lines.findIndex(line => line.toLowerCase().includes(name.toLowerCase()));
 
-        // Function to add a new application
-        function addApplication() {
-            const appNameInput = document.getElementById('appNameInput');
-            const appName = appNameInput.value.trim();
+            if (index !== -1) {
+                // Remove the line if found
+                lines.splice(index, 1);
 
-            if (appName !== '') {
-                // Append the new application to the text file
-                // (You may want to use a server-side language for this in a real application)
-                // Here, we'll just update the UI for demonstration purposes.
+                // Join the remaining lines back into a single string
+                fileContent = lines.join('\n');
+
+                // Write the updated content back to the file
+                fs.writeFileSync(filePath, fileContent);
+
+                console.log(`Line containing '${name}' removed from file.`);
                 renderBlockedApplications();
-                appNameInput.value = ''; // Clear the input field
+            } else {
+                console.log(`No line containing '${name}' found in file.`);
             }
         }
 
-        // Function to remove an application
-        function removeApplication(appName) {
-            //hard coded for now only
+        function appendContentToFile(content) {
+            // Check if content is empty or consists only of whitespace
+            if (!content.trim()) {
+                console.log('Content is empty. Nothing to append.');
+                return;
+            }
+
+            // Split the content by comma and join with newline to get the desired format
+            const formattedContent = content.split(',').join('\n');
+
+            // Append the content to the file
+            fs.appendFile('database/apps.txt', '\n' + formattedContent, function (err) {
+                if (err) throw err;
+                console.log('Saved!');
+                renderBlockedApplications(); // Assuming renderBlockedApplications is defined elsewhere
+            });
         }
 
         // Initial rendering of blocked applications
@@ -439,18 +485,224 @@
 
     <!--Loading database-->
     <script>
+        <!-- Code for Increase and Decrease-->
+        document.addEventListener("DOMContentLoaded", function () {
+            const increaseButton = document.getElementById("increaseTimer");
+            const decreaseButton = document.getElementById("decreaseTimer");
+            const timerValueInput = document.getElementById("timerValue");
+
+            increaseButton.addEventListener("click", function () {
+                const currentValue = parseInt(timerValueInput.value, 10);
+                timerValueInput.value = currentValue + 50;
+                changeTimerValue(timerValueInput.value); // Call changeTimerValue function after updating the value
+
+            });
+
+            decreaseButton.addEventListener("click", function () {
+                const currentValue = parseInt(timerValueInput.value, 10);
+                if (currentValue > 1) { // Prevents the value from going below the minimum
+                    timerValueInput.value = currentValue - 50;
+                    changeTimerValue(timerValueInput.value); // Call changeTimerValue function after updating the value
+                }
+            });
+        });
+    </script>
+    <script>
+        //read
         fetch('../database/settings.json')
             .then(response => response.json())
             .then(data => {
                 // Update the content of the span element with the timerSetting value
-                document.getElementById('timerValue').textContent = data.BlackoutModeSettings.Timer;
-                document.getElementById('Duration').textContent = data.BlackoutModeSettings.Duration;
-                document.getElementById('QuitEarly').textContent = data.BlackoutModeSettings.QuitEarly;
+                document.getElementById('timerValue').value = data.BlackoutModeSettings.Timer;
+                document.getElementById('Duration').value = data.BlackoutModeSettings.Duration;
+                // Update the checked state of the earlyBlackoutDeactivation checkbox
+                const earlyBlackoutDeactivationCheckbox = document.getElementById('earlyBlackoutDeactivation');
+                earlyBlackoutDeactivationCheckbox.checked = data.BlackoutModeSettings.QuitEarly;
+
+                const allowNotificationBlockingCheckbox = document.getElementById('allowNotificationBlocking');
+                allowNotificationBlockingCheckbox.checked = data.NotificationBlocking.NotificationEnable;
             })
             .catch(error => {
                 console.error('Error fetching or parsing JSON:', error);
             });
     </script>
+
+    <script>
+        function applyBlackoutSettings() {
+            // Get the numeric value from the input
+            var blackoutDuration = document.getElementById('blackoutTimerInput').value;
+
+            // Convert the value to a number, in case it's needed
+            blackoutDuration = Number(blackoutDuration);
+
+            // Here, use blackoutDuration wherever you need to apply the blackout timer setting
+            // For example, saving to a settings object or directly applying to a timer function
+            console.log('Blackout Duration Set To:', blackoutDuration);
+
+            // If you're saving this to a JSON file or elsewhere, include that logic here
+        }
+
+        //document.getElementById('saveSettingsButton').addEventListener('click', applyBlackoutSettings);
+        document.getElementById("Duration").addEventListener("change", function () {
+            // Call your function here
+            val = document.getElementById('Duration').value = this.value;
+            changeDuration(val);
+        });
+
+        function changeDuration(value) {
+            const data = JSON.parse(fs.readFileSync('database/settings.json', 'utf8'));
+            var Duration = data.BlackoutModeSettings.Duration;
+            fs.readFile('database/settings.json', 'utf8', (err, data) => {
+                if (err) {
+                    console.error('Error reading JSON file:', err);
+                    return;
+                }
+                try {
+                    // Parse the JSON data
+                    const analytics = JSON.parse(data);
+
+                    // Modify the value (for example, incrementing BlackoutTimer)
+                    analytics.BlackoutModeSettings.Duration = value;
+
+                    // Convert the modified object back to JSON format
+                    const updatedData = JSON.stringify(analytics, null, 2);
+
+                    // Write the updated JSON back to the file
+                    fs.writeFile('database/settings.json', updatedData, 'utf8', (err) => {
+                        if (err) {
+                            console.error('Error writing JSON file:', err);
+                            return;
+                        }
+                        console.log('JSON file updated successfully.');
+                    });
+                } catch (error) {
+                    console.error('Error parsing JSON:', error);
+                }
+            });
+        }
+
+        document.getElementById("timerValue").addEventListener("change", function () {
+            // Call your function here
+            var val = document.getElementById('timerValue').value;
+            changeTimerValue(val);
+        });
+
+        function changeTimerValue(value) {
+            const fs = require('fs'); // Import the file system module
+            fs.readFile('database/settings.json', 'utf8', (err, data) => {
+                if (err) {
+                    console.error('Error reading JSON file:', err);
+                    return;
+                }
+                try {
+                    // Parse the JSON data
+                    const analytics = JSON.parse(data);
+
+                    // Modify the value (for example, changing Timer value)
+                    analytics.BlackoutModeSettings.Timer = value;
+
+                    // Convert the modified object back to JSON format
+                    const updatedData = JSON.stringify(analytics, null, 2);
+
+                    // Write the updated JSON back to the file
+                    fs.writeFile('database/settings.json', updatedData, 'utf8', (err) => {
+                        if (err) {
+                            console.error('Error writing JSON file:', err);
+                            return;
+                        }
+                        console.log('JSON file updated successfully.');
+                    });
+                } catch (error) {
+                    console.error('Error parsing JSON:', error);
+                }
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const earlyBlackoutDeactivationCheckbox = document.getElementById("earlyBlackoutDeactivation");
+
+            // Add event listener for checkbox change
+            earlyBlackoutDeactivationCheckbox.addEventListener("change", function () {
+                const isChecked = this.checked;
+                changeQuitEarlySetting(isChecked);
+            });
+        });
+
+        function changeQuitEarlySetting(value) {
+            const fs = require('fs'); // Import the file system module
+            fs.readFile('database/settings.json', 'utf8', (err, data) => {
+                if (err) {
+                    console.error('Error reading JSON file:', err);
+                    return;
+                }
+                try {
+                    // Parse the JSON data
+                    const analytics = JSON.parse(data);
+
+                    // Modify the value (for example, changing QuitEarly setting)
+                    analytics.BlackoutModeSettings.QuitEarly = value;
+
+                    // Convert the modified object back to JSON format
+                    const updatedData = JSON.stringify(analytics, null, 2);
+
+                    // Write the updated JSON back to the file
+                    fs.writeFile('database/settings.json', updatedData, 'utf8', (err) => {
+                        if (err) {
+                            console.error('Error writing JSON file:', err);
+                            return;
+                        }
+                        console.log('JSON file updated successfully.');
+                    });
+                } catch (error) {
+                    console.error('Error parsing JSON:', error);
+                }
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const allowNotificationBlockingCheckbox = document.getElementById("allowNotificationBlocking");
+
+            // Add event listener for checkbox change
+            allowNotificationBlockingCheckbox.addEventListener("change", function () {
+                const isChecked = this.checked;
+                changeNotificationEnableSetting(isChecked);
+            });
+        });
+
+        function changeNotificationEnableSetting(value) {
+            const fs = require('fs'); // Import the file system module
+            fs.readFile('database/settings.json', 'utf8', (err, data) => {
+                if (err) {
+                    console.error('Error reading JSON file:', err);
+                    return;
+                }
+                try {
+                    // Parse the JSON data
+                    const settings = JSON.parse(data);
+
+                    // Modify the value (for example, changing NotificationEnable setting)
+                    settings.NotificationBlocking.NotificationEnable = value;
+
+                    // Convert the modified object back to JSON format
+                    const updatedData = JSON.stringify(settings, null, 2);
+
+                    // Write the updated JSON back to the file
+                    fs.writeFile('database/settings.json', updatedData, 'utf8', (err) => {
+                        if (err) {
+                            console.error('Error writing JSON file:', err);
+                            return;
+                        }
+                        console.log('JSON file updated successfully.');
+                    });
+                } catch (error) {
+                    console.error('Error parsing JSON:', error);
+                }
+            });
+        }
+
+
+    </script>
+
 
     <!-- Pre loader Script
     <script>

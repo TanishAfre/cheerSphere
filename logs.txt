@@ -1,0 +1,136 @@
+Error: null, Stderr: , Stdout: 
+Error: null, Stderr: , Stdout: SUCCESS: Sent termination signal to the process with PID 11536.
+SUCCESS: Sent termination signal to the process with PID 11536.
+SUCCESS: The process with PID 11536 has been terminated.
+Process 'Microsoft.Media.Player' is not running.
+Process 'Spotify' is running. Closing...
+Forcing close...
+Process closed.
+
+Error: null, Stderr: , Stdout: Process 'Microsoft.Media.Player' is not running.
+Process 'Spotify' is not running.
+
+Error: null, Stderr: ERROR: The process "11536" not found.
+, Stdout: SUCCESS: Sent termination signal to the process with PID 11536.
+Process 'Microsoft.Media.Player' is not running.
+Process 'Spotify' is running. Closing...
+Process closed.
+
+Error: null, Stderr: ERROR: The process "11536" not found.
+, Stdout: SUCCESS: Sent termination signal to the process with PID 11536.
+Process 'Microsoft.Media.Player' is not running.
+Process 'Spotify' is running. Closing...
+Process closed.
+
+Notification Blocker Said: 26/2/2024, 1:12:03 pm -Error: null, Stderr: , Stdout: 
+Focus Said: 26/2/2024, 1:12:06 pm - Error: null, Stderr: , Stdout: Process 'Microsoft.Media.Player' is not running.
+Process 'Spotify' is not running.
+
+Focus Said: 26/2/2024, 1:12:08 pm - Error: null, Stderr: , Stdout: Process 'Microsoft.Media.Player' is not running.
+Process 'Spotify' is not running.
+
+Focus Said: 26/2/2024, 1:12:10 pm - Error: null, Stderr: , Stdout: Process 'Microsoft.Media.Player' is not running.
+Process 'Spotify' is not running.
+
+Focus Said: 26/2/2024, 1:12:12 pm - Error: null, Stderr: , Stdout: Process 'Microsoft.Media.Player' is not running.
+Process 'Spotify' is not running.
+
+26/2/2024, 1:12:13 pm - Creating blackout window
+Focus Said: 26/2/2024, 1:12:14 pm - Error: null, Stderr: , Stdout: Process 'Microsoft.Media.Player' is not running.
+Process 'Spotify' is not running.
+
+Focus Said: 26/2/2024, 1:12:16 pm - Error: null, Stderr: , Stdout: Process 'Microsoft.Media.Player' is not running.
+Process 'Spotify' is not running.
+
+26/2/2024, 1:12:17 pm - Blackout window closed
+Focus Said: 26/2/2024, 1:12:18 pm - Error: null, Stderr: , Stdout: Process 'Microsoft.Media.Player' is not running.
+Process 'Spotify' is not running.
+
+26/2/2024, 1:12:20 pm - Closing window
+27/2/2024, 3:20:51 pm - Closing window
+27/2/2024, 3:29:03 pm - Closing window
+Notification Blocker Said: 27/2/2024, 3:51:44 pm -Error: null, Stderr: , Stdout: 
+Focus Said: 27/2/2024, 3:51:51 pm - Error: null, Stderr: , Stdout: SUCCESS: Sent termination signal to the process with PID 9844.
+SUCCESS: Sent termination signal to the process with PID 9844.
+SUCCESS: The process with PID 9844 has been terminated.
+Process 'Spotify' is running. Closing...
+Forcing close...
+Process closed.
+
+Focus Said: 27/2/2024, 3:51:53 pm - Error: null, Stderr: ERROR: The process "9844" not found.
+, Stdout: SUCCESS: Sent termination signal to the process with PID 9844.
+Process 'Spotify' is running. Closing...
+Process closed.
+
+27/2/2024, 3:51:54 pm - Creating blackout window
+Focus Said: 27/2/2024, 3:51:55 pm - Error: null, Stderr: ERROR: The process "9844" not found.
+, Stdout: SUCCESS: Sent termination signal to the process with PID 9844.
+Process 'Spotify' is running. Closing...
+Process closed.
+
+Focus Said: 27/2/2024, 3:51:56 pm - Error: null, Stderr: , Stdout: Process 'Spotify' is not running.
+
+Focus Said: 27/2/2024, 3:51:57 pm - Error: null, Stderr: ERROR: The process "9844" not found.
+ERROR: The process "9844" not found.
+, Stdout: Process 'Spotify' is running. Closing...
+Process closed.
+
+Focus Said: 27/2/2024, 3:51:59 pm - Error: null, Stderr: ERROR: The process "24656" not found.
+, Stdout: SUCCESS: Sent termination signal to the process with PID 24656.
+Process 'Spotify' is running. Closing...
+Process closed.
+
+27/2/2024, 3:57:25 pm - Closing window
+27/2/2024, 5:25:54 pm - Closing window
+29/2/2024, 6:13:31 pm - Closing window
+29/2/2024, 6:14:29 pm - Closing window
+29/2/2024, 6:16:05 pm - Closing window
+29/2/2024, 6:16:25 pm - Closing window
+29/2/2024, 7:03:35 pm - Closing window
+29/2/2024, 7:04:22 pm - Closing window
+29/2/2024, 7:07:16 pm - Closing window
+29/2/2024, 7:07:38 pm - Closing window
+29/2/2024, 7:16:39 pm - Closing window
+29/2/2024, 7:25:34 pm - Closing window
+29/2/2024, 7:25:58 pm - Closing window
+29/2/2024, 7:56:49 pm - Closing window
+29/2/2024, 8:11:12 pm - Closing window
+29/2/2024, 8:11:20 pm - Closing window
+29/2/2024, 8:43:59 pm - Closing window
+29/2/2024, 8:51:14 pm - Closing window
+29/2/2024, 11:18:22 pm - Closing window
+29/2/2024, 11:20:48 pm - Closing window
+29/2/2024, 11:21:45 pm - Closing window
+29/2/2024, 11:22:08 pm - Closing window
+1/3/2024, 5:59:30 pm - Closing window
+Notification Blocker Said: 1/3/2024, 10:57:34 pm -Error: null, Stderr: , Stdout: Notifications Triggered
+
+Focus Said: 1/3/2024, 10:57:42 pm - Error: null, Stderr: , Stdout: SUCCESS: Sent termination signal to the process with PID 4448.
+SUCCESS: Sent termination signal to the process with PID 4448.
+SUCCESS: The process with PID 4448 has been terminated.
+Process 'Spotify' is running. Closing...
+Forcing close...
+Process closed.
+
+1/3/2024, 11:07:21 pm - Closing window
+Notification Blocker Said: 1/3/2024, 11:07:26 pm -Error: null, Stderr: , Stdout: Notifications Triggered
+
+Focus Said: 1/3/2024, 11:07:28 pm - Error: null, Stderr: , Stdout: Process 'Spotify' is not running.
+
+1/3/2024, 11:13:53 pm - Closing window
+Notification Blocker Said: 1/3/2024, 11:13:58 pm -Error: null, Stderr: , Stdout: Notifications Triggered
+
+Focus Said: 1/3/2024, 11:14:00 pm - Error: null, Stderr: , Stdout: Process 'Spotify' is not running.
+
+Focus Said: 1/3/2024, 11:14:02 pm - Error: null, Stderr: , Stdout: Process 'Spotify' is not running.
+
+Focus Said: 1/3/2024, 11:14:04 pm - Error: null, Stderr: , Stdout: Process 'Spotify' is not running.
+
+Focus Said: 1/3/2024, 11:14:06 pm - Error: null, Stderr: , Stdout: Process 'Spotify' is not running.
+
+1/3/2024, 11:25:30 pm - Closing window
+Notification Blocker Said: 1/3/2024, 11:25:40 pm -Error: null, Stderr: , Stdout: Notifications Triggered
+
+Focus Said: 1/3/2024, 11:25:43 pm - Error: null, Stderr: , Stdout: Process 'Spotify' is not running.
+
+1/3/2024, 11:54:38 pm - Closing window

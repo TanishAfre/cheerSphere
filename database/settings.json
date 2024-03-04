@@ -1,17 +1,18 @@
 {
-    "BlackoutModeSettings": {
-      "Timer": 90,
-      "Duration": 3,
-      "QuitEarly": true,
-      "DisableKeyboard": false,
-      "MultiScreen": false
-    },
-    "NotificationBlocking": {
-        "NotificationEnable": false,
-        "DisplayNotificationsPost" : false
-      },
-      "Analytics": {
-        "NotificationEnable": false,
-        "DisplayNotificationsPost" : false
-      }
-  }
+  "BlackoutModeSettings": {
+    "Timer": "480",
+    "Duration": "4",
+    "QuitEarly": false,
+    "DisableKeyboard": false,
+    "MultiScreen": false
+  },
+  "NotificationBlocking": {
+    "NotificationEnable": true,
+    "DisplayNotificationsPost": false
+  },
+  "Analytics": {
+    "NotificationEnable": false,
+    "DisplayNotificationsPost": false
+  },
+  "Focus_On": false
+}

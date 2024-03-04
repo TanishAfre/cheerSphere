@@ -1,5 +1,5 @@
 {
-  "name": "Focus Mind",
+  "name": "FocusMind",
   "version": "1.0.0",
   "description": "Focus Mind basic Layout",
   "main": "main.js",
@@ -16,8 +16,12 @@
     }
   },
   "dependencies": {
-    "electron": "^27.1.2",
     "electron-tray-window": "^1.2.7",
     "i": "^0.3.7"
+  },
+  "devDependencies": {
+    "electron": "^27.1.2",
+    "electron-builder": "^24.12.0",
+    "electron-packager": "^17.1.2"
   }
 }

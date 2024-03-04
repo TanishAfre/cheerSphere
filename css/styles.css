@@ -21,3 +21,14 @@
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
+
+.menu-links a.disabled {
+  pointer-events: none; /* Disable pointer events */
+  
+}
+
+.menu-links a.disabled:hover {
+  pointer-events: none; /* Disable pointer events */
+  color:red;
+  
+}

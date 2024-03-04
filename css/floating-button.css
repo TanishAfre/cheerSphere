@@ -4,6 +4,17 @@
     right: 20px;
   }
 
+  .modal-body {
+    display: flex;
+    justify-content: space-around; /* This will space out the emojis evenly */
+    align-items: center; /* This will align the emojis vertically */
+  }
+  
+  .modal-body > .d-inline-block {
+    flex: 1; /* This will make each emoji container take up equal space */
+    text-align: center; /* This centers the emoji and text within the container */
+  }
+
   .emoji {
     cursor: pointer;
     font-size: 60px;

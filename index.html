@@ -31,7 +31,7 @@
 
 <body>
   <div id="title-bar">
-    <div id="title" style="padding-left: 5px;">Focus Mode</div>
+    <div id="title" style="padding-left: 5px;">Focus Mind</div>
     <div id="buttons">
       <div id="minimize-btn">&#x2500;</div>
       <div id="close-btn">&#x2715;</div>
@@ -119,7 +119,7 @@
           </div>
         </div>
         <div class="button-wrapper">
-         <button id="focus-btn" onclick="startFocus()" type="button" class="btn btn-success start-focus">Start
+          <button id="focus-btn" onclick="startFocus()" type="button" class="btn btn-success start-focus">Start
             Focusing</button>
         </div>
 
@@ -149,41 +149,37 @@
           </button>
         </div>
         <div class="modal-body text-center"> <!-- Follow Niko Modal Here-->
-          <div class="d-inline-block text-center">
-            <span class="emoji" onclick="saveMood('😢')" title="Sad">😢</span>
-            <br>
-            <span class="subtitle">Sad</span>
-          </div>
-          <div class="d-inline-block text-center">
-            <span class="emoji" onclick="saveMood('😡')" title="Angry">😡</span>
-            <br>
-            <span class="subtitle">Angry</span>
-          </div>
-          <div class="d-inline-block text-center">
-            <span class="emoji" onclick="saveMood('😄')" title="Happy">😄</span>
-            <br>
-            <span class="subtitle">Happy</span>
-          </div>
-          <div class="d-inline-block text-center">
-            <span class="emoji" onclick="saveMood('😕')" title="Confused">😕</span>
-            <br>
-            <span class="subtitle">Confused</span>
-          </div>
-          <div class="d-inline-block text-center">
-            <span class="emoji" onclick="saveMood('😃')" title="Excited">😃</span>
-            <br>
-            <span class="subtitle">Excited</span>
-          </div>
-          <div class="d-inline-block text-center">
-            <span class="emoji" onclick="saveMood('🤔')" title="Hopeful">🤔</span>
-            <br>
-            <span class="subtitle">Hopeful</span>
-          </div>
+
           <div class="d-inline-block text-center">
             <span class="emoji" onclick="saveMood('😴')" title="Tired">😴</span>
             <br>
             <span class="subtitle">Tired</span>
           </div>
+
+          <div class="d-inline-block text-center">
+            <span class="emoji" onclick="saveMood('😕')" title="Confused">😕</span>
+            <br>
+            <span class="subtitle">Confused</span>
+          </div>
+
+          <div class="d-inline-block text-center">
+            <span class="emoji" onclick="saveMood('🤔')" title="Hopeful">🤔</span>
+            <br>
+            <span class="subtitle">Hopeful</span>
+          </div>
+
+          <div class="d-inline-block text-center">
+            <span class="emoji" onclick="saveMood('😄')" title="Happy">😄</span>
+            <br>
+            <span class="subtitle">Happy</span>
+          </div>
+
+          <div class="d-inline-block text-center">
+            <span class="emoji" onclick="saveMood('😃')" title="Excited">😃</span>
+            <br>
+            <span class="subtitle">Excited</span>
+          </div>
+
         </div>
 
       </div>
@@ -229,140 +225,353 @@
         </div>
       </div>
     </div>
-    <script>
-      var selectedMood = '';
+  </div>
+  <script>
+    var selectedMood = '';
 
-      function saveMood(mood) {
-        selectedMood = mood;
-        console.log('Selected Mood: ' + selectedMood);
-        $('#moodModal').modal('hide'); // Close the modal
-      }
-    </script>
+    // Load existing mood data from JSON file
+    let moodData = {};
+    try {
+      const data = fs.readFileSync('database/mood_data.json', 'utf8');
+      moodData = JSON.parse(data);
+    } catch (err) {
+      console.error("Error reading or parsing JSON file:", err);
+    }
 
-    <!-- Insert this line above script imports, required for electron node integration  -->
-    <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
+    // Initialize mood entries array if not already defined
+    if (!moodData.moodEntries) {
+      moodData.moodEntries = [];
+    }
 
+    // Initialize mood counts if not already defined
+    if (!moodData.TotalMood) {
+      moodData.TotalMood = {
+        '😴': 0,
+        '😕': 0,
+        '🤔': 0,
+        '😄': 0,
+        '😃': 0
+      };
+    }
 
-    <!-- Bootstrap JS and dependencies -->
+    // Define a function to update mood counts and save data to JSON file
+    function saveMoodData(selectedMood) {
+      // Update mood count
+      moodData.TotalMood[selectedMood]++;
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
-    <!-- Code for other js files-->
-    <script src="js/sidebar-render.js"></script>
-    <script src="js/renderer.js"></script>
-    <script src="js/scripts.js"></script>
+      // Create a mood entry with mood and timestamp
+      const moodEntry = {
+        mood: selectedMood,
+        timestamp: new Date().toISOString()
+      };
 
-    <!-- Insert this line after script imports -->
-    <script>if (window.module) module = window.module;</script>
+      // Add the new mood entry to the array
+      moodData.moodEntries.push(moodEntry);
 
-   <!--Timer Start Code-->
-
-
-    <script>
-      var isFocusing = false;
-      var startTime;
-      var button = document.getElementById('focus-btn');
-      var totalDuration = 60 * 60; // 60 minutes in seconds
-      var remainingDuration = totalDuration; // Initialize remaining duration to 60 minutes
-      var focusedTime;
-
-      function showCongratulationsModal() {
-        focusedTime = totalDuration - remainingDuration; // Calculate focused time
-        document.getElementById('focusedTime').innerText = formatTime(focusedTime);
-        console.log(formatTime(focusedTime));
-        // Trigger the modal
-        $('#congratulationsModal').modal('show');
-      }
-
-      function startFocus() {
-        ipcRenderer.send('notif');
-        if (!isFocusing) {
-          // Start focusing
-          startTime = new Date().getTime();
-          isFocusing = true;
-
-          ipcRendererInterval = setInterval(function () {
-            if (!isFocusing) {
-              clearInterval(ipcRendererInterval); // Stop the interval if isFocusing is false
-              return;
-            }
-            // Send data to IPCRenderer here
-            console.log("Sent something");
-            ipcRenderer.send('focus');
-          }, 2000);
-
-          // Change text to a timer
-          button.innerHTML = "Time Left:" + formatTime(remainingDuration);
-
-          // Example: Update timer display every second
-          var intervalId = setInterval(function () {
-            if (isFocusing) {
-              var elapsedMillis = new Date().getTime() - startTime;
-              updateTimerDisplay(elapsedMillis);
-            }
-          }, 1000);
-
-          // Send something to IPCRenderer every 2 seconds
-          ipcRendererInterval = setInterval(function () {
-            if (!isFocusing) {
-              clearInterval(ipcRendererInterval); // Stop the interval if isFocusing is false
-              return;
-            }
-            // Send data to IPCRenderer here
-            console.log("Sent Start python focus");
-            ipcRenderer.send('focus');
-          }, 2000);
-          // Send something to IPCRenderer every 2 min
-          ipcRendererInterval = setInterval(function () {
-            if (!isFocusing) {
-              clearInterval(ipcRendererInterval); // Stop the interval if isFocusing is false
-              return;
-            }
-            // Send data to IPCRenderer here
-            console.log("Blackout Started");
-            ipcRenderer.send('blackout');
-          }, 120000); // currently 120 seconds
-
+      // Write the updated mood data back to the JSON file
+      fs.writeFile('database/mood_data.json', JSON.stringify(moodData, null, 2), 'utf8', (err) => {
+        if (err) {
+          console.error("Error writing JSON file:", err);
         } else {
-          // Stop focusing
-          isFocusing = false;
-
-          // Calculate focused time
-          var elapsedMillis = new Date().getTime() - startTime;
-          var elapsedSeconds = Math.floor(elapsedMillis / 1000);
-          remainingDuration -= elapsedSeconds; // Subtract elapsed time from remaining duration
-
-          // Reset button style
-          button.innerHTML = 'Start Focusing';
-          button.style.backgroundColor = 'green';
-          confettiCaller();
-          showCongratulationsModal();
-          //reset timers
-          focusedTime = 0;
-          totalDuration = 60 * 60;
-          remainingDuration = totalDuration;
+          console.log("Mood data saved successfully.");
         }
-      }
+      });
+    }
 
-      function updateTimerDisplay(elapsedMillis) {
-        var elapsedSeconds = Math.floor(elapsedMillis / 1000);
-        var remainingTime = Math.max(0, remainingDuration - elapsedSeconds); // Ensure remaining time is non-negative
-        button.innerHTML = 'Time Left ' + formatTime(remainingTime);
-      }
 
-      function formatTime(seconds) {
-        var minutes = Math.floor(seconds / 60);
-        seconds = seconds % 60;
-        return padLeft(minutes) + ':' + padLeft(seconds);
-      }
+    function saveMood(mood) {
+      selectedMood = mood;
+      console.log('Selected Mood: ' + selectedMood);
+      saveMoodData(selectedMood); // Save the selected mood
+      $('#moodModal').modal('hide'); // Close the modal
+    }
+  </script>
 
-      function padLeft(value) {
-        return value < 10 ? '0' + value : value;
+  <!-- Insert this line above script imports, required for electron node integration  -->
+  <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
+
+
+  <!-- Bootstrap JS and dependencies -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+  <!-- Code for other js files-->
+  <script src="js/sidebar-render.js"></script>
+  <script src="js/renderer.js"></script>
+  <script src="js/scripts.js"></script>
+
+  <!-- Insert this line after script imports -->
+  <script>if (window.module) module = window.module;</script>
+
+  <!--Timer Start Code-->
+
+  <!--Functions-->
+  <script>
+    // Function to disable links
+    function disableLinks() {
+      var links = document.querySelectorAll('.menu-links a');
+      links.forEach(function (link) {
+        link.classList.add('disabled'); // Add 'disabled' class
+      });
+    }
+
+    // Function to enable links
+    function enableLinks() {
+      var links = document.querySelectorAll('.menu-links a');
+      links.forEach(function (link) {
+        link.classList.remove('disabled'); // Remove 'disabled' class
+      });
+    }
+
+    function showCongratulationsModal() {
+      focusedTime = totalDuration - remainingDuration; // Calculate focused time
+      document.getElementById('focusedTime').innerText = formatTime(focusedTime);
+      $('#congratulationsModal').modal('show');
+      console.log("Congratulations! You were focused for " + formatTime(focusedTime) + ".");
+      //print distractions from the variable and the value that it is at now
+      console.log("distractions: " + (getDistraction()  - distractions));
+      //print start time and end time
+      console.log("Start Time: " + startTimer);
+      console.log("End Time: " + endTimer);
+      // Add session analytics
+      addSessionAnalytics(startTimer, endTimer, formatTime(focusedTime), getDistraction()  - distractions, selectedMood);
+
+    }
+
+    function updateTimerDisplay(elapsedMillis) {
+      var elapsedSeconds = Math.floor(elapsedMillis / 1000);
+      var remainingTime = Math.max(0, remainingDuration - elapsedSeconds); // Ensure remaining time is non-negative
+      button.innerHTML = 'Time Left ' + formatTime(remainingTime);
+    }
+
+    function formatTime(seconds) {
+      var minutes = Math.floor(seconds / 60);
+      seconds = seconds % 60;
+      return padLeft(minutes) + ':' + padLeft(seconds);
+    }
+
+    function padLeft(value) {
+      return value < 10 ? '0' + value : value;
+    }
+
+  </script>
+  <script>
+    const fs = require('fs');
+
+    try {
+      const data = JSON.parse(fs.readFileSync('database/settings.json', 'utf8'));
+      var BlackoutTimer = data.BlackoutModeSettings.Timer;
+      var Duration = data.BlackoutModeSettings.Duration;
+
+    } catch (error) {
+      console.error('Error reading or parsing JSON:', error);
+    }
+
+    function getDistraction() {
+      try {
+        const data = JSON.parse(fs.readFileSync('database/analytics.json', 'utf8'));
+        return data.appAnalytics.appsClosed;
+
+      } catch (error) {
+        console.error('Error reading or parsing JSON:', error);
       }
-    </script>
-    <!-- Pre loader Script 
+    }
+
+  </script>
+  <!--Focus code starts here-->
+  <script>
+    var blackoutAmount = 0;
+    var blackoutLength = 0; // Stores cumulative duration in seconds
+    var isFocusing = false;
+    var startTime;
+    var button = document.getElementById('focus-btn');
+    var totalDuration = 60 * 60; // 60 minutes in seconds
+    var remainingDuration = totalDuration; // Initialize remaining duration to 60 minutes
+    var startTimer;
+    var endTimer;
+    var distractions = getDistraction();
+
+    function startFocus() {
+      if (!isFocusing) {
+        beginFocus();
+        console.log("distractions: " + distractions);
+        startTimer = new Date().getTime();
+      } else {
+        endTimer = new Date().getTime();
+        endFocus();
+      }
+    }
+
+
+
+    function addSessionAnalytics(startTime, endTime, focusDurationMinutes, distractions, notes) {
+      // Calculate session duration in seconds
+      const sessionDurationSeconds = (endTime - startTime) / 1000;
+
+      // Read the current contents of the analytics file
+      fs.readFile('database/focus_sessions.json', 'utf8', (err, data) => {
+        if (err) {
+          console.error("Error reading the analytics file:", err);
+          return;
+        }
+
+        // Parse the JSON data
+        let analyticsData = JSON.parse(data);
+
+        // Create a new session object
+        const newSession = {
+          "start_time": new Date(startTime).toISOString(),
+          "end_time": new Date(endTime).toISOString(),
+          "focus_duration_minutes": focusDurationMinutes,
+          "distractions": distractions,
+          "notes": notes
+        };
+
+        // Add the new session to the analytics
+        if (!analyticsData.sessions) {
+          analyticsData.sessions = [];
+        }
+        analyticsData.sessions.push(newSession);
+
+        // Write the updated data back to the file
+        fs.writeFile('database/focus_sessions.json', JSON.stringify(analyticsData, null, 2), 'utf8', (err) => {
+          if (err) {
+            console.error("Error writing to the analytics file:", err);
+            return;
+          }
+          console.log("Session analytics added successfully.");
+        });
+      });
+    }
+
+    function beginFocus() {
+      ipcRenderer.send('notif'); // sends notification IPC to main.js for python file
+      disableLinks();
+      startTime = new Date().getTime();
+      isFocusing = true;
+      startInterval(ipcRenderer, 'focus', 2000);
+      startInterval(ipcRenderer, 'blackout', 10000);
+      updateTimerDisplayInterval();
+      updateButtonContent("Time Left:" + formatTime(remainingDuration));
+    }
+
+    function triggerBlackoutAnalytics() {
+      // Read the current contents of the file
+      fs.readFile('database/analytics.json', 'utf8', (err, data) => {
+        if (err) {
+          console.error("Error reading the file:", err);
+          return;
+        }
+        // Parse the JSON data
+        let jsonData = JSON.parse(data);
+
+        // Increment the blackoutAmount
+        jsonData.Blackout.blackoutAmount += 1;
+
+        // Convert the updated object back to a JSON string
+        const updatedData = JSON.stringify(jsonData, null, 2); // The second argument null and 2 for pretty-printing
+        // Write the updated data back to the file
+        fs.writeFile('database/analytics.json', updatedData, 'utf8', (err) => {
+          if (err) {
+            console.error("Error writing to the file:", err);
+            return;
+          }
+          console.log("Successfully updated blackoutAmount.");
+        });
+      });
+    }
+
+    function triggerBlackoutDurationAnalytic() {
+      const data = JSON.parse(fs.readFileSync('database/settings.json', 'utf8'));
+      var Duration = data.BlackoutModeSettings.Duration;
+
+      fs.readFile('database/analytics.json', 'utf8', (err, data) => {
+        if (err) {
+          console.error('Error reading JSON file:', err);
+          return;
+        }
+
+        try {
+          // Parse the JSON data
+          const analytics = JSON.parse(data);
+
+          // Modify the value (for example, incrementing BlackoutTimer)
+          analytics.Blackout.blackoutTime += Duration;
+
+          // Convert the modified object back to JSON format
+          const updatedData = JSON.stringify(analytics, null, 2);
+
+          // Write the updated JSON back to the file
+          fs.writeFile('database/analytics.json', updatedData, 'utf8', (err) => {
+            if (err) {
+              console.error('Error writing JSON file:', err);
+              return;
+            }
+            console.log('JSON file updated successfully for Duration.');
+          });
+        } catch (error) {
+          console.error('Error parsing JSON:', error);
+        }
+      });
+    }
+
+    function endFocus() {
+      isFocusing = false;
+      enableLinks();
+      remainingDuration -= Math.floor((new Date().getTime() - startTime) / 1000);
+      resetButton();
+      confettiCaller();
+      showCongratulationsModal();
+      resetTimers();
+    }
+
+    function startInterval(target, message, interval) {
+      var intervalId = setInterval(function () {
+        if (!isFocusing) {
+          clearInterval(intervalId); // Stop the interval if isFocusing is false
+          return;
+        }
+        console.log("Sent " + message);
+        target.send(message);
+        if (message === 'blackout') {
+          triggerBlackoutAnalytics();
+          triggerBlackoutDurationAnalytic();
+        }
+      }, interval);
+    }
+
+    function updateTimerDisplayInterval() {
+      setInterval(function () {
+        if (isFocusing) {
+          updateTimerDisplay(new Date().getTime() - startTime);
+        }
+      }, 1000);
+    }
+
+    function updateButtonContent(content) {
+      button.innerHTML = content;
+    }
+
+    function resetButton() {
+      updateButtonContent('Start Focusing');
+      button.style.backgroundColor = 'green';
+    }
+
+    function resetTimers() {
+      focusedTime = 0;
+      totalDuration = 60 * 60;
+      remainingDuration = totalDuration;
+    }
+
+
+
+  </script>
+
+
+
+  <!-- Pre loader Script 
     <script>
     var loader = document.getElementById("preloader");
       window.addEventListener("load", function(){
