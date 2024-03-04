@@ -1,4 +1,3 @@
 Discord.exe
-Spotify
-Chrome
+Spotify.exe
 chrome.exe

@@ -49,21 +49,26 @@ def parse_duration_to_seconds(duration_str):
 # Function to update the running times of applications
 def update_running_times(tracked_apps):
     current_running_times = load_running_times()
-    current_processes = {p.name(): p.create_time() for p in psutil.process_iter(['name', 'create_time']) if p.name() in tracked_apps}
+    current_processes = {p.name(): p.create_time() for p in psutil.process_iter(['name', 'create_time'])}
 
-    for app_name, details in list(current_running_times.items()):
-        if app_name not in current_processes and "start_time" in details:
-            # Calculate duration since last recorded start time and update total duration
-            end_time = time.time()
-            start_time = datetime.strptime(details["start_time"], '%Y-%m-%d %H:%M:%S').timestamp()
-            duration = end_time - start_time
-            total_duration_seconds = parse_duration_to_seconds(details["total_duration"]) + duration
-            total_duration_str = str(timedelta(seconds=total_duration_seconds))
-            current_running_times[app_name]["total_duration"] = total_duration_str.split('.')[0]  # Update without milliseconds
-            del current_running_times[app_name]["start_time"]  # Remove start_time indicating the app is no longer running
-        elif app_name in current_processes:
-            # Ensure start_time is always up to date
-            current_running_times[app_name]["start_time"] = timestamp_to_readable(current_processes[app_name])
+    for app_name in tracked_apps:
+        if app_name in current_processes:
+            if app_name not in current_running_times or "start_time" not in current_running_times[app_name]:
+                # Initialize or reinitialize app tracking
+                current_running_times[app_name] = {
+                    "total_duration": "0:00:00",
+                    "start_time": timestamp_to_readable(current_processes[app_name])
+                }
+        else:
+            # Handle case where tracked app is not currently running
+            if app_name in current_running_times and "start_time" in current_running_times[app_name]:
+                # Calculate and update total duration before removing start_time
+                start_time = datetime.strptime(current_running_times[app_name]["start_time"], '%Y-%m-%d %H:%M:%S').timestamp()
+                end_time = time.time()
+                duration = end_time - start_time
+                total_duration_seconds = parse_duration_to_seconds(current_running_times[app_name]["total_duration"]) + duration
+                current_running_times[app_name]["total_duration"] = str(timedelta(seconds=total_duration_seconds)).split('.')[0]
+                del current_running_times[app_name]["start_time"]  # Mark the app as not currently running
 
     save_running_times(current_running_times)
 

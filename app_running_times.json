@@ -1,8 +1,13 @@
 {
+    "Spotify.exe": {
+        "total_duration": "0:00:00",
+        "start_time": "2024-03-04 13:07:18"
+    },
     "chrome.exe": {
-        "total_duration": "0:14:46"
+        "total_duration": "0:00:00",
+        "start_time": "2024-03-04 13:07:12"
     },
     "Discord.exe": {
-        "total_duration": "0:12:53"
+        "total_duration": "0:01:13"
     }
 }
