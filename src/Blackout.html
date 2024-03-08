@@ -121,4 +121,24 @@
   -->
 </body>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Array of messages for the break
+        const breakMessages = [
+            "Great Job! Time for a Well-Deserved Break:",
+            "Awesome Work! Let's Take a Short Break:",
+            "You've Been Fantastic! Break Time:",
+            "Excellent Effort! Relax with a Quick Break:",
+            "Outstanding Performance! Enjoy Your Break:"
+        ];
+
+        // Select a random message
+        const randomMessage = breakMessages[Math.floor(Math.random() * breakMessages.length)];
+
+        // Set the selected message
+        document.querySelector('h1').textContent = randomMessage;
+    });
+</script>
+
+
 </html>
