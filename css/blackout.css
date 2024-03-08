@@ -1,13 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto+Slab:wght@100&family=Source+Sans+3:wght@400;600;700&display=swap');
 
 
-body{
-    background-color: #FEF6EB !important;
+body {
+    background-image: url('../images/background.jpg'); /* Add your image path here */
+    background-size: cover; /* Cover the entire screen */
+    background-position: center; /* Center the background image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-color: #FEF6EB !important; /* Fallback color */
     min-height: 100vh;
     transition: var(--tran-05);
     font-family: 'Poppins', sans-serif;
-
 }
+
+
 .container {
     /* make it so container is in the 
     middle of the screen */
