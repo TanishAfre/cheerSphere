@@ -1,6 +1,6 @@
 {
   "BlackoutModeSettings": {
-    "Timer": "480",
+    "Timer": "20",
     "Duration": "4",
     "QuitEarly": false,
     "DisableKeyboard": false,
@@ -14,5 +14,5 @@
     "NotificationEnable": false,
     "DisplayNotificationsPost": false
   },
-  "Focus_On": false
+  "Focus_On": true
 }

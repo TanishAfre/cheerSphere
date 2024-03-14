@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 import os
 
 # Paths
-json_file_path = 'app_running_times.json'
+json_file_path = 'database/app_running_times.json'
 apps_list_path = 'database/apps.txt'
 settings_path = 'database/settings.json'
 
