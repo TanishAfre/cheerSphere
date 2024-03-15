@@ -7,11 +7,12 @@ const logFilePath = path.join(__dirname, 'logs.txt');
 let mainWindow;
 let splash;
 const { Notification } = require('electron');
-
+app.setName('Focus Mind');
 function showNotification(title, body) {
   const notification = new Notification({
     title: title,
-    body: body
+    body: body,
+    icon: "images/favicon.ico"
   });
   notification.show();
 }
