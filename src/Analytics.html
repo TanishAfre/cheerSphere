@@ -136,6 +136,24 @@
                         <ion-icon name="barbell-outline"></ion-icon>
                     </div>
                 </div>
+                <div class="card">
+                    <div>
+                        <div class="numbers">7</div>
+                        <div class="cardName">Total Apps Closed</div>
+                    </div>
+                    <div class="iconBox">
+                        <ion-icon name="close-circle-outline"></ion-icon>
+                    </div>
+                </div>
+                <div class="card">
+                    <div>
+                        <div class="numbers">7</div>
+                        <div class="cardName">Average Blackout Mode Duration</div>
+                    </div>
+                    <div class="iconBox">
+                        <ion-icon name="brush-outline"></ion-icon>
+                    </div>
+                </div>
             </div>
 
             <!-- Adding Charts -->
@@ -148,6 +166,78 @@
                 </div>
                 <div class="box">
                     <canvas id="focusMode"></canvas>
+                </div>
+            </div>
+
+            <!-- Additional Section for Mood Analytics -->
+            <div class="text">Mood Analytics</div>
+            <div class="cardBoxMood">
+                <!-- Mood Entries Overview -->
+                <div class="card">
+                    <div>
+                        <div class="numbers" id="moodCountHappy">1</div>
+                    </div>
+                    <div class="iconBox">
+                        <i class="far fa-laugh"></i>
+                    </div>
+                </div>
+                <div class="card">
+                    <div>
+                        <div class="numbers" id="moodCountTired">1</div>
+                    </div>
+                    <div class="iconBox">
+                        <i class="far fa-tired"></i>
+                    </div>
+                </div>
+                <div class="card">
+                    <div>
+                        <div class="numbers" id="moodCountTired">1</div>
+                    </div>
+                    <div class="iconBox">
+                        <i class="far fa-tired"></i>
+                    </div>
+                </div>
+                <div class="card">
+                    <div>
+                        <div class="numbers" id="moodCountTired">1</div>
+                    </div>
+                    <div class="iconBox">
+                        <i class="far fa-tired"></i>
+                    </div>
+                </div>
+                <div class="card">
+                    <div>
+                        <div class="numbers" id="moodCountTired">1</div>
+                    </div>
+                    <div class="iconBox">
+                        <i class="far fa-tired"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mood Entries Detail List -->
+            <div class="detailBox">
+                <div class="text">Detailed Mood Entries</div>
+                <div class="listBox">
+                    <ul id="moodEntriesList">
+                        <li>
+                            <span class="moodEmoji">😄</span>
+                            <span class="moodTime">Feb 29, 2024 11:21 PM</span>
+                        </li>
+                        <li>
+                            <span class="moodEmoji">😃</span>
+                            <span class="moodTime">Feb 29, 2024 11:21 PM</span>
+                        </li>
+                        <li>
+                            <span class="moodEmoji">😴</span>
+                            <span class="moodTime">Feb 29, 2024 11:21 PM</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="pagination">
+                    <button id="prevPage">Previous</button>
+                    <span id="pageNumber">1</span>
+                    <button id="nextPage">Next</button>
                 </div>
             </div>
         </div>
@@ -173,6 +263,7 @@
     <script src="../js/sidebar-render.js"></script>
     <script src="../js/renderer.js"></script>
     <script src="../js/scripts.js"></script>
+    <script src="../js/pagination.js"></script>
     <script src="../js/settings.js"></script>
 
     <!-- Insert this line after script imports -->

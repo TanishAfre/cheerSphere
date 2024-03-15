@@ -19,6 +19,8 @@
 
 <body>
 
+
+
     <div class="container">
         <h1>Great Job! Time for a Well-Deserved Break:</h1>
         <div id="timer">10:00</div>
@@ -36,6 +38,21 @@
     <!-- Code for other js files-->
     <script src="../js/renderer.js"></script>
     <script src="../js/scripts.js"></script>
+
+    <script>
+        function applyThemeBasedOnTime() {
+        const hour = new Date().getHours();
+        const body = document.body;
+
+        if (hour >= 18 || hour < 6) { // Checks if the time is past 6 PM or before 6 AM
+            body.classList.add("dark-mode");
+        } else {
+            body.classList.remove("dark-mode");
+        }
+    }
+
+    applyThemeBasedOnTime(); // Run the function when the page loads
+        </script>
 
     <!-- Insert this line after script imports -->
     <script>if (window.module) module = window.module;</script>
