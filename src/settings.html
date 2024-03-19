@@ -217,8 +217,8 @@
                                             <button id="decreaseTimer" class="btn btn-secondary">-</button>
                                             <div style="display: inline-flex; align-items: center;">
                                                 <input type="number" id="timerValue" value="" min="1"
-                                                    class="form-control" style="width: 80px; text-align: right;">
-                                                <span id="timerUnit" style="margin-left: 5px;">ms</span>
+                                                    class="form-control" style="width: 80px; text-align: right;" readonly>
+                                                <span id="timerUnit" style="margin-left: 5px;">min</span>
                                             </div>
                                             <button id="increaseTimer" class="btn btn-secondary">+</button>
                                         </div>
@@ -493,16 +493,15 @@
 
             increaseButton.addEventListener("click", function () {
                 const currentValue = parseInt(timerValueInput.value, 10);
-                timerValueInput.value = currentValue + 50;
-                changeTimerValue(timerValueInput.value); // Call changeTimerValue function after updating the value
-
+                timerValueInput.value = currentValue + 1; // Increase by 1 minute
+                changeTimerValue(timerValueInput.value * 60000); // Convert to milliseconds when sending to the backend
             });
 
             decreaseButton.addEventListener("click", function () {
                 const currentValue = parseInt(timerValueInput.value, 10);
-                if (currentValue > 1) { // Prevents the value from going below the minimum
-                    timerValueInput.value = currentValue - 50;
-                    changeTimerValue(timerValueInput.value); // Call changeTimerValue function after updating the value
+                if (currentValue > 1) {
+                    timerValueInput.value = currentValue - 1; // Decrease by 1 minute
+                    changeTimerValue(timerValueInput.value * 60000); // Convert to milliseconds when sending to the backend
                 }
             });
         });
@@ -513,7 +512,8 @@
             .then(response => response.json())
             .then(data => {
                 // Update the content of the span element with the timerSetting value
-                document.getElementById('timerValue').value = data.BlackoutModeSettings.Timer;
+                document.getElementById('timerValue').value = data.BlackoutModeSettings.Timer / 60000; // Convert to minutes
+
                 document.getElementById('Duration').value = data.BlackoutModeSettings.Duration;
                 // Update the checked state of the earlyBlackoutDeactivation checkbox
                 const earlyBlackoutDeactivationCheckbox = document.getElementById('earlyBlackoutDeactivation');
