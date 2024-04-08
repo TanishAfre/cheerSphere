@@ -24,6 +24,7 @@ function toggleCountdown() {
     startCountdown(targetDate);
   } else {
     button.textContent = 'Start Countdown';
+    sessionLength.textContent = '0'; // Reset the session length display
     enableLinks(); // Enable links as countdown stops
     stopCountdown();
   }
