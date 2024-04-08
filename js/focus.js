@@ -24,8 +24,8 @@ function toggleCountdown() {
     startCountdown(targetDate);
   } else {
     button.textContent = 'Start Countdown';
-    stopCountdown();
     enableLinks(); // Enable links as countdown stops
+    stopCountdown();
   }
 }
 
@@ -33,14 +33,15 @@ function toggleLinks(enable) {
   var links = document.querySelectorAll('.menu-links a');
   links.forEach(function(link) {
       if (enable) {
-          link.style.pointerEvents = ""; // Re-enable pointer events
-          link.style.opacity = ""; // Reset opacity to default
+          link.style.pointerEvents = "auto"; // Explicitly enable pointer events
+          link.style.opacity = "1"; // Reset opacity to fully opaque
       } else {
           link.style.pointerEvents = "none"; // Disable pointer events
           link.style.opacity = "0.5"; // Make link visually "disabled"
       }
   });
 }
+
 
 // Updated functions to use the toggleLinks function
 function disableLinks() {
