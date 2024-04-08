@@ -1,15 +1,40 @@
     /* Style for the modal container */
-    .congratulations-modal {
-        display: none;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        max-width: 300px;
-        width: 100%;
-        text-align: center;
-      }
+.congratulations-modal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 700px;
+  width: 100%;
+  text-align: center;
+}
+
+.emoji-container {
+  display: flex; /* Use flexbox to layout children in a row */
+  justify-content: center; /* Center the children horizontally */
+  align-items: center; /* Center the children vertically */
+  flex-wrap: nowrap; /* Prevent wrapping of children to a new line */
+  width: 100%; /* Ensure the container spans the full width of its parent */
+  padding: 0; /* Adjust padding as necessary */
+  margin: 0; /* Adjust margin as necessary */
+}
+    
+.emoji-container .d-inline-block {
+  flex: 1; /* Allow each emoji to grow equally */
+  text-align: center; /* Center the content of each emoji container */
+  margin: 0 5px; /* Add some space between the emojis, adjust as needed */
+  font-size: 15px; /* Set the emoji size to 24px, adjust as needed */
+}
+
+.emoji-container .d-inline-block span.emoji {
+  font-size: 50px; /* Adjust the size to your preference */
+  line-height: 1; /* Adjust line height to ensure proper vertical alignment */
+  display: inline-block; /* Ensures the emoji behaves like an image */
+}
+
+  

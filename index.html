@@ -201,30 +201,33 @@
           <div class="card-body text-center"> <img src="https://img.icons8.com/bubbles/200/000000/trophy.png">
             <p>You were focused for: <span id="focusedTime">0 minutes</span>.</p>
             <p>Describe your mood based on the outcome of this session.</p>
-            <div class="d-inline-block text-center">
-              <span class="emoji" onclick="saveMood('😒')" title="Low">😒</span>
-              <br>
-              <span class="subtitle">Sad</span>
-            </div>
-            <div class="d-inline-block text-center">
-              <span class="emoji" onclick="saveMood('😕')" title="Mild">😕</span>
-              <br>
-              <span class="subtitle">Angry</span>
-            </div>
-            <div class="d-inline-block text-center">
-              <span class="emoji" onclick="saveMood('😐')" title="Neutral">😐</span>
-              <br>
-              <span class="subtitle">Happy</span>
-            </div>
-            <div class="d-inline-block text-center">
-              <span class="emoji" onclick="saveMood('😊')" title="Moderate">😊</span>
-              <br>
-              <span class="subtitle">Confused</span>
-            </div>
-            <div class="d-inline-block text-center">
-              <span class="emoji" onclick="saveMood('😀')" title="Content">😀</span>
-              <br>
-              <span class="subtitle">Confused</span>
+            <!-- Adjusted emoji containers to be in a single container -->
+            <div class="emoji-container">
+              <div class="d-inline-block text-center">
+                <span class="emoji" onclick="saveMood('😒')" title="Low">😒</span>
+                <br>
+                <span class="subtitle">Sad</span>
+              </div>
+              <div class="d-inline-block text-center">
+                <span class="emoji" onclick="saveMood('😕')" title="Mild">😕</span>
+                <br>
+                <span class="subtitle">Angry</span>
+              </div>
+              <div class="d-inline-block text-center">
+                <span class="emoji" onclick="saveMood('😐')" title="Neutral">😐</span>
+                <br>
+                <span class="subtitle">Happy</span>
+              </div>
+              <div class="d-inline-block text-center">
+                <span class="emoji" onclick="saveMood('😊')" title="Moderate">😊</span>
+                <br>
+                <span class="subtitle">Confused</span>
+              </div>
+              <div class="d-inline-block text-center">
+                <span class="emoji" onclick="saveMood('😀')" title="Content">😀</span>
+                <br>
+                <span class="subtitle">Confused</span>
+              </div>
             </div>
           </div>
         </div>
