@@ -202,22 +202,27 @@
             <p>You were focused for: <span id="focusedTime">0 minutes</span>.</p>
             <p>Describe your mood based on the outcome of this session.</p>
             <div class="d-inline-block text-center">
-              <span class="emoji" onclick="saveMood('😢')" title="Sad">😢</span>
+              <span class="emoji" onclick="saveMood('😒')" title="Low">😒</span>
               <br>
               <span class="subtitle">Sad</span>
             </div>
             <div class="d-inline-block text-center">
-              <span class="emoji" onclick="saveMood('😡')" title="Angry">😡</span>
+              <span class="emoji" onclick="saveMood('😕')" title="Mild">😕</span>
               <br>
               <span class="subtitle">Angry</span>
             </div>
             <div class="d-inline-block text-center">
-              <span class="emoji" onclick="saveMood('😄')" title="Happy">😄</span>
+              <span class="emoji" onclick="saveMood('😐')" title="Neutral">😐</span>
               <br>
               <span class="subtitle">Happy</span>
             </div>
             <div class="d-inline-block text-center">
-              <span class="emoji" onclick="saveMood('😕')" title="Confused">😕</span>
+              <span class="emoji" onclick="saveMood('😊')" title="Moderate">😊</span>
+              <br>
+              <span class="subtitle">Confused</span>
+            </div>
+            <div class="d-inline-block text-center">
+              <span class="emoji" onclick="saveMood('😀')" title="Content">😀</span>
               <br>
               <span class="subtitle">Confused</span>
             </div>
@@ -246,11 +251,11 @@
     // Initialize mood counts if not already defined
     if (!moodData.TotalMood) {
       moodData.TotalMood = {
-        '😴': 0,
+        '😒': 0,
         '😕': 0,
-        '🤔': 0,
-        '😄': 0,
-        '😃': 0
+        '😐': 0,
+        '😊': 0,
+        '😀': 0
       };
     }
 
