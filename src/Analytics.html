@@ -490,6 +490,38 @@
         // Call the function to update apps closed this month on page load
         updateAppsClosedThisMonth();
 
+        // Function to load and parse the analytics data from the JSON file
+        function loadAnalyticsData() {
+            const analyticsFilePath = path.join(__dirname, '../database/analytics.json');
+            const analyticsData = JSON.parse(fs.readFileSync(analyticsFilePath));
+            return analyticsData;
+        }
+
+        // Function to update the card displaying the number of apps closed
+        function updateAppsClosedCard() {
+            const analyticsData = loadAnalyticsData();
+            const appsClosed = analyticsData.appAnalytics.appsClosed;
+
+            // Update the UI element with the apps closed count
+            document.getElementById('appsClosedCount').textContent = appsClosed;
+        }
+
+        // Function to update the card displaying the blackout mode information
+        function updateBlackoutModeCard() {
+            const analyticsData = loadAnalyticsData();
+            const blackoutAmount = analyticsData.Blackout.blackoutAmount;
+            const blackoutTime = analyticsData.Blackout.blackoutTime;
+
+            // Update the UI elements with blackout mode information
+            document.getElementById('blackoutAmount').textContent = blackoutAmount;
+            document.getElementById('blackoutTime').textContent = blackoutTime;
+        }
+
+        // Call the functions to update UI cards on page load
+        updateAppsClosedCard();
+        updateBlackoutModeCard();
+
+
     </script>
 
 
