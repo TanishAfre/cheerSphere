@@ -168,3 +168,101 @@ Process closed.
 14/3/2024, 2:16:36 pm - Minimizing window
 14/3/2024, 2:16:44 pm - Minimizing window
 15/3/2024, 10:20:32 pm - Closing window
+9/4/2024, 12:14:52 pm - Minimizing window
+9/4/2024, 1:41:28 pm - Minimizing window
+9/4/2024, 3:36:18 pm - Minimizing window
+9/4/2024, 3:49:37 pm - Minimizing window
+9/4/2024, 4:01:46 pm - Minimizing window
+Notification Blocker Said: 9/4/2024, 4:02:13 pm -Error: null, Stderr: , Stdout: Notifications Triggered
+
+9/4/2024, 4:02:23 pm - Creating blackout window
+Focus Said: 9/4/2024, 4:02:32 pm - Error: null, Stderr: , Stdout: SUCCESS: Sent termination signal to the process with PID 13700.
+SUCCESS: Sent termination signal to the process with PID 13700.
+SUCCESS: The process with PID 13700 has been terminated.
+SUCCESS: Sent termination signal to the process with PID 23304.
+SUCCESS: Sent termination signal to the process with PID 23304.
+SUCCESS: The process with PID 23304 has been terminated.
+SUCCESS: Sent termination signal to the process with PID 2476.
+SUCCESS: Sent termination signal to the process with PID 2476.
+SUCCESS: The process with PID 2476 has been terminated.
+Process 'Discord.exe' is running. Closing...
+Forcing close...
+Process closed.
+Process 'Spotify.exe' is running. Closing...
+Forcing close...
+Process closed.
+Process 'chrome.exe' is running. Closing...
+Forcing close...
+Process closed.
+
+Focus Said: 9/4/2024, 4:02:32 pm - Error: null, Stderr: ERROR: The process "23304" not found.
+ERROR: The process "2476" not found.
+, Stdout: SUCCESS: Sent termination signal to the process with PID 23304.
+SUCCESS: Sent termination signal to the process with PID 2476.
+Process 'Discord.exe' is not running.
+Process 'Spotify.exe' is running. Closing...
+Process closed.
+Process 'chrome.exe' is running. Closing...
+Process closed.
+
+Focus Said: 9/4/2024, 4:02:33 pm - Error: null, Stderr: ERROR: The process "13700" not found.
+ERROR: The process "23304" not found.
+ERROR: The process "2476" not found.
+, Stdout: SUCCESS: Sent termination signal to the process with PID 13700.
+SUCCESS: Sent termination signal to the process with PID 23304.
+SUCCESS: Sent termination signal to the process with PID 2476.
+Process 'Discord.exe' is running. Closing...
+Process closed.
+Process 'Spotify.exe' is running. Closing...
+Process closed.
+Process 'chrome.exe' is running. Closing...
+Process closed.
+
+Focus Said: 9/4/2024, 4:02:34 pm - Error: null, Stderr: ERROR: The process "23304" not found.
+ERROR: The process "2476" not found.
+, Stdout: SUCCESS: Sent termination signal to the process with PID 23304.
+SUCCESS: Sent termination signal to the process with PID 2476.
+Process 'Discord.exe' is not running.
+Process 'Spotify.exe' is running. Closing...
+Process closed.
+Process 'chrome.exe' is running. Closing...
+Process closed.
+
+Focus Said: 9/4/2024, 4:02:35 pm - Error: null, Stderr: ERROR: The process "13700" not found.
+ERROR: The process "23304" not found.
+ERROR: The process "2476" not found.
+, Stdout: SUCCESS: Sent termination signal to the process with PID 13700.
+SUCCESS: Sent termination signal to the process with PID 23304.
+SUCCESS: Sent termination signal to the process with PID 2476.
+Process 'Discord.exe' is running. Closing...
+Process closed.
+Process 'Spotify.exe' is running. Closing...
+Process closed.
+Process 'chrome.exe' is running. Closing...
+Process closed.
+
+Focus Said: 9/4/2024, 4:02:36 pm - Error: null, Stderr: ERROR: The process "23304" not found.
+ERROR: The process "2476" not found.
+, Stdout: SUCCESS: Sent termination signal to the process with PID 23304.
+SUCCESS: Sent termination signal to the process with PID 2476.
+Process 'Discord.exe' is not running.
+Process 'Spotify.exe' is running. Closing...
+Process closed.
+Process 'chrome.exe' is running. Closing...
+Process closed.
+
+13/4/2024, 5:14:47 pm - Closing window
+13/4/2024, 5:20:30 pm - Closing window
+13/4/2024, 5:30:36 pm - Closing window
+13/4/2024, 5:33:05 pm - Closing window
+13/4/2024, 5:37:36 pm - Closing window
+13/4/2024, 5:41:44 pm - Closing window
+13/4/2024, 5:45:07 pm - Closing window
+13/4/2024, 5:45:16 pm - Closing window
+13/4/2024, 5:46:59 pm - Closing window
+13/4/2024, 6:07:24 pm - Closing window
+13/4/2024, 6:08:26 pm - Closing window
+13/4/2024, 6:08:34 pm - Closing window
+13/4/2024, 6:17:15 pm - Closing window
+13/4/2024, 6:17:23 pm - Closing window
+13/4/2024, 6:38:14 pm - Closing window

@@ -1,29 +1,32 @@
 {
   "sessions": [
     {
-      "session_id": "unique_session_identifier",
-      "start_time": "2024-02-29T08:00:00",
-      "end_time": "2024-02-29T09:00:00",
-      "focus_duration_minutes": 60,
-      "distractions": 5,
-      "notes": "User notes about the session",
-      "system_notes": "System notes about the session"
-    },
-    {
-      "session_id": "unique_session_identifier",
-      "start_time": "2024-02-29T14:00:00",
-      "end_time": "2024-02-29T15:30:00",
-      "focus_duration_minutes": 90,
-      "distractions": 3,
-      "notes": "User notes about the session",
-      "system_notes": "System notes about the session"
-    },
-    {
       "start_time": "2024-03-07T15:08:34.560Z",
       "end_time": "2024-03-07T15:08:36.737Z",
       "focus_duration_minutes": "00:02",
       "distractions": 0,
       "notes": ""
+    },
+    {
+      "start_time": "2024-04-09T15:02:13.493Z",
+      "end_time": "2024-04-09T15:02:26.068Z",
+      "focus_duration_minutes": "00:12",
+      "distractions": 3,
+      "notes": ""
+    },
+    {
+      "start_time": "2024-04-11T09:30:00.000Z",
+      "end_time": "2024-04-11T10:15:00.000Z",
+      "focus_duration_minutes": "00:45",
+      "distractions": 20,
+      "notes": "Completed report analysis"
+    },
+    {
+      "start_time": "2024-04-15T14:00:00.000Z",
+      "end_time": "2024-04-15T15:30:00.000Z",
+      "focus_duration_minutes": "01:30",
+      "distractions": 8,
+      "notes": "Meeting with the team"
     }
   ]
 }

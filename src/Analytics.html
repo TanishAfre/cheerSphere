@@ -105,9 +105,9 @@
 
     <section class="home" style="overflow: scroll;">
 
-        
 
-        
+
+
         <div class="text">
             Time Spent
             <hr>
@@ -117,7 +117,7 @@
                 Overview
             </div>
             <div class="cardBox">
-                
+
                 <div class="card">
                     <div>
                         <div class="numbers">7</div>
@@ -155,7 +155,68 @@
                     </div>
                 </div>
             </div>
+            <div class="cardBox">
+                <div class="card">
+                    <div>
+                        <div class="numbers" id="lastWeekFocusDuration">0</div>
+                        <div class="cardName">Minutes focused this week</div>
+                    </div>
+                    <div class="iconBox">
+                        <i class="far fa-clock"></i>
+                    </div>
+                </div>
+                <div class="card">
+                    <div>
+                        <div class="numbers" id="thisMonthFocusDuration">0</div>
+                        <div class="cardName">Minutes focused this month</div>
+                    </div>
+                    <div class="iconBox">
+                        <i class="far fa-clock"></i>
+                    </div>
+                </div>
+            </div>
 
+            <!-- Apps Closed While Focusing This Week -->
+            <div class="text">
+                Distractions Eliminiated
+                <hr>
+            </div>
+            <div class="cardBox">
+                <div class="card">
+                    <div>
+                        <div class="numbers" id="appsClosedThisWeek">0</div>
+                        <div class="cardName">Times this week</div>
+                    </div>
+                    <div class="iconBox">
+                        <i class="far fa-window-close"></i>
+                    </div>
+                </div>
+                <div class="card">
+                    <div>
+                        <div class="numbers" id="appsClosedThisMonth">0</div>
+                        <div class="cardName">Times this month</div>
+                    </div>
+                    <div class="iconBox">
+                        <i class="far fa-window-close"></i>
+                    </div>
+                </div>
+            </div>
+            <!-- Betterment from Last Week -->
+            <div class="text">
+                Betterment from Last Week
+                <hr>
+            </div>
+            <div class="cardBox">
+                <div class="card">
+                    <div>
+                        <div class="numbers" id="bettermentFromLastWeek">0%</div>
+                        <div class="cardName">Improvement</div>
+                    </div>
+                    <div class="iconBox">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                </div>
+            </div>
             <!-- Adding Charts -->
             <div class="text">
                 Indepth Analysis
@@ -237,7 +298,7 @@
             </div>
         </div>
 
-        
+
 
     </section>
 
@@ -252,21 +313,184 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <!-- Code for other js files-->
     <script src="../js/myChart.js"></script>
-    <script src="../js/sidebar-render.js"></script>
     <script src="../js/renderer.js"></script>
-    <script src="../js/scripts.js"></script>
-    <script src="../js/pagination.js"></script>
-    <script src="../js/settings.js"></script>
 
     <!-- Insert this line after script imports -->
     <script>if (window.module) module = window.module;</script>
 
     <div id="preloader">
     </div>
-    <!--Timer Start Code-->
+    <script>
+        const fs = require('fs');
+        const path = require('path');
+        function getTotalFocusDurationThisWeek(weekStartDate) {
+            // Load the analytics file
+            const analyticsFilePath = path.join(__dirname, '../database/focus_sessions.json');
+            const analyticsData = JSON.parse(fs.readFileSync(analyticsFilePath));
+            console.log(analyticsData);
+            console.log(analyticsFilePath);
+            // Calculate the start and end of the week
+            const startDate = new Date(weekStartDate);
+            const endDate = new Date(startDate);
+            endDate.setDate(startDate.getDate() + 7);
+
+            // Filter sessions for this week
+            const thisWeekSessions = analyticsData.sessions.filter(session => {
+                const sessionStartTime = new Date(session.start_time);
+                return sessionStartTime >= startDate && sessionStartTime < endDate;
+            });
+
+            // Calculate total focus duration in minutes
+            const totalFocusDuration = thisWeekSessions.reduce((total, session) => {
+                const duration = session.focus_duration_minutes.split(':');
+                return total + parseInt(duration[0]) * 60 + parseInt(duration[1]);
+            }, 0);
+
+            return totalFocusDuration;
+        }
+        function getTotalFocusDurationThisMonth(month) {
+            // Load the analytics file
+            const analyticsFilePath = path.join(__dirname, '../database/focus_sessions.json');
+            const analyticsData = JSON.parse(fs.readFileSync(analyticsFilePath));
+
+            // Filter sessions for the given month
+            const monthSessions = analyticsData.sessions.filter(session => {
+                const sessionStartTime = new Date(session.start_time);
+                return sessionStartTime.getMonth() === month - 1; // JavaScript months are 0-based
+            });
+
+            // Calculate total focus duration in minutes
+            const totalFocusDuration = monthSessions.reduce((total, session) => {
+                const duration = session.focus_duration_minutes.split(':');
+                return total + parseInt(duration[0]) * 60 + parseInt(duration[1]);
+            }, 0);
+
+            return totalFocusDuration;
+        }
+        // Function to get the number of distractions (apps closed) last week
+        function getBlockedAppsCountLastWeek(weekStartDate) {
+            // Load the analytics file
+            const analyticsFilePath = path.join(__dirname, '../database/focus_sessions.json');
+            const analyticsData = JSON.parse(fs.readFileSync(analyticsFilePath));
+
+            // Calculate the start and end of the week
+            const startDate = new Date(weekStartDate);
+            const endDate = new Date(startDate);
+            endDate.setDate(startDate.getDate() + 7);
+
+            // Filter distractions for last week
+            const lastWeekDistractions = analyticsData.sessions.filter(session => {
+                const sessionStartTime = new Date(session.start_time);
+                return sessionStartTime >= startDate && sessionStartTime < endDate && session.distractions > 0;
+            });
+
+            // Count the number of distractions
+            const blockedAppsCount = lastWeekDistractions.reduce((count, session) => {
+                return count + session.distractions;
+            }, 0);
+
+            return blockedAppsCount;
+        }
+
+        // Function to get the number of distractions (apps closed) this month
+        function getBlockedAppsCountThisMonth(monthStartDate) {
+            // Load the analytics file
+            const analyticsFilePath = path.join(__dirname, '../database/focus_sessions.json');
+            const analyticsData = JSON.parse(fs.readFileSync(analyticsFilePath));
+
+            // Calculate the end of the month
+            const endDate = new Date(monthStartDate);
+            endDate.setMonth(endDate.getMonth() + 1);
+            endDate.setDate(0); // Set to last day of the month
+
+            // Filter distractions for this month
+            const thisMonthDistractions = analyticsData.sessions.filter(session => {
+                const sessionStartTime = new Date(session.start_time);
+                return sessionStartTime >= monthStartDate && sessionStartTime <= endDate && session.distractions > 0;
+            });
+
+            // Count the number of distractions
+            const blockedAppsCount = thisMonthDistractions.reduce((count, session) => {
+                return count + session.distractions;
+            }, 0);
+
+            return blockedAppsCount;
+        }
+
+
+        // Function to update last week's focus duration
+        function updateLastWeekFocusDuration() {
+            const today = new Date();
+            const lastWeekStartDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7);
+            const lastWeekFocusDuration = getTotalFocusDurationThisWeek(lastWeekStartDate.toISOString().slice(0, 10));
+            document.getElementById('lastWeekFocusDuration').textContent = lastWeekFocusDuration;
+        }
+        // Function to update this month's focus duration
+        function updateThisMonthFocusDuration(month) {
+            const thisMonthFocusDuration = getTotalFocusDurationThisMonth(month);
+            document.getElementById('thisMonthFocusDuration').textContent = thisMonthFocusDuration;
+        }
+
+        // Function to update apps closed while focusing this week
+        function updateAppsClosedThisWeek(weekStartDate) {
+            const appsClosedThisWeek = getBlockedAppsCountLastWeek(weekStartDate);
+            document.getElementById('appsClosedThisWeek').textContent = appsClosedThisWeek;
+        }
+
+        // Call the functions to update UI on page load
+        const today = new Date();
+        updateThisMonthFocusDuration(today.getMonth() + 1); // Month is 1-based
+        updateAppsClosedThisWeek(today.toISOString().slice(0, 10));
+        updateLastWeekFocusDuration();
+
+        // Function to get the start date of the current week
+        function getStartOfWeek(date) {
+            const day = date.getDay();
+            const diff = date.getDate() - day + (day === 0 ? -6 : 1); // Adjust when Sunday is the first day of the week
+            return new Date(date.setDate(diff));
+        }
+
+        // Function to calculate betterment from last week
+        function getBettermentFromLastWeek() {
+            const today = new Date();
+            const currentWeekStartDate = getStartOfWeek(today);
+            const previousWeekStartDate = new Date(currentWeekStartDate);
+            previousWeekStartDate.setDate(previousWeekStartDate.getDate() - 7);
+
+            const currentWeekFocus = getTotalFocusDurationThisWeek(currentWeekStartDate.toISOString().slice(0, 10));
+            const previousWeekFocus = getTotalFocusDurationThisWeek(previousWeekStartDate.toISOString().slice(0, 10));
+
+            const improvement = currentWeekFocus - previousWeekFocus;
+            const percentImprovement = ((improvement / previousWeekFocus) * 100).toFixed(2);
+            return percentImprovement;
+        }
+
+        // Call the function to update UI on page load
+        const betterment = getBettermentFromLastWeek();
+        document.getElementById('bettermentFromLastWeek').textContent = betterment + "%";
+
+        // Function to get the start date of the current month
+        function getStartOfMonth(date) {
+            return new Date(date.getFullYear(), date.getMonth(), 1);
+        }
+
+        // Function to update apps closed while focusing this month
+        function updateAppsClosedThisMonth() {
+            const today = new Date();
+            const startOfMonth = getStartOfMonth(today);
+            const appsClosedThisMonth = getBlockedAppsCountThisMonth(startOfMonth);
+            document.getElementById('appsClosedThisMonth').textContent = appsClosedThisMonth;
+        }
+
+
+
+        // Call the function to update apps closed this month on page load
+        updateAppsClosedThisMonth();
+
+    </script>
 
 
     <!-- Pre loader Script

@@ -16,9 +16,6 @@ function showNotification(title, body) {
   });
   notification.show();
 }
-
-
-
 // Function to append logs to the log file
 function appendToLog(data) {
   fs.appendFile(logFilePath, data + '\n', (err) => {
@@ -27,7 +24,6 @@ function appendToLog(data) {
     }
   });
 }
-
 
 let tray = null; // Tray instance
 let win = null; // BrowserWindow instance
@@ -118,8 +114,8 @@ const createWindow = () => {
       event.preventDefault();
       win.hide();
       // Usage
-      const NOTIFICATION_TITLE = 'Basic Notification';
-      const NOTIFICATION_BODY = 'Notification from the Main process';
+      const NOTIFICATION_TITLE = 'Application Minimized';
+      const NOTIFICATION_BODY = 'The application is now going to be running in the background.';
 
       showNotification(NOTIFICATION_TITLE, NOTIFICATION_BODY);
     }
@@ -187,6 +183,54 @@ const createWindow = () => {
   
 
 }
+
+// Function to calculate time difference in hours between two timestamps
+function getTimeDifferenceInHours(startTime, endTime) {
+  const startTimestamp = new Date(startTime).getTime();
+  const endTimestamp = new Date(endTime).getTime();
+  const differenceInMilliseconds = Math.abs(endTimestamp - startTimestamp);
+  return differenceInMilliseconds / (1000 * 60 * 60); // Convert milliseconds to hours
+}
+
+// Function to read focus session data from file
+function readFocusSessionsFromFile() {
+  const filePath = path.join(__dirname, 'database', 'focus_sessions.json');
+  try {
+    const data = fs.readFileSync(filePath, 'utf8');
+    return JSON.parse(data);
+  } catch (error) {
+    console.error('Error reading focus sessions data:', error);
+    return null;
+  }
+}
+
+// Function to check the time since the last session and send a notification if necessary
+function checkFocusTime() {
+  const sessions = readFocusSessionsFromFile();
+  if (sessions && sessions.length > 0) {
+    const lastSession = sessions[sessions.length - 1];
+    const lastStartTime = new Date(lastSession.start_time);
+    const hoursSinceLastSession = getTimeDifferenceInHours(lastStartTime, new Date());
+    if (hoursSinceLastSession >= 6) {
+      // If 6 or more hours have passed since the last session, send a notification
+      const notification = new Notification({
+        title: 'Focus Reminder',
+        body: 'It\'s been a while since your last focused session. Maybe it\'s time to focus again?',
+        icon: 'path/to/icon.png' // Update with the path to your app's icon
+      });
+      notification.show();
+    }
+  }
+}
+
+// Call the function when the app is ready
+app.whenReady().then(() => {
+  // Call the function initially
+  checkFocusTime();
+  
+  // Schedule the function to check every hour
+  setInterval(checkFocusTime, 3600000); // 3600000 milliseconds = 1 hour
+});
 
 app.setName('FocusMind');
 app.whenReady().then(() => {
