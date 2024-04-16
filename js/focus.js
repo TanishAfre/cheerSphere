@@ -14,6 +14,7 @@ function toggleCountdown() {
   var button = document.getElementById('toggleButton');
   
   if (button.textContent === 'Start Countdown') {
+    disableLinks(); // Disable links as countdown starts
     button.textContent = 'Stop Countdown';
     const sessionMinutes = parseInt(sessionLength.textContent, 10);
     const targetDate = new Date();
@@ -23,8 +24,33 @@ function toggleCountdown() {
     startCountdown(targetDate);
   } else {
     button.textContent = 'Start Countdown';
+    sessionLength.textContent = '0'; // Reset the session length display
+    enableLinks(); // Enable links as countdown stops
     stopCountdown();
   }
+}
+
+function toggleLinks(enable) {
+  var links = document.querySelectorAll('.menu-links a');
+  links.forEach(function(link) {
+      if (enable) {
+          link.style.pointerEvents = "auto"; // Explicitly enable pointer events
+          link.style.opacity = "1"; // Reset opacity to fully opaque
+      } else {
+          link.style.pointerEvents = "none"; // Disable pointer events
+          link.style.opacity = "0.5"; // Make link visually "disabled"
+      }
+  });
+}
+
+
+// Updated functions to use the toggleLinks function
+function disableLinks() {
+  toggleLinks(false); // Pass false to disable links
+}
+
+function enableLinks() {
+  toggleLinks(true); // Pass true to enable links
 }
 
 function restoreCountdown() {

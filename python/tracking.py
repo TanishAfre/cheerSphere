@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 import os
 
 # Paths
-json_file_path = 'app_running_times.json'
+json_file_path = 'database/app_running_times.json'
 apps_list_path = 'database/apps.txt'
 settings_path = 'database/settings.json'
 
@@ -32,7 +32,7 @@ def check_focus_on_setting():
     try:
         with open(settings_path, 'r') as file:
             settings = json.load(file)
-            return settings.get("Focus_On", False)
+            return settings.get("Tracking", False)
     except FileNotFoundError:
         print("Settings file not found. Assuming Focus_On is False.")
         return False

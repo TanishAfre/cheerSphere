@@ -1,26 +1,48 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto+Slab:wght@100&family=Source+Sans+3:wght@400;600;700&display=swap');
 
+:root{
+    --background-image-url-dark: url('../images/dark_background.jpg'); /* Path to the background image */
+    --container-background-color-dark: rgba(144, 144, 144, 0.8); /* Semi-transparent white */
+    --timer-text-color-dark: #ffffff;
+}
+ 
+.dark-mode
+{
+    --background-image-url-light: url('../images/Light_Background.jpeg'); /* Path to the background image */
+    --container-background-color-light: rgb(255, 255, 255); /* Semi-transparent white */
+    --timer-text-color-light: #212529;;
+}
 
-body{
-    background-color: #FEF6EB !important;
+body {
+    background-image: var(--background-image-url-dark); /* Add your image path here */
+    background-size: cover; /* Cover the entire screen */
+    background-position: center; /* Center the background image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-color: #fef6eb !important; /* Fallback color */
     min-height: 100vh;
     transition: var(--tran-05);
     font-family: 'Poppins', sans-serif;
-
 }
+
 .container {
-    /* make it so container is in the 
-    middle of the screen */
     position: absolute;
     top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
+    background-color: var(--container-background-color-dark); /* Semi-transparent white */
+    padding: 20px; /* Adjust padding to your preference */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow for depth */
+}
+
+h1 { 
+    color: var(--timer-text-color-dark); 
 }
 
 #timer {
     font-size: 2em;
-    color: #1ca0c2;
+    color: var(--timer-text-color-dark);
 }
 
 .btn {

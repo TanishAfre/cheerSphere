@@ -158,3 +158,8 @@
       min-width: 50px; /* Ensures that the div does not shrink */
       text-align: center;
   }
+
+  .disabled {
+    pointer-events: none;
+    color: grey; /* Example of visual feedback */
+  }

@@ -18,6 +18,9 @@
 </head>
 
 <body>
+
+
+
     <div class="container">
         <h1>Great Job! Time for a Well-Deserved Break:</h1>
         <div id="timer">10:00</div>
@@ -35,6 +38,21 @@
     <!-- Code for other js files-->
     <script src="../js/renderer.js"></script>
     <script src="../js/scripts.js"></script>
+
+    <script>
+        function applyThemeBasedOnTime() {
+        const hour = new Date().getHours();
+        const body = document.body;
+
+        if (hour >= 18 || hour < 6) { // Checks if the time is past 6 PM or before 6 AM
+            body.classList.add("dark-mode");
+        } else {
+            body.classList.remove("dark-mode");
+        }
+    }
+
+    applyThemeBasedOnTime(); // Run the function when the page loads
+        </script>
 
     <!-- Insert this line after script imports -->
     <script>if (window.module) module = window.module;</script>
@@ -111,14 +129,31 @@
         });
     </script>
 
-    <!-- Pre loader Script
-    <script>
-    var loader = document.getElementById("preloader");
-      window.addEventListener("load", function(){
-       loader.style.display = "none";
-     });
-    </script> 
-  -->
+
+    <audio autoplay loop>
+        <source src="../music/backgroundMusic.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
 </body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Array of messages for the break
+        const breakMessages = [
+            "Great Job! Time for a Well-Deserved Break:",
+            "Awesome Work! Let's Take a Short Break:",
+            "You've Been Fantastic! Break Time:",
+            "Excellent Effort! Relax with a Quick Break:",
+            "Outstanding Performance! Enjoy Your Break:"
+        ];
+
+        // Select a random message
+        const randomMessage = breakMessages[Math.floor(Math.random() * breakMessages.length)];
+
+        // Set the selected message
+        document.querySelector('h1').textContent = randomMessage;
+    });
+</script>
+
 
 </html>

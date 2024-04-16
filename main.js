@@ -6,8 +6,16 @@ const fs = require('fs');
 const logFilePath = path.join(__dirname, 'logs.txt');
 let mainWindow;
 let splash;
-
-
+const { Notification } = require('electron');
+app.setName('Focus Mind');
+function showNotification(title, body) {
+  const notification = new Notification({
+    title: title,
+    body: body,
+    icon: "images/favicon.ico"
+  });
+  notification.show();
+}
 // Function to append logs to the log file
 function appendToLog(data) {
   fs.appendFile(logFilePath, data + '\n', (err) => {
@@ -16,7 +24,6 @@ function appendToLog(data) {
     }
   });
 }
-
 
 let tray = null; // Tray instance
 let win = null; // BrowserWindow instance
@@ -58,7 +65,7 @@ const createWindow = () => {
   });
   splash.loadFile('./src/splash.html'); // Load your splash screen html
 
-   // Then create the main window, but don't show it immediately
+  // Then create the main window, but don't show it immediately
   const win = new BrowserWindow({
     width: 1000,
     height: 600,
@@ -76,12 +83,12 @@ const createWindow = () => {
   win.setIcon('images/Focus_Mind_Logo.png');
   //win.webContents.openDevTools();
 
-    // Only show the main window when it is ready to show
-    win.once('ready-to-show', () => {
-      splash.destroy(); // Close the splash screen
-      win.show(); // Show the main window
-    });
-    
+  // Only show the main window when it is ready to show
+  win.once('ready-to-show', () => {
+    splash.destroy(); // Close the splash screen
+    win.show(); // Show the main window
+  });
+
   // Create the Tray icon
   tray = new Tray(path.join(__dirname, 'images/focus-mind.png')); // Path to the tray icon
   tray.setToolTip('Focus Mind'); // Tooltip for the tray icon
@@ -106,28 +113,33 @@ const createWindow = () => {
     if (!app.isQuitting) {
       event.preventDefault();
       win.hide();
+      // Usage
+      const NOTIFICATION_TITLE = 'Application Minimized';
+      const NOTIFICATION_BODY = 'The application is now going to be running in the background.';
+
+      showNotification(NOTIFICATION_TITLE, NOTIFICATION_BODY);
     }
   });
   // Event listener for the 'blackout' event
 
   ipcMain.on('close-blackout', (event, arg) => {
     const timestamp = new Date().toLocaleString(); // Get current timestamp
-    console.log(timestamp +' - Blackout window closed');
-    appendToLog(timestamp +' - Blackout window closed');
+    console.log(timestamp + ' - Blackout window closed');
+    appendToLog(timestamp + ' - Blackout window closed');
     blackoutWin.close();
   });
 
   ipcMain.on('minimize-window', () => {
     const timestamp = new Date().toLocaleString(); // Get current timestamp
-    console.log(timestamp +' - Minimizing window');
-    appendToLog(timestamp +' - Minimizing window');
+    console.log(timestamp + ' - Minimizing window');
+    appendToLog(timestamp + ' - Minimizing window');
     win.minimize();
   })
 
   ipcMain.on('close-window', () => {
     const timestamp = new Date().toLocaleString(); // Get current timestamp
-    console.log( timestamp +' - Closing window');
-    appendToLog(timestamp +' - Closing window');
+    console.log(timestamp + ' - Closing window');
+    appendToLog(timestamp + ' - Closing window');
     win.close();
   })
 
@@ -136,10 +148,10 @@ const createWindow = () => {
     exec('python python/start-focus.py', (error, stdout, stderr) => {
       const timestamp = new Date().toLocaleString(); // Get current timestamp
       const logMessage = `${timestamp} - Error: ${error}, Stderr: ${stderr}, Stdout: ${stdout}`;
-    
+
       // Log to console
       console.log(logMessage);
-      
+
       // Log to file
       appendToLog("Focus Said: " + logMessage);
     });
@@ -149,10 +161,10 @@ const createWindow = () => {
     const timestamp = new Date().toLocaleString(); // Get current timestamp
     exec('python python/disable-notif.py', (error, stdout, stderr) => {
       const logMessage = `${timestamp} -Error: ${error}, Stderr: ${stderr}, Stdout: ${stdout}`;
-    
+
       // Log to console
       console.log(logMessage);
-      
+
       // Log to file
       appendToLog("Notification Blocker Said: " + logMessage);
     });
@@ -160,12 +172,65 @@ const createWindow = () => {
 
   ipcMain.on('blackout', (event, arg) => {
     const timestamp = new Date().toLocaleString(); // Get current timestamp
-    console.log(timestamp +' - Creating blackout window');
-    appendToLog(timestamp +' - Creating blackout window');
+    console.log(timestamp + ' - Creating blackout window');
+    appendToLog(timestamp + ' - Creating blackout window');
     createBlackoutWindow();
   });
 
+  ipcMain.on('show-notification', (event, args) => {
+    showNotification(args.title, args.body);
+  });
+  
+
 }
+
+// Function to calculate time difference in hours between two timestamps
+function getTimeDifferenceInHours(startTime, endTime) {
+  const startTimestamp = new Date(startTime).getTime();
+  const endTimestamp = new Date(endTime).getTime();
+  const differenceInMilliseconds = Math.abs(endTimestamp - startTimestamp);
+  return differenceInMilliseconds / (1000 * 60 * 60); // Convert milliseconds to hours
+}
+
+// Function to read focus session data from file
+function readFocusSessionsFromFile() {
+  const filePath = path.join(__dirname, 'database', 'focus_sessions.json');
+  try {
+    const data = fs.readFileSync(filePath, 'utf8');
+    return JSON.parse(data);
+  } catch (error) {
+    console.error('Error reading focus sessions data:', error);
+    return null;
+  }
+}
+
+// Function to check the time since the last session and send a notification if necessary
+function checkFocusTime() {
+  const sessions = readFocusSessionsFromFile();
+  if (sessions && sessions.length > 0) {
+    const lastSession = sessions[sessions.length - 1];
+    const lastStartTime = new Date(lastSession.start_time);
+    const hoursSinceLastSession = getTimeDifferenceInHours(lastStartTime, new Date());
+    if (hoursSinceLastSession >= 6) {
+      // If 6 or more hours have passed since the last session, send a notification
+      const notification = new Notification({
+        title: 'Focus Reminder',
+        body: 'It\'s been a while since your last focused session. Maybe it\'s time to focus again?',
+        icon: 'path/to/icon.png' // Update with the path to your app's icon
+      });
+      notification.show();
+    }
+  }
+}
+
+// Call the function when the app is ready
+app.whenReady().then(() => {
+  // Call the function initially
+  checkFocusTime();
+  
+  // Schedule the function to check every hour
+  setInterval(checkFocusTime, 3600000); // 3600000 milliseconds = 1 hour
+});
 
 app.setName('FocusMind');
 app.whenReady().then(() => {

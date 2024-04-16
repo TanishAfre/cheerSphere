@@ -38,7 +38,7 @@ var myChart = new Chart(focusHours, {
     data: {
         labels: ['Monday', 'Tuesday', 'Wednesday', 'Thirsday', 'Friday', 'Saterday'],
         datasets: [{
-            label: 'Hours Focused',
+            label: 'Focus Mode Duration Per Day (in hours)',
             data: [12, 10, 5, 8, 10, 2],
             backgroundColor: [
                 'rgba(0, 0, 0, 0.2)',
