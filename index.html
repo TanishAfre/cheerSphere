@@ -494,8 +494,8 @@
       disableLinks();
       startTime = new Date().getTime();
       isFocusing = true;
-      ipcRenderer.send('focus'); 
-      startInterval(ipcRenderer, 'blackout', 10000);
+      startInterval(ipcRenderer, 'focus', 5000);
+      startInterval(ipcRenderer, 'blackout', 1000000);
       updateTimerDisplayInterval();
       updateButtonContent("Time Left:" + formatTime(remainingDuration));
     }

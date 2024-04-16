@@ -69,6 +69,55 @@
       "focus_duration_minutes": "00:05",
       "distractions": 2,
       "notes": ""
+    },
+    {
+      "start_time": "2024-04-16T14:51:32.510Z",
+      "end_time": "2024-04-16T14:51:45.047Z",
+      "focus_duration_minutes": "00:12",
+      "distractions": null,
+      "notes": ""
+    },
+    {
+      "start_time": "2024-04-16T14:53:32.683Z",
+      "end_time": "2024-04-16T14:53:57.325Z",
+      "focus_duration_minutes": "00:24",
+      "distractions": null,
+      "notes": ""
+    },
+    {
+      "start_time": "2024-04-16T14:54:38.499Z",
+      "end_time": "2024-04-16T14:54:47.757Z",
+      "focus_duration_minutes": "00:09",
+      "distractions": null,
+      "notes": ""
+    },
+    {
+      "start_time": "2024-04-16T15:01:48.178Z",
+      "end_time": "2024-04-16T15:02:11.573Z",
+      "focus_duration_minutes": "00:23",
+      "distractions": null,
+      "notes": ""
+    },
+    {
+      "start_time": "2024-04-16T15:10:47.089Z",
+      "end_time": "2024-04-16T15:11:38.917Z",
+      "focus_duration_minutes": "00:51",
+      "distractions": null,
+      "notes": ""
+    },
+    {
+      "start_time": "2024-04-16T15:11:43.234Z",
+      "end_time": "2024-04-16T15:11:48.831Z",
+      "focus_duration_minutes": "00:05",
+      "distractions": null,
+      "notes": ""
+    },
+    {
+      "start_time": "2024-04-16T15:17:55.606Z",
+      "end_time": "2024-04-16T15:18:13.776Z",
+      "focus_duration_minutes": "00:18",
+      "distractions": 2,
+      "notes": ""
     }
   ]
 }
