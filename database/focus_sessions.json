@@ -27,6 +27,48 @@
       "focus_duration_minutes": "01:30",
       "distractions": 8,
       "notes": "Meeting with the team"
+    },
+    {
+      "start_time": "2024-04-16T14:17:35.297Z",
+      "end_time": "2024-04-16T14:17:54.077Z",
+      "focus_duration_minutes": "00:18",
+      "distractions": 4,
+      "notes": ""
+    },
+    {
+      "start_time": "2024-04-16T14:27:12.180Z",
+      "end_time": "2024-04-16T14:27:16.319Z",
+      "focus_duration_minutes": "00:04",
+      "distractions": 4,
+      "notes": ""
+    },
+    {
+      "start_time": "2024-04-16T14:28:20.182Z",
+      "end_time": "2024-04-16T14:28:37.919Z",
+      "focus_duration_minutes": "00:17",
+      "distractions": 9,
+      "notes": ""
+    },
+    {
+      "start_time": "2024-04-16T14:37:28.802Z",
+      "end_time": "2024-04-16T14:37:34.161Z",
+      "focus_duration_minutes": "00:05",
+      "distractions": 0,
+      "notes": ""
+    },
+    {
+      "start_time": "2024-04-16T14:37:47.560Z",
+      "end_time": "2024-04-16T14:37:48.407Z",
+      "focus_duration_minutes": "00:00",
+      "distractions": 2,
+      "notes": ""
+    },
+    {
+      "start_time": "2024-04-16T14:37:54.037Z",
+      "end_time": "2024-04-16T14:37:59.691Z",
+      "focus_duration_minutes": "00:05",
+      "distractions": 2,
+      "notes": ""
     }
   ]
 }

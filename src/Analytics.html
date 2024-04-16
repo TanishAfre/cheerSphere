@@ -120,7 +120,7 @@
 
                 <div class="card">
                     <div>
-                        <div class="numbers">7</div>
+                        <div class="numbers" id="blackoutTime">7</div>
                         <div class="cardName">Hours Focused</div>
                     </div>
                     <div class="iconBox">
@@ -147,7 +147,7 @@
                 </div> -->
                 <div class="card">
                     <div>
-                        <div class="numbers">7</div>
+                        <div class="numbers" id="blackoutAmount">0</div>
                         <div class="cardName">Average Blackout Mode Duration</div>
                     </div>
                     <div class="iconBox">
@@ -504,6 +504,7 @@
 
             // Update the UI element with the apps closed count
             document.getElementById('appsClosedCount').textContent = appsClosed;
+            console.log(appsClosed);
         }
 
         // Function to update the card displaying the blackout mode information
@@ -515,6 +516,8 @@
             // Update the UI elements with blackout mode information
             document.getElementById('blackoutAmount').textContent = blackoutAmount;
             document.getElementById('blackoutTime').textContent = blackoutTime;
+            console.log(blackoutAmount);
+            console.log(blackoutTime);
         }
 
         // Call the functions to update UI cards on page load

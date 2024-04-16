@@ -1,9 +1,9 @@
 {
   "appAnalytics": {
-    "appsClosed": 39
+    "appsClosed": 50
   },
   "Blackout": {
     "blackoutAmount": 12,
-    "blackoutTime": "194"
+    "blackoutTime": "194444"
   }
 }

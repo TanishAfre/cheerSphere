@@ -269,3 +269,110 @@ Process closed.
 13/4/2024, 6:58:38 pm - Closing window
 13/4/2024, 6:58:55 pm - Closing window
 13/4/2024, 6:59:12 pm - Closing window
+13/4/2024, 11:26:04 pm - Closing window
+13/4/2024, 11:39:24 pm - Closing window
+15/4/2024, 11:18:23 am - Closing window
+15/4/2024, 11:20:46 am - Minimizing window
+15/4/2024, 5:43:14 pm - Closing window
+Notification Blocker Said: 16/4/2024, 3:17:35 pm -Error: null, Stderr: , Stdout: Notifications Triggered
+
+Focus Said: 16/4/2024, 3:17:42 pm - Error: null, Stderr: , Stdout: SUCCESS: Sent termination signal to the process with PID 12840.
+SUCCESS: Sent termination signal to the process with PID 12840.
+SUCCESS: The process with PID 12840 has been terminated.
+Process 'chrome.exe' is running. Closing...
+Forcing close...
+Process closed.
+
+Focus Said: 16/4/2024, 3:17:44 pm - Error: null, Stderr: ERROR: The process "12840" not found.
+, Stdout: SUCCESS: Sent termination signal to the process with PID 12840.
+Process 'chrome.exe' is running. Closing...
+Process closed.
+
+16/4/2024, 3:17:45 pm - Creating blackout window
+Focus Said: 16/4/2024, 3:17:45 pm - Error: null, Stderr: , Stdout: Process 'chrome.exe' is not running.
+
+Focus Said: 16/4/2024, 3:17:46 pm - Error: null, Stderr: ERROR: The process "12840" not found.
+, Stdout: SUCCESS: Sent termination signal to the process with PID 12840.
+Process 'chrome.exe' is running. Closing...
+Process closed.
+
+Focus Said: 16/4/2024, 3:17:47 pm - Error: null, Stderr: , Stdout: Process 'chrome.exe' is not running.
+
+Focus Said: 16/4/2024, 3:17:48 pm - Error: null, Stderr: ERROR: The process "1376" not found.
+ERROR: The process "1376" not found.
+, Stdout: Process 'chrome.exe' is running. Closing...
+Process closed.
+
+Focus Said: 16/4/2024, 3:17:49 pm - Error: null, Stderr: , Stdout: Process 'chrome.exe' is not running.
+
+Focus Said: 16/4/2024, 3:17:51 pm - Error: null, Stderr: , Stdout: Process 'chrome.exe' is not running.
+
+Focus Said: 16/4/2024, 3:17:53 pm - Error: null, Stderr: , Stdout: Process 'chrome.exe' is not running.
+
+Notification Blocker Said: 16/4/2024, 3:27:12 pm -Error: null, Stderr: , Stdout: Notifications Triggered
+
+Focus Said: 16/4/2024, 3:27:19 pm - Error: null, Stderr: , Stdout: SUCCESS: Sent termination signal to the process with PID 12036.
+SUCCESS: Sent termination signal to the process with PID 12036.
+SUCCESS: The process with PID 12036 has been terminated.
+Process 'chrome.exe' is running. Closing...
+Forcing close...
+Process closed.
+
+Focus Said: 16/4/2024, 3:27:21 pm - Error: null, Stderr: ERROR: The process "12036" not found.
+, Stdout: SUCCESS: Sent termination signal to the process with PID 12036.
+Process 'chrome.exe' is running. Closing...
+Process closed.
+
+Notification Blocker Said: 16/4/2024, 3:28:20 pm -Error: null, Stderr: , Stdout: Notifications Triggered
+
+Focus Said: 16/4/2024, 3:28:22 pm - Error: null, Stderr: , Stdout: Process 'chrome.exe' is not running.
+
+Focus Said: 16/4/2024, 3:28:24 pm - Error: null, Stderr: , Stdout: Process 'chrome.exe' is not running.
+
+16/4/2024, 3:28:30 pm - Creating blackout window
+Focus Said: 16/4/2024, 3:28:31 pm - Error: null, Stderr: , Stdout: SUCCESS: Sent termination signal to the process with PID 5544.
+SUCCESS: Sent termination signal to the process with PID 5544.
+SUCCESS: The process with PID 5544 has been terminated.
+Process 'chrome.exe' is running. Closing...
+Forcing close...
+Process closed.
+
+Focus Said: 16/4/2024, 3:28:32 pm - Error: null, Stderr: , Stdout: Process 'chrome.exe' is not running.
+
+Focus Said: 16/4/2024, 3:28:34 pm - Error: null, Stderr: ERROR: The process "5544" not found.
+, Stdout: SUCCESS: Sent termination signal to the process with PID 5544.
+Process 'chrome.exe' is running. Closing...
+Process closed.
+
+Focus Said: 16/4/2024, 3:28:34 pm - Error: null, Stderr: , Stdout: Process 'chrome.exe' is not running.
+
+Focus Said: 16/4/2024, 3:28:35 pm - Error: null, Stderr: ERROR: The process "5544" not found.
+, Stdout: SUCCESS: Sent termination signal to the process with PID 5544.
+Process 'chrome.exe' is running. Closing...
+Process closed.
+
+Focus Said: 16/4/2024, 3:28:36 pm - Error: null, Stderr: , Stdout: Process 'chrome.exe' is not running.
+
+Notification Blocker Said: 16/4/2024, 3:37:28 pm -Error: null, Stderr: , Stdout: Notifications Triggered
+
+Focus Said: 16/4/2024, 3:37:36 pm - Error: null, Stderr: , Stdout: SUCCESS: Sent termination signal to the process with PID 27224.
+SUCCESS: Sent termination signal to the process with PID 27224.
+SUCCESS: The process with PID 27224 has been terminated.
+Process 'chrome.exe' is running. Closing...
+Forcing close...
+Process closed.
+
+Focus Said: 16/4/2024, 3:37:38 pm - Error: null, Stderr: ERROR: The process "27224" not found.
+, Stdout: SUCCESS: Sent termination signal to the process with PID 27224.
+Process 'chrome.exe' is running. Closing...
+Process closed.
+
+Notification Blocker Said: 16/4/2024, 3:37:47 pm -Error: null, Stderr: , Stdout: Notifications Triggered
+
+Notification Blocker Said: 16/4/2024, 3:37:54 pm -Error: null, Stderr: , Stdout: Notifications Triggered
+
+Focus Said: 16/4/2024, 3:37:56 pm - Error: null, Stderr: , Stdout: Process 'chrome.exe' is not running.
+
+16/4/2024, 3:37:57 pm - Creating blackout window
+Focus Said: 16/4/2024, 3:37:58 pm - Error: null, Stderr: , Stdout: Process 'chrome.exe' is not running.
+

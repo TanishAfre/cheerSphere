@@ -15,5 +15,5 @@
     "DisplayNotificationsPost": false
   },
   "Tracking": true,
-  "Focus_Mode": true
+  "Focus_Mode": false
 }
