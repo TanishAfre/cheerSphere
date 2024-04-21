@@ -132,12 +132,20 @@
                             <h5 class="card-header blocked-card-head">Blocked Applications</h5>
                             <div class="card-body blocked-card-body">
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" id="txtAddApp"
+                                    <!-- <input type="text" class="form-control" id="txtAddApp"
                                         placeholder="Block more applications by entering there name"
-                                        style="width: 80%;">
+                                        style="width: 80%;"> -->
+                                    <select class="form-control" id="txtAddApp" placeholder="Block more applications by entering there name"  style="width: 80%;">
+                                        <option value="" disabled selected class="placeholder-option" >Block applications by their name</option>
+                                        <option value="chrome.exe">Chrome</option>
+                                        <option value="Discord.exe">Discord</option>
+                                        <option value="app3">Application 3</option>
+                                        <option value="app4">Application 4</option>
+                                        <!-- Add more options as needed -->
+                                    </select> 
                                     <div class="input-group-append" style="width: 20%;">
                                         <button class="btn green-button" type="button"
-                                            onclick="appendContentToFile(document.getElementById('txtAddApp').value)">Add</button>
+                                            onclick="appendContentToFile(document.getElementById('txtAddApp').value)">Block</button>
                                     </div>
                                 </div>
                                 <div class="text-container">

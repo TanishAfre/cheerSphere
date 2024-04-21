@@ -86,8 +86,28 @@ td:nth-child(2) {
     background-color: #789c74 !important;
     color: white !important;
 }
+
 input::placeholder{
     font-size: 10px;
+}
+
+.placeholder-option {
+    font-size: 10px;
+}
+
+.input-group > .form-control {
+    /* Your override styles here */
+    height: auto !important; /* Example property */
+}
+
+#txtAddApp {
+    font-size: 10px;  /* Smaller font size for the selected/displayed value */
+    width: 80%;
+}
+
+/* Reset the font size for options when the select box is opened */
+#txtAddApp option {
+    font-size: 16px;  /* Standard font size for options */
 }
 
 .settings-container {
