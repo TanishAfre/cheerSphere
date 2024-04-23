@@ -438,3 +438,8 @@ Process closed.
 Focus Said: 16/4/2024, 4:18:11 pm - Error: null, Stderr: , Stdout: Process 'chrome.exe' is not running.
 
 16/4/2024, 7:12:24 pm - Closing window
+22/4/2024, 2:14:36 pm - Closing window
+23/4/2024, 12:10:41 am - Minimizing window
+23/4/2024, 12:10:56 am - Minimizing window
+23/4/2024, 12:12:42 am - Minimizing window
+23/4/2024, 3:43:13 pm - Closing window
