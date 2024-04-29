@@ -86,6 +86,42 @@ td:nth-child(2) {
     background-color: #789c74 !important;
     color: white !important;
 }
+
 input::placeholder{
     font-size: 10px;
+}
+
+.placeholder-option {
+    font-size: 10px;
+}
+
+.input-group > .form-control {
+    /* Your override styles here */
+    height: auto !important; /* Example property */
+}
+
+#txtAddApp {
+    font-size: 10px;  /* Smaller font size for the selected/displayed value */
+    width: 80%;
+}
+
+/* Reset the font size for options when the select box is opened */
+#txtAddApp option {
+    font-size: 16px;  /* Standard font size for options */
+}
+
+.settings-container {
+    display: flex;
+    justify-content: space-between; /* Ensures that the child elements are spaced out evenly. */
+    align-items: center; /* Aligns items vertically in the center. */
+}
+
+.settings-title, .settings-dropdown {
+    flex: 1; /* Each element will take up equal space */
+    padding: 10px; /* Adds some padding around each element. */
+}
+
+/* Optional: You might want to adjust margins or padding for a better alignment */
+.settings-title {
+    margin-right: 10px; /* Adds a right margin to the title for better spacing */
 }

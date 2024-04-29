@@ -206,27 +206,27 @@
               <div class="d-inline-block text-center">
                 <span class="emoji" onclick="saveMood('😒')" title="Low">😒</span>
                 <br>
-                <span class="subtitle">Sad</span>
+                <span class="subtitle">Low</span>
               </div>
               <div class="d-inline-block text-center">
                 <span class="emoji" onclick="saveMood('😕')" title="Mild">😕</span>
                 <br>
-                <span class="subtitle">Angry</span>
+                <span class="subtitle">Mild</span>
               </div>
               <div class="d-inline-block text-center">
                 <span class="emoji" onclick="saveMood('😐')" title="Neutral">😐</span>
                 <br>
-                <span class="subtitle">Happy</span>
+                <span class="subtitle">Neutral</span>
               </div>
               <div class="d-inline-block text-center">
                 <span class="emoji" onclick="saveMood('😊')" title="Moderate">😊</span>
                 <br>
-                <span class="subtitle">Confused</span>
+                <span class="subtitle">Moderate</span>
               </div>
               <div class="d-inline-block text-center">
                 <span class="emoji" onclick="saveMood('😀')" title="Content">😀</span>
                 <br>
-                <span class="subtitle">Confused</span>
+                <span class="subtitle">Content</span>
               </div>
             </div>
           </div>
@@ -317,6 +317,37 @@
 
   <!--Functions-->
   <script>
+
+    function updateFocusMode(isFocusing) {
+      fs.readFile('database/settings.json', 'utf8', (err, data) => {
+        if (err) {
+          console.error('Error reading JSON file:', err);
+          return;
+        }
+
+        try {
+          // Parse the JSON data
+          const settings = JSON.parse(data);
+
+          // Update the Focus_Mode value
+          settings.Focus_Mode = isFocusing;
+
+          // Convert the updated object back to JSON format
+          const updatedData = JSON.stringify(settings, null, 2);
+
+          // Write the updated JSON back to the file
+          fs.writeFile('database/settings.json', updatedData, 'utf8', (err) => {
+            if (err) {
+              console.error('Error writing JSON file:', err);
+              return;
+            }
+            console.log('Focus_Mode updated successfully.');
+          });
+        } catch (error) {
+          console.error('Error parsing JSON:', error);
+        }
+      });
+    }
     // Function to disable links
     function disableLinks() {
       var links = document.querySelectorAll('.menu-links a');
@@ -339,12 +370,12 @@
       $('#congratulationsModal').modal('show');
       console.log("Congratulations! You were focused for " + formatTime(focusedTime) + ".");
       //print distractions from the variable and the value that it is at now
-      console.log("distractions: " + (getDistraction()  - distractions));
+      console.log("distractions: " + (getDistraction() - distractions));
       //print start time and end time
       console.log("Start Time: " + startTimer);
       console.log("End Time: " + endTimer);
       // Add session analytics
-      addSessionAnalytics(startTimer, endTimer, formatTime(focusedTime), getDistraction()  - distractions, selectedMood);
+      addSessionAnalytics(startTimer, endTimer, formatTime(focusedTime), getDistraction() - distractions, selectedMood);
 
     }
 
@@ -408,9 +439,11 @@
         beginFocus();
         console.log("distractions: " + distractions);
         startTimer = new Date().getTime();
+        updateFocusMode(true);
       } else {
         endTimer = new Date().getTime();
         endFocus();
+        updateFocusMode(false);
       }
     }
 
@@ -461,8 +494,8 @@
       disableLinks();
       startTime = new Date().getTime();
       isFocusing = true;
-      startInterval(ipcRenderer, 'focus', 2000);
-      startInterval(ipcRenderer, 'blackout', 10000);
+      startInterval(ipcRenderer, 'focus', 5000);
+      startInterval(ipcRenderer, 'blackout', 1000000);
       updateTimerDisplayInterval();
       updateButtonContent("Time Left:" + formatTime(remainingDuration));
     }

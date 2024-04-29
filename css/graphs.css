@@ -31,6 +31,11 @@
     grid-gap: 30px;
     min-height: 200px;
 }
+#centerThisCard {
+    grid-column: 1 / -1; /* This makes the card span all columns */
+    justify-self: center; /* Center the card within the column */
+    width: 50%;
+}
 
 .cardBoxMood{
     position: relative !important;

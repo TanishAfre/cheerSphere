@@ -5,10 +5,10 @@ var focusHours = document.getElementById('focusMode').getContext('2d');
 var myChart = new Chart(ctx, {
     type: 'polarArea',
     data: {
-        labels: ['Facebook', 'Spotify', 'YouTube', 'Netflix', 'Instagram', 'Twitter'],
+        labels: ['Discord', 'Spotify', 'Chrome', 'Photoshop', 'Steam', 'Word'],
         datasets: [{
-            label: 'Hours spent on websites',
-            data: [5, 15, 10, 8, 6, 3],
+            label: 'Hours spent on Applications (in hours)',
+            data: [26, 3, 14, 2, 12, 1],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.5)',
                 'rgba(54, 162, 235, 0.5)',
@@ -36,10 +36,10 @@ var myChart = new Chart(ctx, {
 var myChart = new Chart(focusHours, {
     type: 'bar',
     data: {
-        labels: ['Monday', 'Tuesday', 'Wednesday', 'Thirsday', 'Friday', 'Saterday'],
+        labels: ['Monday', 'Tuesday', 'Wednesday', 'Thirsday', 'Friday', 'Saturday'],
         datasets: [{
             label: 'Focus Mode Duration Per Day (in hours)',
-            data: [12, 10, 5, 8, 10, 2],
+            data: [5, 6, 2, 12, 8, 0],
             backgroundColor: [
                 'rgba(0, 0, 0, 0.2)',
                 'rgba(0, 0, 0, 0.2)',

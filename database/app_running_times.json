@@ -5,5 +5,36 @@
     "chrome.exe": {
         "total_duration": "0:00:00",
         "start_time": "2024-03-12 14:38:43"
+    },
+    "Spotify.exe": {
+        "total_duration": "3:45:12"
+    },
+    "Photoshop.exe": {
+        "total_duration": "2:30:40",
+        "start_time": "2024-04-10 09:15:30"
+    },
+    "Outlook.exe": {
+        "total_duration": "5:12:07",
+        "start_time": "2024-04-28 08:00:00"
+    },
+    "Excel.exe": {
+        "total_duration": "8:23:55",
+        "start_time": "2024-04-15 10:20:00"
+    },
+    "Word.exe": {
+        "total_duration": "1:40:00",
+        "start_time": "2024-04-22 13:00:00"
+    },
+    "PowerPoint.exe": {
+        "total_duration": "0:35:20",
+        "start_time": "2024-04-22 14:00:00"
+    },
+    "OneNote.exe": {
+        "total_duration": "0:22:10",
+        "start_time": "2024-04-28 11:30:00"
+    },
+    "Steam.exe": {
+        "total_duration": "12:15:30",
+        "start_time": "2024-04-05 20:45:00"
     }
 }
