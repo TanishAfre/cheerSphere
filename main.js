@@ -303,6 +303,7 @@ function checkFocusTime() {
 
 // Call the function when the app is ready
 app.whenReady().then(() => {
+  appStartupTasks();
   // Call the function initially
   checkFocusTime();
   
@@ -319,6 +320,7 @@ app.whenReady().then(() => {
 
   app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
+      appShutdownTasks();
       app.quit();
     }
   });
