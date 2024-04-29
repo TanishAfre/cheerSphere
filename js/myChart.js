@@ -5,10 +5,10 @@ var focusHours = document.getElementById('focusMode').getContext('2d');
 var myChart = new Chart(ctx, {
     type: 'polarArea',
     data: {
-        labels: ['Facebook', 'Spotify', 'YouTube', 'Netflix', 'Instagram', 'Twitter'],
+        labels: ['Discord', 'Spotify', 'Chrome', 'Photoshop', 'Steam', 'Word'],
         datasets: [{
-            label: 'Hours spent on websites',
-            data: [5, 15, 10, 8, 6, 3],
+            label: 'Hours spent on Applications (in hours)',
+            data: [26, 3, 14, 2, 12, 1],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.5)',
                 'rgba(54, 162, 235, 0.5)',
