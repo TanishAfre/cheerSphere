@@ -114,7 +114,7 @@
             <h3 style="margin-top: 40px;">Hours Focused This Week</h3>
           </div>
           <div class="col-md circle-glow">
-            <div class="circle">200</div>
+            <div class="circle" id="lastWeekFocusDuration">200</div>
             <h3 style="margin-top: 40px;">Hours spent on blocked<br> app/websites</h3>
           </div>
         </div>
@@ -398,6 +398,38 @@
   </script>
   <script>
     const fs = require('fs');
+    function getTotalFocusDurationThisWeek(weekStartDate) {
+            // Load the analytics file
+            const analyticsFilePath = path.join(__dirname, '../database/focus_sessions.json');
+            const analyticsData = JSON.parse(fs.readFileSync(analyticsFilePath));
+            console.log(analyticsData);
+            console.log(analyticsFilePath);
+            // Calculate the start and end of the week
+            const startDate = new Date(weekStartDate);
+            const endDate = new Date(startDate);
+            endDate.setDate(startDate.getDate() + 7);
+
+            // Filter sessions for this week
+            const thisWeekSessions = analyticsData.sessions.filter(session => {
+                const sessionStartTime = new Date(session.start_time);
+                return sessionStartTime >= startDate && sessionStartTime < endDate;
+            });
+
+            // Calculate total focus duration in minutes
+            const totalFocusDuration = thisWeekSessions.reduce((total, session) => {
+                const duration = session.focus_duration_minutes.split(':');
+                return total + parseInt(duration[0]) * 60 + parseInt(duration[1]);
+            }, 0);
+
+            return totalFocusDuration;
+        }
+        // Function to update last week's focus duration
+        function updateLastWeekFocusDuration() {
+            const today = new Date();
+            const lastWeekStartDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7);
+            const lastWeekFocusDuration = getTotalFocusDurationThisWeek(lastWeekStartDate.toISOString().slice(0, 10));
+            document.getElementById('lastWeekFocusDuration').textContent = lastWeekFocusDuration;
+        }
 
     try {
       const data = JSON.parse(fs.readFileSync('database/settings.json', 'utf8'));
