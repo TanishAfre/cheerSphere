@@ -24,6 +24,84 @@ function appendToLog(data) {
     }
   });
 }
+// Function to read the value of Tracking from settings.json
+function checkTrackingValue() {
+  const settingsFilePath = path.join(__dirname, 'database', 'settings.json');
+  try {
+    // Read the settings file
+    const settingsData = fs.readFileSync(settingsFilePath, 'utf8');
+    // Parse the JSON data
+    const settings = JSON.parse(settingsData);
+    // Get the value of Tracking
+    const trackingValue = settings.Tracking;
+    return trackingValue;
+  } catch (error) {
+    console.error('Error reading settings file:', error);
+    return null;
+  }
+}
+
+// Function to set the value of Tracking to true
+function setTrackingValueToTrue() {
+  const settingsFilePath = path.join(__dirname, 'database', 'settings.json');
+  try {
+    // Read the settings file
+    let settingsData = fs.readFileSync(settingsFilePath, 'utf8');
+    // Parse the JSON data
+    let settings = JSON.parse(settingsData);
+    // Update the value of Tracking
+    settings.Tracking = true;
+    // Write the updated settings back to the file
+    fs.writeFileSync(settingsFilePath, JSON.stringify(settings, null, 2));
+  } catch (error) {
+    console.error('Error writing to settings file:', error);
+  }
+}
+
+// Function to set the value of Tracking to false
+function setTrackingValueToFalse() {
+  const settingsFilePath = path.join(__dirname, 'database', 'settings.json');
+  try {
+    // Read the settings file
+    let settingsData = fs.readFileSync(settingsFilePath, 'utf8');
+    // Parse the JSON data
+    let settings = JSON.parse(settingsData);
+    // Update the value of Tracking
+    settings.Tracking = false;
+    // Write the updated settings back to the file
+    fs.writeFileSync(settingsFilePath, JSON.stringify(settings, null, 2));
+  } catch (error) {
+    console.error('Error writing to settings file:', error);
+  }
+}
+
+// Function to start tracking.py
+function startTrackingPythonScript() {
+  const pythonScriptPath = path.join(__dirname, 'python', 'tracking.py');
+  exec(`python ${pythonScriptPath}`, (error, stdout, stderr) => {
+    if (error) {
+      console.error('Error starting tracking.py:', error);
+    }
+    if (stderr) {
+      console.error('Error output from tracking.py:', stderr);
+    }
+    console.log('Tracking script started.');
+  });
+}
+
+// Call the functions when the app starts
+function appStartupTasks() {
+  // Set Tracking value to true
+  setTrackingValueToTrue();
+  // Start tracking.py
+  startTrackingPythonScript();
+}
+
+// Call the function when the app closes
+function appShutdownTasks() {
+  // Set Tracking value to false
+  setTrackingValueToFalse();
+}
 
 let tray = null; // Tray instance
 let win = null; // BrowserWindow instance
