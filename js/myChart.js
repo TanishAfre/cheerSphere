@@ -36,10 +36,10 @@ var myChart = new Chart(ctx, {
 var myChart = new Chart(focusHours, {
     type: 'bar',
     data: {
-        labels: ['Monday', 'Tuesday', 'Wednesday', 'Thirsday', 'Friday', 'Saterday'],
+        labels: ['Monday', 'Tuesday', 'Wednesday', 'Thirsday', 'Friday', 'Saturday'],
         datasets: [{
             label: 'Focus Mode Duration Per Day (in hours)',
-            data: [12, 10, 5, 8, 10, 2],
+            data: [5, 6, 2, 12, 8, 0],
             backgroundColor: [
                 'rgba(0, 0, 0, 0.2)',
                 'rgba(0, 0, 0, 0.2)',
