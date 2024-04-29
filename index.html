@@ -111,11 +111,11 @@
         <div class="row">
           <div class="col-md" align="center">
             <div class="circle" id="appsClosedThisMonth"></div>
-            <h3 style="margin-top: 40px;">Hours Focused This Week</h3>
+            <h3 style="margin-top: 40px;">Distractions Eliminiated this month</h3>
           </div>
           <div class="col-md circle-glow">
             <div class="circle" id="thisMonthFocusDuration"></div>
-            <h3 style="margin-top: 40px;">Hours spent on blocked<br> app/websites</h3>
+            <h3 style="margin-top: 40px;">Hours Focused This<br> Month</h3>
           </div>
         </div>
         <div class="button-wrapper">
@@ -398,27 +398,8 @@
   </script>
   <script>
     const fs = require('fs');
-    const path = require('path');
-    function getTotalFocusDurationThisMonth(month) {
-            // Load the analytics file
-            const analyticsFilePath = path.join(__dirname, 'database/focus_sessions.json');
-            const analyticsData = JSON.parse(fs.readFileSync(analyticsFilePath));
-
-            // Filter sessions for the given month
-            const monthSessions = analyticsData.sessions.filter(session => {
-                const sessionStartTime = new Date(session.start_time);
-                return sessionStartTime.getMonth() === month - 1; // JavaScript months are 0-based
-            });
-
-            // Calculate total focus duration in minutes
-            const totalFocusDuration = monthSessions.reduce((total, session) => {
-                const duration = session.focus_duration_minutes.split(':');
-                return total + parseInt(duration[0]) * 60 + parseInt(duration[1]);
-            }, 0);
-
-            return totalFocusDuration;
-        }
-    function getTotalFocusDurationThisWeek(weekStartDate) {
+        const path = require('path');
+        function getTotalFocusDurationThisWeek(weekStartDate) {
             // Load the analytics file
             const analyticsFilePath = path.join(__dirname, 'database/focus_sessions.json');
             const analyticsData = JSON.parse(fs.readFileSync(analyticsFilePath));
@@ -443,6 +424,50 @@
 
             return totalFocusDuration;
         }
+        function getTotalFocusDurationThisMonth(month) {
+            // Load the analytics file
+            const analyticsFilePath = path.join(__dirname, 'database/focus_sessions.json');
+            const analyticsData = JSON.parse(fs.readFileSync(analyticsFilePath));
+
+            // Filter sessions for the given month
+            const monthSessions = analyticsData.sessions.filter(session => {
+                const sessionStartTime = new Date(session.start_time);
+                return sessionStartTime.getMonth() === month - 1; // JavaScript months are 0-based
+            });
+
+            // Calculate total focus duration in minutes
+            const totalFocusDuration = monthSessions.reduce((total, session) => {
+                const duration = session.focus_duration_minutes.split(':');
+                return total + parseInt(duration[0]) * 60 + parseInt(duration[1]);
+            }, 0);
+
+            return totalFocusDuration;
+        }
+        // Function to get the number of distractions (apps closed) last week
+        function getBlockedAppsCountLastWeek(weekStartDate) {
+            // Load the analytics file
+            const analyticsFilePath = path.join(__dirname, 'database/focus_sessions.json');
+            const analyticsData = JSON.parse(fs.readFileSync(analyticsFilePath));
+
+            // Calculate the start and end of the week
+            const startDate = new Date(weekStartDate);
+            const endDate = new Date(startDate);
+            endDate.setDate(startDate.getDate() + 7);
+
+            // Filter distractions for last week
+            const lastWeekDistractions = analyticsData.sessions.filter(session => {
+                const sessionStartTime = new Date(session.start_time);
+                return sessionStartTime >= startDate && sessionStartTime < endDate && session.distractions > 0;
+            });
+
+            // Count the number of distractions
+            const blockedAppsCount = lastWeekDistractions.reduce((count, session) => {
+                return count + session.distractions;
+            }, 0);
+
+            return blockedAppsCount;
+        }
+
         // Function to get the number of distractions (apps closed) this month
         function getBlockedAppsCountThisMonth(monthStartDate) {
             // Load the analytics file
@@ -467,6 +492,8 @@
 
             return blockedAppsCount;
         }
+
+
         // Function to update last week's focus duration
         function updateLastWeekFocusDuration() {
             const today = new Date();
@@ -485,6 +512,44 @@
             const appsClosedThisWeek = getBlockedAppsCountLastWeek(weekStartDate);
             document.getElementById('appsClosedThisWeek').textContent = appsClosedThisWeek;
         }
+
+        // Call the functions to update UI on page load
+        const today = new Date();
+        updateThisMonthFocusDuration(today.getMonth() + 1); // Month is 1-based
+        updateAppsClosedThisWeek(today.toISOString().slice(0, 10));
+        updateLastWeekFocusDuration();
+
+        // Function to get the start date of the current week
+        function getStartOfWeek(date) {
+            const day = date.getDay();
+            const diff = date.getDate() - day + (day === 0 ? -6 : 1); // Adjust when Sunday is the first day of the week
+            return new Date(date.setDate(diff));
+        }
+
+        // Function to calculate betterment from last week
+        function getBettermentFromLastWeek() {
+            const today = new Date();
+            const currentWeekStartDate = getStartOfWeek(today);
+            const previousWeekStartDate = new Date(currentWeekStartDate);
+            previousWeekStartDate.setDate(previousWeekStartDate.getDate() - 7);
+
+            const currentWeekFocus = getTotalFocusDurationThisWeek(currentWeekStartDate.toISOString().slice(0, 10));
+            const previousWeekFocus = getTotalFocusDurationThisWeek(previousWeekStartDate.toISOString().slice(0, 10));
+
+            const improvement = currentWeekFocus - previousWeekFocus;
+            const percentImprovement = ((improvement / previousWeekFocus) * 100).toFixed(2);
+            return percentImprovement;
+        }
+
+        // Call the function to update UI on page load
+        const betterment = getBettermentFromLastWeek();
+        document.getElementById('bettermentFromLastWeek').textContent = betterment + "%";
+
+        // Function to get the start date of the current month
+        function getStartOfMonth(date) {
+            return new Date(date.getFullYear(), date.getMonth(), 1);
+        }
+
         // Function to update apps closed while focusing this month
         function updateAppsClosedThisMonth() {
             const today = new Date();
@@ -492,6 +557,46 @@
             const appsClosedThisMonth = getBlockedAppsCountThisMonth(startOfMonth);
             document.getElementById('appsClosedThisMonth').textContent = appsClosedThisMonth;
         }
+
+
+
+        // Call the function to update apps closed this month on page load
+        updateAppsClosedThisMonth();
+
+        // Function to load and parse the analytics data from the JSON file
+        function loadAnalyticsData() {
+            const analyticsFilePath = path.join(__dirname, 'database/analytics.json');
+            const analyticsData = JSON.parse(fs.readFileSync(analyticsFilePath));
+            return analyticsData;
+        }
+
+        // Function to update the card displaying the number of apps closed
+        function updateAppsClosedCard() {
+            const analyticsData = loadAnalyticsData();
+            const appsClosed = analyticsData.appAnalytics.appsClosed;
+
+            // Update the UI element with the apps closed count
+            document.getElementById('appsClosedCount').textContent = appsClosed;
+            console.log(appsClosed);
+        }
+
+        // Function to update the card displaying the blackout mode information
+        function updateBlackoutModeCard() {
+            const analyticsData = loadAnalyticsData();
+            const blackoutAmount = analyticsData.Blackout.blackoutAmount;
+            const blackoutTime = analyticsData.Blackout.blackoutTime;
+
+            // Update the UI elements with blackout mode information
+            document.getElementById('blackoutAmount').textContent = blackoutAmount;
+            document.getElementById('blackoutTime').textContent = blackoutTime;
+            console.log(blackoutAmount);
+            console.log(blackoutTime);
+        }
+
+        // Call the functions to update UI cards on page load
+        updateAppsClosedCard();
+        updateBlackoutModeCard();
+
 
     try {
       const data = JSON.parse(fs.readFileSync('database/settings.json', 'utf8'));
