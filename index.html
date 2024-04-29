@@ -110,7 +110,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md" align="center" >
-            <div class="circle" id="appsClosedThisMonth">54</div>
+            <div class="circle" id="appsClosedThisMonth">53</div>
             <h3 style="margin-top: 40px;">Distractions Eliminiated this month</h3>
           </div>
           <div class="col-md circle-glow" align="center">
@@ -507,6 +507,19 @@
             document.getElementById('thisMonthFocusDuration').textContent = thisMonthFocusDuration;
         }
 
+        
+        // Function to update apps closed while focusing this month
+        function updateAppsClosedThisMonth() {
+            const today = new Date();
+            const startOfMonth = getStartOfMonth(today);
+            const appsClosedThisMonth = getBlockedAppsCountThisMonth(startOfMonth);
+            document.getElementById('appsClosedThisMonth').textContent = appsClosedThisMonth;
+        }
+
+
+
+        // Call the function to update apps closed this month on page load
+        updateAppsClosedThisMonth();
         // Function to update apps closed while focusing this week
         function updateAppsClosedThisWeek(weekStartDate) {
             const appsClosedThisWeek = getBlockedAppsCountLastWeek(weekStartDate);
@@ -516,7 +529,6 @@
         // Call the functions to update UI on page load
         const today = new Date();
         updateThisMonthFocusDuration(today.getMonth() + 1); // Month is 1-based
-        updateAppsClosedThisWeek(today.toISOString().slice(0, 10));
         updateLastWeekFocusDuration();
 
         // Function to get the start date of the current week
@@ -550,18 +562,6 @@
             return new Date(date.getFullYear(), date.getMonth(), 1);
         }
 
-        // Function to update apps closed while focusing this month
-        function updateAppsClosedThisMonth() {
-            const today = new Date();
-            const startOfMonth = getStartOfMonth(today);
-            const appsClosedThisMonth = getBlockedAppsCountThisMonth(startOfMonth);
-            document.getElementById('appsClosedThisMonth').textContent = appsClosedThisMonth;
-        }
-
-
-
-        // Call the function to update apps closed this month on page load
-        updateAppsClosedThisMonth();
 
         // Function to load and parse the analytics data from the JSON file
         function loadAnalyticsData() {
