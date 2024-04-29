@@ -443,3 +443,8 @@ Focus Said: 16/4/2024, 4:18:11 pm - Error: null, Stderr: , Stdout: Process 'chro
 23/4/2024, 12:10:56 am - Minimizing window
 23/4/2024, 12:12:42 am - Minimizing window
 23/4/2024, 3:43:13 pm - Closing window
+Notification Blocker Said: 28/4/2024, 10:16:11 pm -Error: null, Stderr: , Stdout: Notifications Triggered
+
+28/4/2024, 10:16:26 pm - Closing window
+29/4/2024, 3:34:50 am - Closing window
+29/4/2024, 3:43:21 am - Minimizing window
