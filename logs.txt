@@ -448,3 +448,17 @@ Notification Blocker Said: 28/4/2024, 10:16:11 pm -Error: null, Stderr: , Stdout
 28/4/2024, 10:16:26 pm - Closing window
 29/4/2024, 3:34:50 am - Closing window
 29/4/2024, 3:43:21 am - Minimizing window
+29/4/2024, 12:24:39 pm - Closing window
+29/4/2024, 12:27:37 pm - Closing window
+29/4/2024, 12:30:30 pm - Closing window
+29/4/2024, 12:33:17 pm - Closing window
+29/4/2024, 12:35:02 pm - Closing window
+29/4/2024, 12:35:33 pm - Closing window
+29/4/2024, 12:36:35 pm - Closing window
+29/4/2024, 12:36:59 pm - Closing window
+29/4/2024, 12:38:44 pm - Closing window
+29/4/2024, 12:38:54 pm - Closing window
+29/4/2024, 12:39:55 pm - Closing window
+29/4/2024, 12:40:09 pm - Closing window
+29/4/2024, 12:40:20 pm - Closing window
+29/4/2024, 12:51:31 pm - Closing window
